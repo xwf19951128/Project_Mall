@@ -6,7 +6,7 @@ target/
 !**/src/test/**
 src/main/resources/application.properties
 src/main/resources/application.yml
-.gitignore
+
 
 ### STS ###
 .apt_generated
