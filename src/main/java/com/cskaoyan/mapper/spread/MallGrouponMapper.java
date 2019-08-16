@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.MallGroupon;
-import com.cskaoyan.bean.MallGrouponExample;
+import com.cskaoyan.bean.spread.MallGroupon;
+import com.cskaoyan.bean.spread.MallGrouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

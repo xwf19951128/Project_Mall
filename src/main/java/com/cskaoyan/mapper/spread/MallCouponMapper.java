@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.MallCoupon;
-import com.cskaoyan.bean.MallCouponExample;
+import com.cskaoyan.bean.spread.MallCoupon;
+import com.cskaoyan.bean.spread.MallCouponExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
