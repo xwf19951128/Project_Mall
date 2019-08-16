@@ -18,6 +18,6 @@ public class ConfigController {
         vo.setErrno(0);
         vo.setErrmsg("成功");
         ConfigMall configMall = new ConfigMall();
-
+        return vo;
     }
 }

@@ -10,6 +10,16 @@ public class PageParams4Goods {
 
     private String order;
 
+    public PageParams4Goods() {
+    }
+
+    public PageParams4Goods(int page, int limit, String sort, String order) {
+        this.page = page;
+        this.limit = limit;
+        this.sort = sort;
+        this.order = order;
+    }
+
     public int getPage() {
         return page;
     }

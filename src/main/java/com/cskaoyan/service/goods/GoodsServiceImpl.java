@@ -4,6 +4,7 @@ import com.cskaoyan.bean.goods.Goods;
 import com.cskaoyan.bean.goods.GoodsExample;
 import com.cskaoyan.bean.goods.PageParams4Goods;
 import com.cskaoyan.mapper.goods.GoodsMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> listPageGoods(PageParams4Goods pageParams4Goods) {
         GoodsExample goodsExample = new GoodsExample();
-//        goodsExample.createCriteria().andIdIsNotNull().
-        return null;
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
+        goodsExample.setOrderByClause(pageParams4Goods.getSort() + " " + pageParams4Goods.getOrder());
+        goodsExample.createCriteria().andIdIsNotNull();
+        return goodsMapper.selectByExample(goodsExample);
     }
 }

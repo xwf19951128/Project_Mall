@@ -93,4 +93,19 @@ public class GoodsProduct {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsProduct{" +
+                "id=" + id +
+                ", goodsId=" + goodsId +
+                ", specifications='" + specifications + '\'' +
+                ", price=" + price +
+                ", number=" + number +
+                ", url='" + url + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 }
