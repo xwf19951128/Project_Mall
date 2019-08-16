@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.reckon.mapper.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.reckon.bean.Brand">
+<mapper namespace="com.cskaoyan.mapper.mall.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.mall.Brand">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
@@ -73,7 +73,7 @@
   <sql id="Base_Column_List">
     id, name, desc, pic_url, sort_order, floor_price, add_time, update_time, deleted
   </sql>
-  <select id="selectByExample" parameterType="com.reckon.bean.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.BrandExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -97,13 +97,13 @@
     delete from cskaoyan_mall_brand
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.reckon.bean.BrandExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.mall.BrandExample">
     delete from cskaoyan_mall_brand
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.reckon.bean.Brand">
+  <insert id="insert" parameterType="com.cskaoyan.bean.mall.Brand">
     insert into cskaoyan_mall_brand (id, name, desc, 
       pic_url, sort_order, floor_price, 
       add_time, update_time, deleted
@@ -113,7 +113,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.reckon.bean.Brand">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.Brand">
     insert into cskaoyan_mall_brand
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.reckon.bean.BrandExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.mall.BrandExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_brand
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -230,7 +230,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.reckon.bean.Brand">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.mall.Brand">
     update cskaoyan_mall_brand
     <set>
       <if test="name != null">
@@ -260,7 +260,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.reckon.bean.Brand">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.mall.Brand">
     update cskaoyan_mall_brand
     set name = #{name,jdbcType=VARCHAR},
       desc = #{desc,jdbcType=VARCHAR},
@@ -272,7 +272,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <resultMap id="BaseResultMap" type="com.reckon.bean.Brand">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.mall.Brand">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
@@ -344,7 +344,7 @@
   <sql id="Base_Column_List">
     id, name, desc, pic_url, sort_order, floor_price, add_time, update_time, deleted
   </sql>
-  <select id="selectByExample" parameterType="com.reckon.bean.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.BrandExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -368,13 +368,13 @@
     delete from cskaoyan_mall_brand
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.reckon.bean.BrandExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.mall.BrandExample">
     delete from cskaoyan_mall_brand
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.reckon.bean.Brand">
+  <insert id="insert" parameterType="com.cskaoyan.bean.mall.Brand">
     insert into cskaoyan_mall_brand (id, name, desc, 
       pic_url, sort_order, floor_price, 
       add_time, update_time, deleted
@@ -384,7 +384,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.reckon.bean.Brand">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.Brand">
     insert into cskaoyan_mall_brand
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -445,7 +445,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.reckon.bean.BrandExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.mall.BrandExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_brand
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -501,7 +501,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.reckon.bean.Brand">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.mall.Brand">
     update cskaoyan_mall_brand
     <set>
       <if test="name != null">
@@ -531,7 +531,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.reckon.bean.Brand">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.mall.Brand">
     update cskaoyan_mall_brand
     set name = #{name,jdbcType=VARCHAR},
       desc = #{desc,jdbcType=VARCHAR},

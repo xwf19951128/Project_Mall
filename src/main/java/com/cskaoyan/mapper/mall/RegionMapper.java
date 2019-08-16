@@ -1,7 +1,8 @@
 package com.cskaoyan.mapper.mall;
 
-import com.reckon.bean.Region;
-import com.reckon.bean.RegionExample;
+
+import com.cskaoyan.bean.mall.Region;
+import com.cskaoyan.bean.mall.RegionExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

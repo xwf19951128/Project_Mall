@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.mall;
 
-import com.reckon.bean.Order;
-import com.reckon.bean.OrderExample;
+import com.cskaoyan.bean.mall.Order;
+import com.cskaoyan.bean.mall.OrderExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
