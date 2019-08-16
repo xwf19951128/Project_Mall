@@ -1,4 +1,4 @@
-package com.cskaoyan.utils;
+package com.cskaoyan.util;
 
 public class ResponseUtil {
 

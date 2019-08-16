@@ -1,11 +1,52 @@
 package com.cskaoyan.controller.statistic;
 
+import com.cskaoyan.bean.statistic.StatGoods;
+import com.cskaoyan.bean.statistic.StatOrder;
+import com.cskaoyan.bean.statistic.StatUser;
+import com.cskaoyan.bean.statistic.StatisticVo;
+import com.cskaoyan.service.statistic.StatService;
+import com.cskaoyan.util.ResponseUtil;
+import com.cskaoyan.util.ResponseVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/admin/stat")
 public class StatisticController {
-//    @RequestMapping("/stat/user")
-//    @RequestMapping("/stat/order")
-//    @RequestMapping("/stat/goods")
+
+    @Autowired
+    StatService statService;
+
+    @RequestMapping("/user")
+    public ResponseVo user(){
+        List<StatUser> statUsers = statService.statUser();
+        StatisticVo<StatUser> statisticVo = new StatisticVo<>();
+        statisticVo.setRows(statUsers);
+        statisticVo.setColumns(new String[]{"day","users"});
+        ResponseVo success = ResponseUtil.success(statisticVo);
+        return success;
+    }
+
+    @RequestMapping("/order")
+    public ResponseVo order(){
+        List<StatOrder> statOrders = statService.statOrder();
+        StatisticVo<StatOrder> statisticVo = new StatisticVo<>();
+        statisticVo.setRows(statOrders);
+        statisticVo.setColumns(new String[]{"day","orders","customers","amount","pcr"});
+        ResponseVo success = ResponseUtil.success(statisticVo);
+        return success;
+    }
+
+    @RequestMapping("/goods")
+    public ResponseVo goods(){
+        List<StatGoods> statGoods = statService.statGoods();
+        StatisticVo<StatGoods> statisticVo = new StatisticVo<>();
+        statisticVo.setRows(statGoods);
+        statisticVo.setColumns(new String[]{"day","orders","products","amount"});
+        ResponseVo responseVo = ResponseUtil.success(statisticVo);
+        return responseVo;
+    }
 }
