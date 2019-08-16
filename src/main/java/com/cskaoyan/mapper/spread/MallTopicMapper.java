@@ -2,6 +2,8 @@ package com.cskaoyan.mapper.spread;
 
 import com.cskaoyan.bean.spread.MallTopic;
 import com.cskaoyan.bean.spread.MallTopicExample;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -33,4 +35,6 @@ public interface MallTopicMapper {
     int updateByPrimaryKeyWithBLOBs(MallTopic record);
 
     int updateByPrimaryKey(MallTopic record);
+
+    ArrayList<MallTopic> queryMallTopicList(@Param("content") String content, @Param("name") String name);
 }
