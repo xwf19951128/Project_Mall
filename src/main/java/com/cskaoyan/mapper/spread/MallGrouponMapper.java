@@ -1,8 +1,13 @@
 package com.cskaoyan.mapper.spread;
 
+import com.cskaoyan.bean.spread.GrouponInfo;
 import com.cskaoyan.bean.spread.MallGroupon;
 import com.cskaoyan.bean.spread.MallGrouponExample;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import com.cskaoyan.bean.spread.MallGrouponRule;
 import org.apache.ibatis.annotations.Param;
 
 public interface MallGrouponMapper {
@@ -27,4 +32,8 @@ public interface MallGrouponMapper {
     int updateByPrimaryKeySelective(MallGroupon record);
 
     int updateByPrimaryKey(MallGroupon record);
+
+    ArrayList<GrouponInfo> queryGrouponInfoList(@Param("content") String content, @Param("name") String name);
+
+    ArrayList<MallGrouponRule> queryMallGrouponRuleList(@Param("content") String content, @Param("name") String name);
 }
