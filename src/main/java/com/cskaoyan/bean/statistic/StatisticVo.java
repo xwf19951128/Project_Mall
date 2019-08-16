@@ -1,8 +1,10 @@
 package com.cskaoyan.bean.statistic;
 
-public class StatisticResult<T> {
+import java.util.List;
+
+public class StatisticVo<T> {
     String[] columns;
-    T[] rows;
+    List<T> rows;
 
     public String[] getColumns() {
         return columns;
@@ -12,11 +14,11 @@ public class StatisticResult<T> {
         this.columns = columns;
     }
 
-    public T[] getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
-    public void setRows(T[] rows) {
+    public void setRows(List<T> rows) {
         this.rows = rows;
     }
 }

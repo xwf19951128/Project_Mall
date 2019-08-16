@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.statistic;
+package com.cskaoyan.util;
 
 public class ResponseVo<T> {
     T data;
