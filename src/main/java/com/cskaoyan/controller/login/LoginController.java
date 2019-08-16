@@ -2,7 +2,7 @@ package com.cskaoyan.controller.login;
 
 import com.cskaoyan.bean.vo.Data;
 
-import com.cskaoyan.utils.ResponseVo;
+import com.cskaoyan.util.ResponseVo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
