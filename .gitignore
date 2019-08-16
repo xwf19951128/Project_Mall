@@ -33,3 +33,17 @@ build/
 
 ### VS Code ###
 .vscode/
+.mvn/wrapper/maven-wrapper.properties
+cskaoyan-admin/.babelrc
+cskaoyan-admin/.editorconfig
+cskaoyan-admin/.eslintignore
+cskaoyan-admin/.eslintrc.js
+cskaoyan-admin/.postcssrc.js
+cskaoyan-admin/.travis.yml
+cskaoyan-admin/config/
+cskaoyan-admin/favicon.ico
+cskaoyan-admin/index.html
+cskaoyan-admin/package.json
+cskaoyan-admin/src/
+cskaoyan-admin/static/
+exclude/
