@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GoodsService {
 
-    public long countTotalGoodsCount();
+    long countTotalGoodsCount();
 
     List<Goods> listPageGoods(PageParams4Goods pageParams4Goods);
 }
