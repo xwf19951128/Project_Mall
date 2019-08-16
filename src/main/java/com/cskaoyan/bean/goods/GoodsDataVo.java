@@ -4,11 +4,19 @@ import java.util.List;
 
 public class GoodsDataVo<T> {
 
-    private int total;
+    private long total;
 
     private List<T> items;
 
-    public int getTotal() {
+    public GoodsDataVo() {
+    }
+
+    public GoodsDataVo(long total, List<T> items) {
+        this.total = total;
+        this.items = items;
+    }
+
+    public long getTotal() {
         return total;
     }
 

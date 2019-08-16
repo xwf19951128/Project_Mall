@@ -12,8 +12,11 @@ public class GoodsResponseVo<T> {
     public GoodsResponseVo() {
     }
 
-
-
+    public GoodsResponseVo(int errno, T data, String errmsg) {
+        this.errno = errno;
+        this.data = data;
+        this.errmsg = errmsg;
+    }
 
     public int getErrno() {
         return errno;

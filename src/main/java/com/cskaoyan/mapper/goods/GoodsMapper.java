@@ -4,7 +4,9 @@ import com.cskaoyan.bean.goods.Goods;
 import com.cskaoyan.bean.goods.GoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GoodsMapper {
     long countByExample(GoodsExample example);
 
