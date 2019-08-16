@@ -35,10 +35,10 @@ public class LoginController {
         data.setRoles(roles);
         data.setName("admin123");
         data.setPerms(perms);
+        data.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         responseVo2.setData(data);
         responseVo2.setErrmsg("成功");
         responseVo2.setErrno(0);
         return responseVo2;
-
     }
 }
