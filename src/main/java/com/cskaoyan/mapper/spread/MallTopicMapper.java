@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.MallTopic;
-import com.cskaoyan.bean.MallTopicExample;
+import com.cskaoyan.bean.spread.MallTopic;
+import com.cskaoyan.bean.spread.MallTopicExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

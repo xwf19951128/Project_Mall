@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.MallAD;
-import com.cskaoyan.bean.MallADExample;
+import com.cskaoyan.bean.spread.MallAD;
+import com.cskaoyan.bean.spread.MallADExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

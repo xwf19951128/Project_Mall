@@ -1,25 +1,23 @@
-package com.cskaoyan.bean;
+package com.cskaoyan.bean.spread;
 
 import java.util.Date;
 
-public class MallAD {
+public class UserCoupon {
     private Integer id;
 
-    private String name;
+    private Integer userId;
 
-    private String link;
+    private Integer couponId;
 
-    private String url;
+    private Short status;
 
-    private Byte position;
-
-    private String content;
+    private Date usedTime;
 
     private Date startTime;
 
     private Date endTime;
 
-    private Boolean enabled;
+    private Integer orderId;
 
     private Date addTime;
 
@@ -35,44 +33,36 @@ public class MallAD {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getLink() {
-        return link;
+    public Integer getCouponId() {
+        return couponId;
     }
 
-    public void setLink(String link) {
-        this.link = link == null ? null : link.trim();
+    public void setCouponId(Integer couponId) {
+        this.couponId = couponId;
     }
 
-    public String getUrl() {
-        return url;
+    public Short getStatus() {
+        return status;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setStatus(Short status) {
+        this.status = status;
     }
 
-    public Byte getPosition() {
-        return position;
+    public Date getUsedTime() {
+        return usedTime;
     }
 
-    public void setPosition(Byte position) {
-        this.position = position;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setUsedTime(Date usedTime) {
+        this.usedTime = usedTime;
     }
 
     public Date getStartTime() {
@@ -91,12 +81,12 @@ public class MallAD {
         this.endTime = endTime;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Date getAddTime() {
