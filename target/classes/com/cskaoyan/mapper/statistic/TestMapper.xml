@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.statistic.TestMapper">
+
+    <resultMap id="test" type="com.cskaoyan.bean.statistic.Test">
+        <result column="role_ids" property="ids"></result>
+    </resultMap>
+
+    <select id="queryById" resultMap="test">
+        select role_ids from cskaoyan_mall_admin where id=#{id}
+    </select>
+</mapper>
