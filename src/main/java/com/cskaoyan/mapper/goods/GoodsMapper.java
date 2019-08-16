@@ -15,6 +15,6 @@ public interface GoodsMapper {
     long countTotalGoodsCount();
 
 
-    List<Goods> listPageGoods(@Param("limit") int limit, @Param("offset") int offset, @Param("sort") String sort, @Param("order") String order);
+    List<Goods> listAllGoods(/*@Param("limit") int limit, @Param("offset") int offset, */@Param("sort") String sort, @Param("order") String order);
 
 }

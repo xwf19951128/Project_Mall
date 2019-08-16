@@ -3,6 +3,7 @@ package com.cskaoyan.service.goods;
 import com.cskaoyan.bean.goods.Goods;
 import com.cskaoyan.bean.goods.PageParams4Goods;
 import com.cskaoyan.mapper.goods.GoodsMapper;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +30,13 @@ public class GoodsServiceImpl implements GoodsService {
         goodsExample.setOrderByClause(pageParams4Goods.getSort() + " " + pageParams4Goods.getOrder());
         goodsExample.createCriteria().andIdIsNotNull();
         return goodsMapper.selectByExample(goodsExample);*/
-        int limit = pageParams4Goods.getLimit();
-        int offset = (pageParams4Goods.getPage() - 1) * limit;
+
+//        int limit = pageParams4Goods.getLimit();
+//        int offset = (pageParams4Goods.getPage() - 1) * limit;
         String sort = pageParams4Goods.getSort();
         String order = pageParams4Goods.getOrder();
-        return goodsMapper.listPageGoods(limit, offset, sort, order);
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
+        return goodsMapper.listAllGoods(sort, order);
 
     }
 }

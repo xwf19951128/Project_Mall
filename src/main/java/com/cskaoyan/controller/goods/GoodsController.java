@@ -2,11 +2,10 @@ package com.cskaoyan.controller.goods;
 
 import com.cskaoyan.bean.goods.Goods;
 import com.cskaoyan.bean.goods.GoodsDataVo;
-import com.cskaoyan.bean.goods.GoodsResponseVo;
 import com.cskaoyan.bean.goods.PageParams4Goods;
 import com.cskaoyan.service.goods.GoodsService;
-import com.cskaoyan.utils.ResponseUtil;
-import com.cskaoyan.utils.ResponseVo;
+import com.cskaoyan.util.ResponseUtil;
+import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
