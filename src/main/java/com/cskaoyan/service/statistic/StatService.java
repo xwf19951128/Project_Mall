@@ -1,13 +1,12 @@
-package com.cskaoyan.mapper.statistic;
+package com.cskaoyan.service.statistic;
 
 import com.cskaoyan.bean.statistic.StatGoods;
 import com.cskaoyan.bean.statistic.StatOrder;
 import com.cskaoyan.bean.statistic.StatUser;
-import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
-public interface StatisticMapper {
+public interface StatService {
     //统计用户
     public List<StatUser> statUser();
     //统计订单
