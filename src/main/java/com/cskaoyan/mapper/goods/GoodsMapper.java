@@ -1,38 +1,20 @@
 package com.cskaoyan.mapper.goods;
 
 import com.cskaoyan.bean.goods.Goods;
-import com.cskaoyan.bean.goods.GoodsExample;
-import java.util.List;
+import com.cskaoyan.bean.goods.PageParams4Goods;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface GoodsMapper {
-    long countByExample(GoodsExample example);
 
-    int deleteByExample(GoodsExample example);
+    @Select("select count(id) from cskaoyan_mall_goods")
+    long countTotalGoodsCount();
 
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Goods record);
+    List<Goods> listPageGoods(@Param("limit") int limit, @Param("offset") int offset, @Param("sort") String sort, @Param("order") String order);
 
-    int insertSelective(Goods record);
-
-    List<Goods> selectByExampleWithBLOBs(GoodsExample example);
-
-    List<Goods> selectByExample(GoodsExample example);
-
-    Goods selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Goods record, @Param("example") GoodsExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") Goods record, @Param("example") GoodsExample example);
-
-    int updateByExample(@Param("record") Goods record, @Param("example") GoodsExample example);
-
-    int updateByPrimaryKeySelective(Goods record);
-
-    int updateByPrimaryKeyWithBLOBs(Goods record);
-
-    int updateByPrimaryKey(Goods record);
 }
