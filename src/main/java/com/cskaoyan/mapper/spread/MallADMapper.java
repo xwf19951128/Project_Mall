@@ -2,6 +2,8 @@ package com.cskaoyan.mapper.spread;
 
 import com.cskaoyan.bean.spread.MallAD;
 import com.cskaoyan.bean.spread.MallADExample;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface MallADMapper {
     int updateByPrimaryKeySelective(MallAD record);
 
     int updateByPrimaryKey(MallAD record);
+
+    ArrayList<MallAD> queryMallADList(@Param("content") String content, @Param("name") String name);
 }

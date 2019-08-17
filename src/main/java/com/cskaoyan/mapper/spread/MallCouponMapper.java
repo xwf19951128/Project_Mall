@@ -2,6 +2,8 @@ package com.cskaoyan.mapper.spread;
 
 import com.cskaoyan.bean.spread.MallCoupon;
 import com.cskaoyan.bean.spread.MallCouponExample;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface MallCouponMapper {
     int updateByPrimaryKeySelective(MallCoupon record);
 
     int updateByPrimaryKey(MallCoupon record);
+
+    ArrayList<MallCoupon> queryCouponList(@Param("content") String content, @Param("name") String name);
 }

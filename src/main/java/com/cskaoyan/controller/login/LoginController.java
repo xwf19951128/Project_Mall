@@ -1,4 +1,4 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.login;
 
 import com.cskaoyan.bean.vo.Data;
 
