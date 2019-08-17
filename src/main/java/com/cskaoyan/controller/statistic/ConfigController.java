@@ -1,11 +1,13 @@
 package com.cskaoyan.controller.statistic;
 
+
 import com.cskaoyan.bean.statistic.LiteMall;
 import com.cskaoyan.service.statistic.ConfigService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;

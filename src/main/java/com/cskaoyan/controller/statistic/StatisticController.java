@@ -1,13 +1,13 @@
 package com.cskaoyan.controller.statistic;
 
-import com.cskaoyan.bean.statistic.StatGoods;
-import com.cskaoyan.bean.statistic.StatOrder;
-import com.cskaoyan.bean.statistic.StatUser;
-import com.cskaoyan.bean.statistic.StatisticVo;
+import com.cskaoyan.bean.statistic.*;
 import com.cskaoyan.service.statistic.StatService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +15,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin/stat")
+@Api(tags = "Statistic-Controller",description = "这是统计模块的方法")
 public class StatisticController {
 
     @Autowired
     StatService statService;
 
     @RequestMapping("/user")
-    public ResponseVo user(){
+    @ApiOperation(value = "user方法",notes = "这是用于统计用于的方法")
+    public ResponseVo user(ConfigMall configMall){
         List<StatUser> statUsers = statService.statUser();
         StatisticVo<StatUser> statisticVo = new StatisticVo<>();
         statisticVo.setRows(statUsers);

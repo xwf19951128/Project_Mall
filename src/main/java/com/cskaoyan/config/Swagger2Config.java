@@ -1,4 +1,4 @@
-package com.cskaoyan.config.spread;
+package com.cskaoyan.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,22 +13,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
-
     @Bean
     public Docket createRestApi(){
-        Docket build = new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.cskaoyan.mall.controller")).paths(PathSelectors.any()).build();
-        return build;
-
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.cskaoyan.controller"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {
-
-        ApiInfo build = new ApiInfoBuilder()
-                .title("mall后台管理系统")
-                .description(" ")
-                .contact("Mr.Xu")
-                .version("10").build();
-
-        return build;
+        return new ApiInfoBuilder()
+            .title("谢文斐的mall后台管理系统")
+                .description("后台后台后台CN NO.1")
+                .contact("cskaoyan")
+                .version("1.0")
+                .build();
     }
 }
