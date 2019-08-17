@@ -25,12 +25,4 @@ public class GoodsTest {
         System.out.println("count = " + count);
     }
 
-    @Test
-    public void listPageGoods(){
-        PageParams4Goods pageParams4Goods = new PageParams4Goods(1, 20, "add_time", "desc");
-        List<Goods> goodsList = goodsService.listPageGoods(pageParams4Goods);
-        for (Goods goods : goodsList) {
-            System.out.println("goods = " + goods);
-        }
-    }
 }

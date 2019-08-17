@@ -10,6 +10,7 @@ public class PageParams4Goods {
 
     private String order;
 
+
     public PageParams4Goods() {
     }
 

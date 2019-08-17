@@ -3,7 +3,7 @@ package com.cskaoyan.controller.system;
 import com.cskaoyan.bean.system.Storage;
 import com.cskaoyan.bean.vo.DataBean;
 import com.cskaoyan.service.system.StorageService;
-import com.cskaoyan.utils.ResponseVo;
+import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +19,7 @@ public class StorageController {
     StorageService storageService;
 
     @RequestMapping("admin/storage/list")
-    public ResponseVo StorageList(int page,int limit,String key,String name,String order,String sort){
+    public ResponseVo StorageList(int page, int limit, String key, String name, String order, String sort){
         ResponseVo<Object> responseVo = new ResponseVo<>();
         DataBean<Storage> storageDataBean =storageService.selectStorage(page,limit,key,name,order,sort);
         responseVo.setData(storageDataBean);

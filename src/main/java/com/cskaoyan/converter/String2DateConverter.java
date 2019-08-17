@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-@Component
+
 public class String2DateConverter implements Converter<String, Date> {
     @Bean
     @Override

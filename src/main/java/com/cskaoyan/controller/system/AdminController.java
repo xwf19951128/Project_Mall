@@ -3,7 +3,7 @@ package com.cskaoyan.controller.system;
 import com.cskaoyan.bean.system.Admin;
 import com.cskaoyan.bean.vo.DataBean;
 import com.cskaoyan.service.system.AdminService;
-import com.cskaoyan.utils.ResponseVo;
+import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +19,7 @@ public class AdminController {
     AdminService adminService;
 
     @RequestMapping("/admin/admin/list")
-    public ResponseVo getList(int page,int limit,String username,String sort,String order){
+    public ResponseVo getList(int page, int limit, String username, String sort, String order){
         ResponseVo<Object> responseVo = new ResponseVo<>();
         DataBean<Admin> adminData = adminService.selectAdmins(page,limit,username,sort,order);
         responseVo.setErrmsg("成功");

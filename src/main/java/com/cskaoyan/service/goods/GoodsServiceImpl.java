@@ -24,7 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> listPageGoods(PageParams4Goods pageParams4Goods) {
+    public List<Goods> listPageGoods(PageParams4Goods pageParams4Goods, String goodsSn, String name) {
 /*        GoodsExample goodsExample = new GoodsExample();
         PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
         goodsExample.setOrderByClause(pageParams4Goods.getSort() + " " + pageParams4Goods.getOrder());

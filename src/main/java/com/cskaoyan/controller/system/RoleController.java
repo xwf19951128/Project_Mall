@@ -4,7 +4,7 @@ import com.cskaoyan.bean.system.Role;
 import com.cskaoyan.bean.vo.DataBean;
 import com.cskaoyan.bean.vo.Options;
 import com.cskaoyan.service.system.RoleService;
-import com.cskaoyan.utils.ResponseVo;
+import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
