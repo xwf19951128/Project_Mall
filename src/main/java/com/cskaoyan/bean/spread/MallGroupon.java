@@ -1,5 +1,7 @@
 package com.cskaoyan.bean.spread;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class MallGroupon {
@@ -14,9 +16,9 @@ public class MallGroupon {
     private Integer userId;
 
     private Integer creatorUserId;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private String shareUrl;

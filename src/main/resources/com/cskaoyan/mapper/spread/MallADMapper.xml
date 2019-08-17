@@ -249,6 +249,16 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <select id="queryMallADList" resultType="com.cskaoyan.bean.spread.MallAD" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from cskaoyan_mall_ad where 1=1
+    <if test="content !=null">
+     and content like #{content}
+    </if>
+    <if test="name !=null">
+      and name like #{name}
+    </if>
+  </select>
   <update id="updateByExample" parameterType="map">
     update cskaoyan_mall_ad
     set id = #{record.id,jdbcType=INTEGER},

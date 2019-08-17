@@ -75,6 +75,12 @@
     id, goods_id, goods_name, pic_url, discount, discount_member, add_time, update_time, 
     expire_time, deleted
   </sql>
+  <select id="queryMallGrouponRuleList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.spread.MallGrouponRule">
+    select <include refid="Base_Column_List"></include> from cskaoyan_mall_groupon_rules where 1=1
+    <if test="goodsId !=null">
+      and goods_id=#{goods_id}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.spread.MallGrouponRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

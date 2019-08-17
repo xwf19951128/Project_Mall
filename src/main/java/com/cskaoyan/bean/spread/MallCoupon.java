@@ -1,6 +1,9 @@
 package com.cskaoyan.bean.spread;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class MallCoupon {
@@ -26,23 +29,49 @@ public class MallCoupon {
 
     private Short goodsType;
 
-    private String goodsValue;
+    private String[] goodsValue;
 
     private String code;
 
     private Short timeType;
 
     private Short days;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date startTime;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date endTime;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;
+
+    @Override
+    public String toString() {
+        return "MallCoupon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", tag='" + tag + '\'' +
+                ", total=" + total +
+                ", discount=" + discount +
+                ", min=" + min +
+                ", limit=" + limit +
+                ", type=" + type +
+                ", status=" + status +
+                ", goodsType=" + goodsType +
+                ", goodsValue=" + Arrays.toString(goodsValue) +
+                ", code='" + code + '\'' +
+                ", timeType=" + timeType +
+                ", days=" + days +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -132,12 +161,12 @@ public class MallCoupon {
         this.goodsType = goodsType;
     }
 
-    public String getGoodsValue() {
+    public String[] getGoodsValue() {
         return goodsValue;
     }
 
-    public void setGoodsValue(String goodsValue) {
-        this.goodsValue = goodsValue == null ? null : goodsValue.trim();
+    public void setGoodsValue(String[] goodsValue) {
+        this.goodsValue = goodsValue;
     }
 
     public String getCode() {

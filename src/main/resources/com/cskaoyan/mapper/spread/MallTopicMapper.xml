@@ -374,4 +374,13 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryMallTopicList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.spread.MallCoupon">
+    select * from cskaoyan_mall_topic where 1=1
+    <if test="subtitle !=null">
+      and subtitle = #{subtitle}
+    </if>
+    <if test="title !=null">
+      and title like #{title}
+    </if>
+  </select>
 </mapper>
