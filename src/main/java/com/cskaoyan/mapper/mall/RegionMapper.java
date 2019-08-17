@@ -1,7 +1,8 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.Region;
-import com.cskaoyan.bean.mall.RegionExample;
+import com.cskaoyan.bean.mall.region.Region;
+import com.cskaoyan.bean.mall.region.RegionExample;
+import com.cskaoyan.bean.mall.region.Province;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface RegionMapper {
     int updateByPrimaryKeySelective(Region record);
 
     int updateByPrimaryKey(Region record);
+
+    List<Province> getProvince();
+
 }

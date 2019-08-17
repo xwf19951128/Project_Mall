@@ -3,6 +3,8 @@ package com.cskaoyan.mapper.mall;
 
 import com.cskaoyan.bean.mall.Category;
 import com.cskaoyan.bean.mall.CategoryExample;
+import com.cskaoyan.bean.mall.category.CategoryFirstClass;
+import com.cskaoyan.bean.mall.category.Label;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,4 +31,9 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKey(Category record);
+
+    List<CategoryFirstClass> getCategory();
+
+    List<Label> getLabel();
+
 }

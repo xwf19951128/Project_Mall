@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.mall;
+package com.cskaoyan.bean.mall.region;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -320,4 +320,39 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    
+    <select id="getCategory" resultMap="getCategoryLeft">
+        select
+        f.id,f.name,f.keywords,f.`desc`,f.pid,f.icon_url,f.pic_url,f.level,
+        s.id as sid,s.name as sName,s.keywords as sKeywords,s.`desc` as sDesc,s.pid as sPid,
+        s.icon_url as sIconUrl,s.pic_url as sPicUrl,s.level as sLevel
+        from cskaoyan_mall_category f
+        left join cskaoyan_mall_category s on s.pid = f.id
+        where f.pid = 0
+    </select>
+
+    <resultMap id="getCategoryLeft" type="com.cskaoyan.bean.mall.category.CategoryFirstClass">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="keywords" column="keywords"/>
+        <result property="desc" column="desc"/>
+        <result property="iconUrl" column="icon_url"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="level" column="level"/>
+        <collection property="children" ofType="com.cskaoyan.bean.mall.category.CategorySecondClass">
+            <result property="id" column="sId"/>
+            <result property="name" column="sName"/>
+            <result property="keywords" column="sKeywords"/>
+            <result property="desc" column="desc"/>
+            <result property="iconUrl"  column="sIconUrl"/>
+            <result property="picUrl" column="sPicUrl"/>
+            <result property="level" column="sLevel"/>
+        </collection>
+    </resultMap>
+
+    <select id="getLabel" resultType="com.cskaoyan.bean.mall.category.Label">
+        select name as label, id as value
+        from cskaoyan_mall_category
+        where pid = 0
+    </select>
 </mapper>

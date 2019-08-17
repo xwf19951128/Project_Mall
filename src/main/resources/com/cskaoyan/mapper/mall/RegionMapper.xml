@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.mall.RegionMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.mall.Region">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.mall.region.Region">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, pid, name, type, code
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.RegionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.region.RegionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -93,19 +93,19 @@
     delete from cskaoyan_mall_region
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.mall.RegionExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.mall.region.RegionExample">
     delete from cskaoyan_mall_region
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.mall.Region">
+  <insert id="insert" parameterType="com.cskaoyan.bean.mall.region.Region">
     insert into cskaoyan_mall_region (id, pid, name, 
       type, code)
     values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=TINYINT}, #{code,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.Region">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.region.Region">
     insert into cskaoyan_mall_region
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.mall.RegionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.mall.region.RegionExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_region
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.mall.Region">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.mall.region.Region">
     update cskaoyan_mall_region
     <set>
       <if test="pid != null">
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.mall.Region">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.mall.region.Region">
     update cskaoyan_mall_region
     set pid = #{pid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
@@ -208,4 +208,35 @@
       code = #{code,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+    <select id="getProvince" resultMap="getProvinceLeft">
+        select
+        p.id as p_id, p.code as p_code, p.name as p_name, p.type as p_type,
+        c.id as c_id, c.code as c_code, c.name as c_name, c.type as c_type,
+        d.id as d_id, d.code as d_code, d.name as d_name, d.type as d_type
+        from cskaoyan_mall_region p
+        left join cskaoyan_mall_region c on c.pid = p.id
+        left join cskaoyan_mall_region d on d.pid = c.id
+        where p.pid = 0
+    </select>
+    
+    <resultMap id="getProvinceLeft" type="com.cskaoyan.bean.mall.region.Province">
+        <result property="code" column="p_code"/>
+        <result property="id" column="p_id"/>
+        <result property="name" column="p_name"/>
+        <result property="type" column="p_type"/>
+        <collection property="children" ofType="com.cskaoyan.bean.mall.region.City">
+            <result property="code" column="c_code"/>
+            <result property="id" column="c_id"/>
+            <result property="name" column="c_name"/>
+            <result property="type" column="c_type"/>
+            <collection property="children" ofType="com.cskaoyan.bean.mall.region.District">
+                <result property="code" column="d_code"/>
+                <result property="id" column="d_id"/>
+                <result property="name" column="d_name"/>
+                <result property="type" column="d_type"/>
+            </collection>
+        </collection>
+    </resultMap>
 </mapper>

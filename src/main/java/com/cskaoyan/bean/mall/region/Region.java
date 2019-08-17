@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.mall;
+package com.cskaoyan.bean.mall.region;
 
 public class Region {
     private Integer id;

@@ -1,9 +1,10 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.Brand;
-import com.cskaoyan.bean.mall.BrandExample;
+import com.cskaoyan.bean.mall.brand.Brand;
+import com.cskaoyan.bean.mall.brand.BrandExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface BrandMapper {
@@ -28,4 +29,12 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    List<Brand> getBrandList();
+
+    int updateBrandById(@Param("brand") Brand brand);
+
+    Brand queryBrandById(@Param("id") Integer id);
+
+    Brand queryBrandByAddTime(@Param("addTime") Date addTime);
 }

@@ -1,5 +1,6 @@
 package com.cskaoyan;
 
+import com.cskaoyan.bean.vo.Data;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

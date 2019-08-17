@@ -1,9 +1,10 @@
-package com.cskaoyan.bean.mall;
+package com.cskaoyan.bean.mall.brand;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Brand {
+public class  Brand {
     private Integer id;
 
     private String name;
@@ -16,8 +17,10 @@ public class Brand {
 
     private BigDecimal floorPrice;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date addTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     private Boolean deleted;
