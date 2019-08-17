@@ -23,7 +23,7 @@ public class StatisticController {
 
     @RequestMapping("/user")
     @ApiOperation(value = "user方法",notes = "这是用于统计用于的方法")
-    public ResponseVo user(@RequestBody ConfigMall configMall){
+    public ResponseVo user(ConfigMall configMall){
         List<StatUser> statUsers = statService.statUser();
         StatisticVo<StatUser> statisticVo = new StatisticVo<>();
         statisticVo.setRows(statUsers);
