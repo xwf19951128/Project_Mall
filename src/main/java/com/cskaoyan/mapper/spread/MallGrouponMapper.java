@@ -35,5 +35,5 @@ public interface MallGrouponMapper {
 
     ArrayList<GrouponInfo> queryGrouponInfoList(@Param("content") String content, @Param("name") String name);
 
-    ArrayList<MallGrouponRule> queryMallGrouponRuleList(@Param("content") String content, @Param("name") String name);
+
 }

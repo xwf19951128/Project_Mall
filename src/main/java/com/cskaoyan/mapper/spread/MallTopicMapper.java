@@ -36,5 +36,5 @@ public interface MallTopicMapper {
 
     int updateByPrimaryKey(MallTopic record);
 
-    ArrayList<MallTopic> queryMallTopicList(@Param("content") String content, @Param("name") String name);
+    ArrayList<MallTopic> queryMallTopicList(@Param("title") String title, @Param("subtitle") String subtitle);
 }

@@ -20,7 +20,7 @@ public interface SpreadService {
 
     MessageBean<String> deleteRecord(MallAD ad);
 
-    MessageBean<ListDate<MallGrouponRule>> showGrouponRuleListByPage(int page, int limit, String content, String name);
+    MessageBean<ListDate<MallGrouponRule>> showGrouponRuleListByPage(int page, int limit, String goodsId);
 
     MessageBean<MallGrouponRule> updateRecord(MallGrouponRule ad);
 
@@ -28,7 +28,7 @@ public interface SpreadService {
 
     MessageBean<String> deleteRecord(MallGrouponRule ad);
 
-    MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String content, String name);
+    MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String type,String status,String name);
 
     MessageBean<ListDate<String>> showSingleCouponByPage(int page, int limit, String content, String name, String couponId);
 

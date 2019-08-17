@@ -5,13 +5,13 @@ import java.util.List;
 
 public class MessageBean<T> {
     public String errmsg;
-    public String errno;
+    public int errno;
     public T data;
 
     public MessageBean() {
     }
 
-    public MessageBean(String errmsg, String errno, T data) {
+    public MessageBean(String errmsg, int errno, T data) {
         this.errmsg = errmsg;
         this.errno = errno;
         this.data = data;
@@ -25,11 +25,11 @@ public class MessageBean<T> {
         this.errmsg = errmsg;
     }
 
-    public String getErrno() {
+    public int getErrno() {
         return errno;
     }
 
-    public void setErrno(String errno) {
+    public void setErrno(int errno) {
         this.errno = errno;
     }
 
