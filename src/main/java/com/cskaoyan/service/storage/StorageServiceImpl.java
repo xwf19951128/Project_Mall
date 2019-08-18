@@ -39,4 +39,14 @@ public class StorageServiceImpl implements StorageService {
     public Storage selectStorageById(Integer id) {
         return storageMapper.selectStorageById(id);
     }
+
+    @Override
+    public int updateStorage(Storage storage) {
+        return storageMapper.updateStorage(storage);
+    }
+
+    @Override
+    public int deleteStorage(Storage storage) {
+        return storageMapper.deleteByPrimaryKey(storage.getId());
+    }
 }

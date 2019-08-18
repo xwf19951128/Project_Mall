@@ -1,11 +1,13 @@
 package com.cskaoyan.controller.storage;
 
+import com.cskaoyan.annotation.SystemLog;
 import com.cskaoyan.bean.storage.Storage;
 import com.cskaoyan.bean.vo.DataBean;
 import com.cskaoyan.oss.MyOssClient;
 import com.cskaoyan.service.storage.StorageService;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +30,7 @@ public class StorageController {
 
 
     @RequestMapping("admin/storage/list")
+    @SystemLog(desc = "查看存储对象")
     public ResponseVo StorageList(int page,int limit,String key,String name,String order,String sort){
         ResponseVo<Object> responseVo = new ResponseVo<>();
         DataBean<Storage> storageDataBean =storageService.selectStorage(page,limit,key,name,order,sort);
@@ -39,6 +42,7 @@ public class StorageController {
 
     //文件上传，并存入数据库
     @RequestMapping("admin/storage/create")
+    @SystemLog(desc = "文件上传")
     //抓包去看mulitpart的请求，需要和input标签的name一致
     public ResponseVo uploadFile(MultipartFile file) throws IOException {
         ResponseVo responseVo = new ResponseVo();
@@ -65,4 +69,38 @@ public class StorageController {
         }
 
     }
+
+    @RequestMapping("/admin/storage/update")
+    @SystemLog(desc = "删除存储对象")
+    public ResponseVo updateStorage(@RequestBody Storage storage){
+        ResponseVo responseVo = new ResponseVo();
+
+        int i =storageService.updateStorage(storage);
+        Storage storage1 =storageService.selectStorageById(storage.getId());
+        if(i!=0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+            responseVo.setData(storage1);
+            return responseVo;
+        }
+        responseVo.setErrmsg("失败");
+        return responseVo;
+    }
+
+    @RequestMapping("/admin/storage/delete")
+    @SystemLog(desc = "删除存储对象")
+    public ResponseVo deleteStorage(@RequestBody Storage storage){
+        ResponseVo responseVo = new ResponseVo();
+        int i = storageService.deleteStorage(storage);
+        if(i!=0){
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+            return responseVo;
+        }
+        responseVo.setErrno(1);
+        responseVo.setErrmsg("失败");
+        return responseVo;
+    }
+
+
 }

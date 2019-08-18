@@ -33,4 +33,6 @@ public interface StorageMapper {
     int createStorage(Storage storage);
 
     Storage selectStorageById(@Param("id") Integer id);
+
+    int updateStorage(Storage storage);
 }

@@ -13,4 +13,8 @@ public interface StorageService {
     int createStorage(Storage storage);
 
     Storage selectStorageById(Integer id);
+
+    int updateStorage(Storage storage);
+
+    int deleteStorage(Storage storage);
 }
