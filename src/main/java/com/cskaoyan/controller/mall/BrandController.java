@@ -8,6 +8,7 @@ import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +37,7 @@ public class BrandController {
 
     /*品牌更新*/
     @RequestMapping("update")
-    public ResponseVo updateBrandById(Brand brand) {
+    public ResponseVo updateBrandById(@RequestBody Brand brand) {
         System.out.println(brand);
         brand.setUpdateTime(new Date());
         brand = brandService.updateBrandById(brand);
@@ -44,7 +45,7 @@ public class BrandController {
     }
 
     @RequestMapping("create")
-    public ResponseVo createBrand(Brand brand) {
+    public ResponseVo createBrand(@RequestBody Brand brand) {
         brand.setAddTime(new Date());
         brand.setUpdateTime(new Date());
         brand = brandService.insertBrand(brand);

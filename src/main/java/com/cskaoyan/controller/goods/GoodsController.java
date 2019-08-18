@@ -22,21 +22,20 @@ public class GoodsController {
 
     /*分页查询，模糊查询*/
     @RequestMapping("/list")
-    public ResponseVo listPageGoods(PageParams4Goods pageParams4Goods, String goodsSn, String name){
+    public ResponseVo listPageGoods(PageParams4Goods pageParams4Goods){
 /*        long total = goodsService.countTotalGoodsCount();
         if(total == 0){
             return ResponseUtil.fail(null, "总数为0", 0);
         }*/
-        List<Goods> goodsList = goodsService.listPageGoods(pageParams4Goods, goodsSn, name);
+        List<Goods> goodsList = goodsService.listPageGoods(pageParams4Goods);
         if(goodsList == null){
             return ResponseUtil.fail(null, "无商品信息", 0);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
+        System.out.println("ccc");
         return ResponseUtil.success(goodsDataVo);
     }
-
-
 
 }

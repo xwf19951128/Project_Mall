@@ -1,7 +1,7 @@
 package com.cskaoyan.controller.mall;
 
 import com.cskaoyan.bean.mall.file.Storage;
-import com.cskaoyan.service.mall.StorageService;
+import com.cskaoyan.service.mall.StoragesService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("admin")
-public class StorageController {
+public class StoragesController {
 
     @Autowired
-    StorageService storageService;
+    StoragesService storagesService;
 
     /*图片上传*/
     @RequestMapping("storage/create")
@@ -35,7 +35,7 @@ public class StorageController {
         upload.setSize((int) file.getSize());
         upload.setDeleted(0);
         upload.setKey(UUID.randomUUID().toString()+".jpg");
-        storageService.uploadPic(upload);
+        storagesService.uploadPic(upload);
         return ResponseUtil.success(upload);
     }
 
