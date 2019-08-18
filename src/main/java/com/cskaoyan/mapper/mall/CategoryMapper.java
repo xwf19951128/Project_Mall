@@ -36,4 +36,7 @@ public interface CategoryMapper {
 
     List<Label> getLabel();
 
+    int updateCategoryById(@Param("cfc") CategoryFirstClass categoryFirstClass);
+
+    CategoryFirstClass selectById(@Param("id") int id);
 }

@@ -17,7 +17,7 @@
         <result property="addTime" column="add_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="deleted" column="deleted"/>
-        <collection property="picUrls" ofType="list"/>
+        <result property="picUrls" column="pic_urls"/>
     </resultMap>
     <!--查询所有意见反馈-->
     <select id="queryFeedBack" resultMap="feedMapper">

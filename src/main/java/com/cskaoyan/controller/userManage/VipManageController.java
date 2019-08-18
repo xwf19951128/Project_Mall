@@ -4,6 +4,8 @@ import com.cskaoyan.bean.userManage.DataAndErr;
 import com.cskaoyan.bean.userManage.ItemAndTotal;
 import com.cskaoyan.bean.userManage.User;
 import com.cskaoyan.service.userManage.VipManageService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -28,33 +30,32 @@ public class VipManageController {
         ItemAndTotal<User> itemAndTotal = new ItemAndTotal<>();
         List<User> users;
 
+        // 开启分页
+        PageHelper.startPage(page, limit);
+
         if ((username == null || "".equals(username)) && (mobile == null || "".equals(mobile))) {
             // 获取用户信息的集合
             users = vipManageService.queryAllUser();
-            // 封装item和total
-            itemAndTotal.setItems(users);
-            itemAndTotal.setTotal(users.size());
         } else if ("".equals(mobile) || mobile == null) {
-            // 只输入用户名
             // 根据用户名查询
             users = vipManageService.queryUserByUsername("%" + username + "%");
-            // 封装item和total
-            itemAndTotal.setItems(users);
-            itemAndTotal.setTotal(users.size());
         } else if ("".equals(username) || username == null) {
-            // 只输入手机号码
             // 根据手机号码查询
             users = vipManageService.queryUserByMobile(mobile);
-            // 封装item和total
-            itemAndTotal.setItems(users);
-            itemAndTotal.setTotal(users.size());
         } else {
             // 根据用户名和手机号码查询
             users = vipManageService.queryUserByUsernameAndMobile("%" + username + "%", mobile);
-            // 封装item和total
-            itemAndTotal.setItems(users);
-            itemAndTotal.setTotal(users.size());
         }
+
+        // 分页
+        // 获取分页信息
+        PageInfo<User> pageInfo = new PageInfo<>(users);
+        // 获取总个数
+        int total = (int) pageInfo.getTotal();
+
+        // 封装item和total
+        itemAndTotal.setItems(users);
+        itemAndTotal.setTotal(total);
 
         // 封装data、errMsg、errno
         dataAndErr.setData(itemAndTotal);
