@@ -23,7 +23,7 @@ public class StoragesController {
     StoragesService storagesService;
 
     /*图片上传*/
-    @RequestMapping("storage/create")
+//    @RequestMapping("storage/create")
     public ResponseVo uploadPic(HttpServletRequest request, MultipartFile file) throws IOException {
         File pic = new File("c://spring", file.getOriginalFilename());
         file.transferTo(pic);
