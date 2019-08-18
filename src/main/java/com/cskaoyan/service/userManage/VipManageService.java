@@ -7,6 +7,7 @@ import java.util.List;
 public interface VipManageService {
     // 查询所有用户信息
     List<User> queryAllUser();
+<<<<<<< .merge_file_a13376
 <<<<<<< .merge_file_a14228
 
     // 通过用户名和手机号查询用户
@@ -19,4 +20,6 @@ public interface VipManageService {
     List<User> queryUserByMobile(String mobile);
 =======
 >>>>>>> .merge_file_a12160
+=======
+>>>>>>> .merge_file_a12652
 }

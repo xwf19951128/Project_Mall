@@ -21,6 +21,7 @@ public class VipManageServiceImpl implements VipManageService {
         return vipManageMapper.queryAllUser();
     }
 
+<<<<<<< .merge_file_a15048
 <<<<<<< .merge_file_a07040
     // 通过用户名和手机号查询用户
     @Override
@@ -42,5 +43,7 @@ public class VipManageServiceImpl implements VipManageService {
 
 =======
 >>>>>>> .merge_file_a12564
+=======
+>>>>>>> .merge_file_a06348
 
 }

@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.VipManageMapper">
+<<<<<<< .merge_file_a01752
 <<<<<<< .merge_file_a11696
     <resultMap id="userMapper" type="com.cskaoyan.bean.userManage.User">
         <result property="id" column="id"/>
@@ -117,5 +118,9 @@
     <select id="VipManageMapper" resultMap="">
 
 >>>>>>> .merge_file_a17356
+=======
+    <select id="VipManageMapper" resultMap="">
+
+>>>>>>> .merge_file_a00264
     </select>
 </mapper>

@@ -6,10 +6,13 @@ import com.cskaoyan.bean.userManage.User;
 import com.cskaoyan.service.userManage.VipManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+<<<<<<< .merge_file_a13376
 <<<<<<< .merge_file_a16336
 import org.springframework.web.bind.annotation.PathVariable;
 =======
 >>>>>>> .merge_file_a15468
+=======
+>>>>>>> .merge_file_a15264
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +25,7 @@ public class VipManageController {
     @Autowired
     VipManageService vipManageService;
 
+<<<<<<< .merge_file_a13376
 <<<<<<< .merge_file_a16336
     // 查询
     @RequestMapping("/admin/user/list")
@@ -65,6 +69,8 @@ public class VipManageController {
         dataAndErr.setErrno(0);
 
 =======
+=======
+>>>>>>> .merge_file_a15264
     // 查询所有用户信息
     @RequestMapping("/user/list")
     @ResponseBody
@@ -86,7 +92,10 @@ public class VipManageController {
             dataAndErr.setErrmsg("失败");
             dataAndErr.setErrno(-1);
         }
+<<<<<<< .merge_file_a13376
 >>>>>>> .merge_file_a15468
+=======
+>>>>>>> .merge_file_a15264
         // 返回这个JavaBean
         return dataAndErr;
     }
