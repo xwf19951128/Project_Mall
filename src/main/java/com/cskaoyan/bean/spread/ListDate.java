@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListDate<T> {
-    ArrayList<T> items;
+    List<T> items;
     long total;
 
-    public ArrayList<T> getItems() {
+    public List<T> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<T> items) {
+    public void setItems(List<T> items) {
         this.items = items;
     }
 

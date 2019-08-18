@@ -12,34 +12,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping("groupon/ad")
+@RequestMapping("admin/groupon")
 @Api(tags = "Created By Mr.Xu",description = "团购规则")
 @RestController
 public class GrouponController {
     @Autowired
     SpreadService spreadService;
     @ApiOperation(value = "显示页面，包括模糊查询")
-    @RequestMapping(value = "list",method = RequestMethod.POST)
-    public MessageBean<ListDate<MallGrouponRule>> showPage(int page, int limit, String content, String name){
-        return spreadService.showGrouponRuleListByPage(page,limit,content,name);
+    @RequestMapping(value = "/list")
+    public MessageBean<ListDate<MallGrouponRule>> showPage(int page, int limit, String goodsId){
+        return spreadService.showGrouponRuleListByPage(page,limit,goodsId);
     }
     @ApiOperation(value = "显示团购订单？页面，包括模糊查询")
-    @RequestMapping(value = "listRecord",method = RequestMethod.POST)
+    @RequestMapping(value = "/listRecord")
     public MessageBean<ListDate<GrouponInfo>> showGrouponInfoPage(int page, int limit, String content, String name){
         return spreadService.showGrouponInfoListByPage(page,limit,content,name);
     }
     @ApiOperation(value = "更新单个团购规则")
-    @RequestMapping(value = "update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     public MessageBean<MallGrouponRule> updateRecord(@RequestBody MallGrouponRule ad){
         return spreadService.updateRecord(ad);
     }
     @ApiOperation(value = "增加新团购规则")
-    @RequestMapping(value = "create",method = RequestMethod.POST)
+    @RequestMapping(value = "/create")
     public MessageBean<MallGrouponRule> addRecord(@RequestBody MallGrouponRule ad){
+        System.out.println(ad);
         return spreadService.addRecord(ad);
     }
     @ApiOperation(value = "删除团购规则")
-    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     public MessageBean<String> deleteRecord(@RequestBody MallGrouponRule ad){
         return spreadService.deleteRecord(ad);
     }

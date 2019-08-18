@@ -82,9 +82,25 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, desc, tag, total, discount, min, limit, type, status, goods_type, goods_value, 
+    id, name, `desc`, tag, total, discount, min, limit, type, status, goods_type, goods_value,
     code, time_type, days, start_time, end_time, add_time, update_time, deleted
   </sql>
+  <select id="countNumber" resultType="_long">
+    select count(id) from cskaoyan_mall_coupon
+  </select>
+  <select id="queryCouponList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.spread.MallCoupon">
+    select * from cskaoyan_mall_coupon where 1=1
+    <if test="status !=null">
+      and status = #{status}
+    </if>
+    <if test="type !=null">
+      and type = #{type}
+    </if>
+    <if test="name !=null">
+      and name like #{name}
+    </if>
+    limit #{limit} offset #{page}
+  </select>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.spread.MallCouponExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -116,14 +132,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.bean.spread.MallCoupon">
-    insert into cskaoyan_mall_coupon (id, name, desc, 
+    insert into cskaoyan_mall_coupon (id, name, `desc`,
       tag, total, discount, 
-      min, limit, type, 
+      min, `limit`, type,
       status, goods_type, goods_value, 
       code, time_type, days, 
       start_time, end_time, add_time, 
       update_time, deleted)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
       #{tag,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, 
       #{min,jdbcType=DECIMAL}, #{limit,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT}, 
       #{status,jdbcType=SMALLINT}, #{goodsType,jdbcType=SMALLINT}, #{goodsValue,jdbcType=VARCHAR}, 
@@ -141,7 +157,7 @@
         name,
       </if>
       <if test="desc != null">
-        desc,
+        `desc`,
       </if>
       <if test="tag != null">
         tag,
@@ -156,7 +172,7 @@
         min,
       </if>
       <if test="limit != null">
-        limit,
+        `limit`,
       </if>
       <if test="type != null">
         type,
@@ -289,7 +305,7 @@
         min = #{record.min,jdbcType=DECIMAL},
       </if>
       <if test="record.limit != null">
-        limit = #{record.limit,jdbcType=SMALLINT},
+        `limit` = #{record.limit,jdbcType=SMALLINT},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=SMALLINT},
@@ -336,12 +352,12 @@
     update cskaoyan_mall_coupon
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      desc = #{record.desc,jdbcType=VARCHAR},
+      `desc` = #{record.desc,jdbcType=VARCHAR},
       tag = #{record.tag,jdbcType=VARCHAR},
       total = #{record.total,jdbcType=INTEGER},
       discount = #{record.discount,jdbcType=DECIMAL},
       min = #{record.min,jdbcType=DECIMAL},
-      limit = #{record.limit,jdbcType=SMALLINT},
+      `limit` = #{record.limit,jdbcType=SMALLINT},
       type = #{record.type,jdbcType=SMALLINT},
       status = #{record.status,jdbcType=SMALLINT},
       goods_type = #{record.goodsType,jdbcType=SMALLINT},
@@ -365,7 +381,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="desc != null">
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="tag != null">
         tag = #{tag,jdbcType=VARCHAR},
@@ -380,7 +396,7 @@
         min = #{min,jdbcType=DECIMAL},
       </if>
       <if test="limit != null">
-        limit = #{limit,jdbcType=SMALLINT},
+        `limit` = #{limit,jdbcType=SMALLINT},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=SMALLINT},
@@ -429,7 +445,7 @@
       total = #{total,jdbcType=INTEGER},
       discount = #{discount,jdbcType=DECIMAL},
       min = #{min,jdbcType=DECIMAL},
-      limit = #{limit,jdbcType=SMALLINT},
+      `limit` = #{limit,jdbcType=SMALLINT},
       type = #{type,jdbcType=SMALLINT},
       status = #{status,jdbcType=SMALLINT},
       goods_type = #{goodsType,jdbcType=SMALLINT},

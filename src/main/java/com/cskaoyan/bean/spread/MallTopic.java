@@ -1,5 +1,7 @@
 package com.cskaoyan.bean.spread;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -19,9 +21,9 @@ public class MallTopic {
     private Integer sortOrder;
 
     private String goods;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
-
+    @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date updateTime;
 
     private Boolean deleted;

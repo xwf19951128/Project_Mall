@@ -29,6 +29,6 @@ public interface MallGrouponRuleMapper {
     int updateByPrimaryKeySelective(MallGrouponRule record);
 
     int updateByPrimaryKey(MallGrouponRule record);
+    ArrayList<MallGrouponRule> queryMallGrouponRuleList(@Param("goodsId") String goodsId);
 
-    ArrayList<MallGrouponRule> queryMallGrouponRuleList(@Param("content") String content, @Param("name") String name);
 }

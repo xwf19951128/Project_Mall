@@ -21,22 +21,22 @@ public class ADController {
     @Autowired
     SpreadService spreadService;
     @ApiOperation(value = "显示页面，包括模糊查询")
-    @RequestMapping(value = "list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list")
     public MessageBean<ListDate<MallAD>> showPage(int page, int limit,String content,String name){
         return spreadService.showADListByPage(page,limit,content,name);
     }
     @ApiOperation(value = "更新单个广告信息")
-    @RequestMapping(value = "update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     public MessageBean<MallAD> updateRecord(@RequestBody MallAD ad){
         return spreadService.updateRecord(ad);
     }
     @ApiOperation(value = "增加新广告")
-    @RequestMapping(value = "create",method = RequestMethod.POST)
+    @RequestMapping(value = "/create")
     public MessageBean<MallAD> addRecord(@RequestBody MallAD ad){
         return spreadService.addRecord(ad);
     }
     @ApiOperation(value = "删除广告")
-    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     public MessageBean<String> deleteRecord(@RequestBody MallAD ad){
         return spreadService.deleteRecord(ad);
     }

@@ -15,29 +15,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping("topic/ad")
+@RequestMapping("admin/topic/")
 @Api(tags = "Created By Mr.Xu",description = "主题系统")
 @RestController
 public class TopicController {
     @Autowired
     SpreadService spreadService;
     @ApiOperation(value = "显示页面，包括模糊查询")
-    @RequestMapping(value = "list",method = RequestMethod.POST)
-    public MessageBean<ListDate<MallTopic>> showPage(int page, int limit, String content, String name){
-        return spreadService.showTopicListByPage(page,limit,content,name);
+    @RequestMapping(value = "/list")
+    public MessageBean<ListDate<MallTopic>> showPage(int page, int limit, String title, String subtitle){
+        return spreadService.showTopicListByPage(page,limit,title,subtitle);
     }
     @ApiOperation(value = "更新单个主题信息")
-    @RequestMapping(value = "update",method = RequestMethod.POST)
+    @RequestMapping(value = "/update")
     public MessageBean<MallTopic> updateRecord(@RequestBody MallTopic ad){
         return spreadService.updateRecord(ad);
     }
     @ApiOperation(value = "增加新主题")
-    @RequestMapping(value = "create",method = RequestMethod.POST)
+    @RequestMapping(value = "/create")
     public MessageBean<MallTopic> addRecord(@RequestBody MallTopic ad){
         return spreadService.addRecord(ad);
     }
     @ApiOperation(value = "删除主题")
-    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete")
     public MessageBean<String> deleteRecord(@RequestBody MallTopic ad){
         return spreadService.deleteRecord(ad);
     }
