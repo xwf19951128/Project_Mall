@@ -108,8 +108,8 @@
       pic_url, sort_order, floor_price, 
       add_time, update_time, deleted
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
-      #{picUrl,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, #{floorPrice,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR},
+      #{picUrl,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, #{floorPrice,jdbcType=DECIMAL},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -286,10 +286,53 @@
         FROM
             cskaoyan_mall_brand
     </select>
+    <select id="getBrandListById" resultType="com.cskaoyan.bean.mall.brand.Brand">
+        SELECT
+            id,
+            NAME,
+            `desc`,
+            pic_url AS picUrl,
+            sort_order AS sortOrder,
+            floor_price AS floorPrice,
+            add_time AS addTime,
+            update_time AS updateTime,deleted
+        FROM
+            cskaoyan_mall_brand
+            where id = #{id}
+    </select>
+    <select id="getBrandListByName" resultType="com.cskaoyan.bean.mall.brand.Brand">
+        SELECT
+            id,
+            NAME,
+            `desc`,
+            pic_url AS picUrl,
+            sort_order AS sortOrder,
+            floor_price AS floorPrice,
+            add_time AS addTime,
+            update_time AS updateTime,deleted
+        FROM
+            cskaoyan_mall_brand
+            where name like #{name}
+    </select>
+    <select id="getBrandListByIdAndName" resultType="com.cskaoyan.bean.mall.brand.Brand">
+        SELECT
+            id,
+            NAME,
+            `desc`,
+            pic_url AS picUrl,
+            sort_order AS sortOrder,
+            floor_price AS floorPrice,
+            add_time AS addTime,
+            update_time AS updateTime,deleted
+        FROM
+            cskaoyan_mall_brand
+            where id = #{id} and name like #{name}
+    </select>
 
     <update id="updateBrandById">
         update cskaoyan_mall_brand
-        set name = #{brand.name},`desc` = #{brand.desc},pic_url=#{brand.picUrl},floor_price=#{brand.floorPrice}
+        set name = #{brand.name},`desc` = #{brand.desc},pic_url=#{brand.picUrl},floor_price=#{brand.floorPrice},
+        update_time = #{brand.updateTime}
         where id = #{brand.id}
     </update>
     <select id="queryBrandById" resultType="com.cskaoyan.bean.mall.brand.Brand">

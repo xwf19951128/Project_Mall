@@ -1,8 +1,8 @@
 package com.cskaoyan.mapper.mall;
 
 
-import com.cskaoyan.bean.mall.Category;
-import com.cskaoyan.bean.mall.CategoryExample;
+import com.cskaoyan.bean.mall.category.Category;
+import com.cskaoyan.bean.mall.category.CategoryExample;
 import com.cskaoyan.bean.mall.category.CategoryFirstClass;
 import com.cskaoyan.bean.mall.category.Label;
 import org.apache.ibatis.annotations.Param;
@@ -36,4 +36,7 @@ public interface CategoryMapper {
 
     List<Label> getLabel();
 
+    int updateCategoryById(@Param("cfc") CategoryFirstClass categoryFirstClass);
+
+    CategoryFirstClass selectById(@Param("id") int id);
 }
