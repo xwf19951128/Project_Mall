@@ -51,4 +51,89 @@
         <result property="deleted" column="deleted"></result>
         <result property="detail" column="detail"></result>
     </resultMap>
+
+    <select id="listSearchGoodsByGoodsSn" resultMap="goodsMap">
+    select
+    id,
+    goods_sn,
+    name,
+    category_id,
+    brand_id,
+    gallery,
+    keywords,
+    brief,
+    is_on_sale,
+    sort_order,
+    pic_url,
+    share_url,
+    is_new,
+    is_hot,
+    unit,
+    counter_price,
+    retail_price,
+    detail,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_goods
+    where goods_sn like #{like}
+    order by #{sort} #{order}
+  </select>
+
+    <select id="listSearchGoodsByName" resultMap="goodsMap">
+    select
+    id,
+    goods_sn,
+    name,
+    category_id,
+    brand_id,
+    gallery,
+    keywords,
+    brief,
+    is_on_sale,
+    sort_order,
+    pic_url,
+    share_url,
+    is_new,
+    is_hot,
+    unit,
+    counter_price,
+    retail_price,
+    detail,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_goods
+    where name like #{like}
+    order by #{sort} #{order}
+  </select>
+
+    <select id="listSearchGoodsByGoodsSnAndName" resultMap="goodsMap">
+    select
+    id,
+    goods_sn,
+    name,
+    category_id,
+    brand_id,
+    gallery,
+    keywords,
+    brief,
+    is_on_sale,
+    sort_order,
+    pic_url,
+    share_url,
+    is_new,
+    is_hot,
+    unit,
+    counter_price,
+    retail_price,
+    detail,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_goods
+    where goods_sn like #{like1}
+    and name like #{like2}
+    order by #{sort} #{order}
+  </select>
 </mapper>

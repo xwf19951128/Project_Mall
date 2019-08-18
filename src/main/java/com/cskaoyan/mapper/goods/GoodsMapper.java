@@ -16,4 +16,9 @@ public interface GoodsMapper {
 
     List<Goods> listAllGoods(/*@Param("limit") int limit, @Param("offset") int offset, */@Param("sort") String sort, @Param("order") String order);
 
+    List<Goods> listSearchGoodsByGoodsSn(@Param("sort")String sort, @Param("order")String order, @Param("like")String like);
+
+    List<Goods> listSearchGoodsByName(@Param("sort")String sort, @Param("order")String order, @Param("like")String like);
+
+    List<Goods> listSearchGoodsByGoodsSnAndName(@Param("sort")String sort, @Param("order")String order, @Param("like1")String like1, @Param("like2")String like2);
 }

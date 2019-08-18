@@ -10,4 +10,11 @@ public interface GoodsService {
     long countTotalGoodsCount();
 
     List<Goods> listPageGoods(PageParams4Goods pageParams4Goods);
+
+    List<Goods> listPageGoodsByGoodsSn(PageParams4Goods pageParams4Goods, String goodsSn);
+
+    List<Goods> listPageGoodsByName(PageParams4Goods pageParams4Goods, String name);
+
+    List<Goods> listPageGoodsByGoodsSnAndName(PageParams4Goods pageParams4Goods, String goodsSn, String name);
+
 }

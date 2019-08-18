@@ -39,4 +39,32 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.listAllGoods(sort, order);
 
     }
+
+    @Override
+    public List<Goods> listPageGoodsByGoodsSn(PageParams4Goods pageParams4Goods, String goodsSn) {
+        String sort = pageParams4Goods.getSort();
+        String order = pageParams4Goods.getOrder();
+        String like = "%" + goodsSn + "%";
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
+        return goodsMapper.listSearchGoodsByGoodsSn(sort, order, like);
+    }
+
+    @Override
+    public List<Goods> listPageGoodsByName(PageParams4Goods pageParams4Goods, String name) {
+        String sort = pageParams4Goods.getSort();
+        String order = pageParams4Goods.getOrder();
+        String like = "%" + name + "%";
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
+        return goodsMapper.listSearchGoodsByName(sort, order, like);
+    }
+
+    @Override
+    public List<Goods> listPageGoodsByGoodsSnAndName(PageParams4Goods pageParams4Goods, String goodsSn, String name) {
+        String sort = pageParams4Goods.getSort();
+        String order = pageParams4Goods.getOrder();
+        String like1 = "%" + goodsSn + "%";
+        String like2 = "%" + name + "%";
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
+        return goodsMapper.listSearchGoodsByGoodsSnAndName(sort, order, like1, like2);
+    }
 }
