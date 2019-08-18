@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, keywords, desc, pid, icon_url, pic_url, level, sort_order, add_time, update_time, 
+    id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.category.CategoryExample" resultMap="BaseResultMap">
@@ -109,7 +109,7 @@
   </delete>
   <insert id="insert" parameterType="com.cskaoyan.bean.mall.category.Category">
     insert into cskaoyan_mall_category (id, name, keywords, 
-      desc, pid, icon_url, 
+      `desc`, pid, icon_url,
       pic_url, level, sort_order, 
       add_time, update_time, deleted
       )
@@ -132,7 +132,7 @@
         keywords,
       </if>
       <if test="desc != null">
-        desc,
+        `desc`,
       </if>
       <if test="pid != null">
         pid,
@@ -169,7 +169,7 @@
       <if test="keywords != null">
         #{keywords,jdbcType=VARCHAR},
       </if>
-      <if test="desc != null">
+      <if test="`desc` != null">
         #{desc,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
@@ -217,7 +217,7 @@
         keywords = #{record.keywords,jdbcType=VARCHAR},
       </if>
       <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=VARCHAR},
+        `desc` = #{record.desc,jdbcType=VARCHAR},
       </if>
       <if test="record.pid != null">
         pid = #{record.pid,jdbcType=INTEGER},
@@ -309,7 +309,7 @@
     update cskaoyan_mall_category
     set name = #{name,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER},
       icon_url = #{iconUrl,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
@@ -343,7 +343,7 @@
             <result property="id" column="sId"/>
             <result property="name" column="sName"/>
             <result property="keywords" column="sKeywords"/>
-            <result property="desc" column="desc"/>
+            <result property="desc" column="sDesc"/>
             <result property="iconUrl"  column="sIconUrl"/>
             <result property="picUrl" column="sPicUrl"/>
             <result property="level" column="sLevel"/>
@@ -354,5 +354,18 @@
         select name as label, id as value
         from cskaoyan_mall_category
         where pid = 0
+    </select>
+
+    <update id="updateCategoryById">
+        update cskaoyan_mall_category
+        set `desc` = #{cfc.desc}, icon_url = #{cfc.iconUrl},  keywords = #{cfc.keywords},
+        name = #{cfc.name}, pic_url = #{cfc.picUrl}
+        where id = #{cfc.id}
+    </update>
+
+    <select id="selectById" resultType="com.cskaoyan.bean.mall.category.CategoryFirstClass">
+        select `desc`, icon_url as iconUrl, keywords, name, pic_url as picUrl, level
+        from cskaoyan_mall_category
+        where id = #{id}
     </select>
 </mapper>
