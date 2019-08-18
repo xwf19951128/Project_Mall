@@ -1,7 +1,7 @@
-package com.cskaoyan.mapper.system;
+package com.cskaoyan.mapper.storage;
 
-import com.cskaoyan.bean.system.Storage;
-import com.cskaoyan.bean.system.StorageExample;
+import com.cskaoyan.bean.storage.Storage;
+import com.cskaoyan.bean.storage.StorageExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

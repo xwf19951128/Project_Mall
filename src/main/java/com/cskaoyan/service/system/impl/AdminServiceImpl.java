@@ -30,4 +30,21 @@ public class AdminServiceImpl implements AdminService {
         adminDataBean.setItems(admins);
         return adminDataBean;
     }
+
+    @Override
+    public int insertAdmin(Admin admin) {
+        return adminMapper.insertAdmin(admin);
+    }
+
+    @Override
+    public int updateAdmin(Admin admin) {
+       return adminMapper.updateAdmin(admin);
+        //下面是逆向工程的写法。
+        // return adminMapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public int deleteAdmin(Integer id) {
+        return adminMapper.deleteByPrimaryKey(id);
+    }
 }

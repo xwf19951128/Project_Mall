@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 @Component
 public class String2DateConverter implements Converter<String, Date> {
-    @Bean
+
     @Override
     public Date convert(String s) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

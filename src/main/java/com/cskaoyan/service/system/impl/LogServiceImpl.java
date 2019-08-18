@@ -30,4 +30,9 @@ public class LogServiceImpl implements LogService {
         dataBean.setItems(logs);
         return dataBean;
     }
+
+    @Override
+    public int insertLog(Log log) {
+        return logMapper.insertSelective(log);
+    }
 }

@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.system;
+package com.cskaoyan.bean.storage;
 
 import java.util.ArrayList;
 import java.util.Date;

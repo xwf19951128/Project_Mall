@@ -33,4 +33,8 @@ public interface RoleMapper {
     List<Role> selectRoles(@Param("name") String name, @Param("sort") String sort, @Param("order") String order);
 
     List<Options> selectOptions();
+
+    int insertRole(Role role);
+
+    int updateRole(Role role);
 }
