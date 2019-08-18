@@ -28,6 +28,7 @@ public class StoragesController {
         File pic = new File("c://spring", file.getOriginalFilename());
         file.transferTo(pic);
         Storage upload = new Storage();
+        upload.setUrl("123.fpg");
         upload.setType(file.getContentType());
         upload.setAddTime(new Date());
         upload.setUpdateTime(new Date());

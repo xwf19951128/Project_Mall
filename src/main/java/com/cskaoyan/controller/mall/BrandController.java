@@ -24,11 +24,15 @@ public class BrandController {
 
     /*品牌分页*/
     @RequestMapping("list")
-    public ResponseVo getBrandList(int page, int limit, String sort, String order) {
+    public ResponseVo getBrandList(int page, int limit, String sort, String order, Integer id, String name) {
+        StringBuilder term = new StringBuilder();
+        if (name != null) {
+            term.append("%").append(name).append("%");
+        }
         BrandPage brandPage = new BrandPage();
         String orderBy = sort + " " + order;
         PageHelper.startPage(page,limit,orderBy);
-        List<Brand> brandList = brandService.getBrandList();
+        List<Brand> brandList = brandService.getBrandList(id,term.toString());
         PageInfo<Brand> pageInfo = new PageInfo<>(brandList);
         brandPage.setItems(brandList);
         brandPage.setTotal((int)pageInfo.getTotal());
@@ -46,10 +50,16 @@ public class BrandController {
 
     @RequestMapping("create")
     public ResponseVo createBrand(@RequestBody Brand brand) {
+        brand.setPicUrl("123.fpg");
         brand.setAddTime(new Date());
         brand.setUpdateTime(new Date());
         brand = brandService.insertBrand(brand);
         return ResponseUtil.success(brand);
     }
 
+    @RequestMapping("delete")
+    public ResponseVo deleteBrand(@RequestBody Brand brand) {
+        brandService.deleteBrandById(brand.getId());
+        return ResponseUtil.success(null);
+    }
 }
