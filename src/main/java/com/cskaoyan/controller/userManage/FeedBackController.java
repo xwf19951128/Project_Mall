@@ -2,6 +2,8 @@ package com.cskaoyan.controller.userManage;
 
 import com.cskaoyan.bean.userManage.*;
 import com.cskaoyan.service.userManage.FeedBackService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,32 +23,28 @@ public class FeedBackController {
         DataAndErr dataAndErr = new DataAndErr();
         ItemAndTotal<FeedBack> itemAndTotal = new ItemAndTotal<>();
         List<FeedBack> feedBacks;
+        PageHelper.startPage(page, limit);
 
         if ((id == null || "".equals(id)) && (username == null || "".equals(username))) {
             // 查询全部反馈
             feedBacks = feedBackService.queryFeedBack();
-            // 封装item和total
-            itemAndTotal.setItems(feedBacks);
-            itemAndTotal.setTotal(feedBacks.size());
         } else if (id == null || "".equals(id)) {
             // 通过用户名查询反馈
             feedBacks = feedBackService.queryFeedBackByUsername("%" + username + "%");
-            // 封装item和total
-            itemAndTotal.setItems(feedBacks);
-            itemAndTotal.setTotal(feedBacks.size());
         } else if (username == null || "".equals(username)) {
             // 通过反馈id查询全部反馈
             feedBacks = feedBackService.queryFeedBackByFeedbackId(id);
-            // 封装item和total
-            itemAndTotal.setItems(feedBacks);
-            itemAndTotal.setTotal(feedBacks.size());
         } else {
             // 通过反馈id和用户名查询反馈
             feedBacks = feedBackService.queryFeedBackByFeedBackIdAndUsername(id, "%" + username + "%");
-            // 封装item和total
-            itemAndTotal.setItems(feedBacks);
-            itemAndTotal.setTotal(feedBacks.size());
         }
+
+        PageInfo<FeedBack> pageInfo = new PageInfo<>(feedBacks);
+        int total = (int) pageInfo.getTotal();
+
+        // 封装item和total
+        itemAndTotal.setItems(feedBacks);
+        itemAndTotal.setTotal(total);
 
         // 封装data、errMsg、errno
         dataAndErr.setData(itemAndTotal);

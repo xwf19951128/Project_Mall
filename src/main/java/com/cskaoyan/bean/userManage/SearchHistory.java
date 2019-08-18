@@ -1,20 +1,26 @@
 package com.cskaoyan.bean.userManage;
 
-public class SearchHistory {
-    String addTime;
-    int deleted;
-    String from;
-    int id;
-    String keyword;
-    String updateTime;
-    int userId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-    public String getAddTime() {
-        return addTime;
+import java.util.Date;
+
+public class SearchHistory {
+    private int userId;
+    private int deleted;
+    private String from;
+    private int id;
+    private String keyword;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date addTime;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getDeleted() {
@@ -49,19 +55,19 @@ public class SearchHistory {
         this.keyword = keyword;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public int getUserId() {
-        return userId;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }
