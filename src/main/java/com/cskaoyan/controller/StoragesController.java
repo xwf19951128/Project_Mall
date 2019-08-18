@@ -1,4 +1,4 @@
-package com.cskaoyan.controller.mall;
+package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.mall.file.Storage;
 import com.cskaoyan.service.mall.StoragesService;

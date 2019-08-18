@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.mall;
+package com.cskaoyan.bean.mall.category;
 
 import java.util.Date;
 

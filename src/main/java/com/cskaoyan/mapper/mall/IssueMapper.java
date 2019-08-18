@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.Issue;
-import com.cskaoyan.bean.mall.IssueExample;
+import com.cskaoyan.bean.mall.issue.Issue;
+import com.cskaoyan.bean.mall.issue.IssueExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -28,4 +28,7 @@ public interface IssueMapper {
     int updateByPrimaryKeySelective(Issue record);
 
     int updateByPrimaryKey(Issue record);
+
+    List<Issue> getIssueList();
+
 }
