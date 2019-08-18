@@ -21,8 +21,7 @@ public class VipManageServiceImpl implements VipManageService {
         return vipManageMapper.queryAllUser();
     }
 
-<<<<<<< .merge_file_a15048
-<<<<<<< .merge_file_a07040
+
     // 通过用户名和手机号查询用户
     @Override
     public List<User> queryUserByUsernameAndMobile(String username, String mobile) {
@@ -40,10 +39,5 @@ public class VipManageServiceImpl implements VipManageService {
     public List<User> queryUserByMobile(String mobile) {
         return vipManageMapper.queryUserByMobile(mobile);
     }
-
-=======
->>>>>>> .merge_file_a12564
-=======
->>>>>>> .merge_file_a06348
 
 }
