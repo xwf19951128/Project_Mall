@@ -13,7 +13,7 @@ public class FeedBack {
     private int hasPicture;
     private int id;
     private String mobile;
-    private List picUrls;
+    private String[] picUrls;
     private int status;
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
@@ -70,11 +70,11 @@ public class FeedBack {
         this.mobile = mobile;
     }
 
-    public List getPicUrls() {
+    public String[] getPicUrls() {
         return picUrls;
     }
 
-    public void setPicUrls(List picUrls) {
+    public void setPicUrls(String[] picUrls) {
         this.picUrls = picUrls;
     }
 
