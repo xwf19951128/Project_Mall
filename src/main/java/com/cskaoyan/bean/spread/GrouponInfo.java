@@ -1,5 +1,7 @@
 package com.cskaoyan.bean.spread;
 
+import com.cskaoyan.bean.goods.Goods;
+
 import java.util.Arrays;
 
 public class GrouponInfo {

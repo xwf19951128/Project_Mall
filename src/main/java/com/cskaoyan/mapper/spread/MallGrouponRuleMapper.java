@@ -1,5 +1,6 @@
 package com.cskaoyan.mapper.spread;
 
+import com.cskaoyan.bean.spread.GrouponInfo;
 import com.cskaoyan.bean.spread.MallGrouponRule;
 import com.cskaoyan.bean.spread.MallGrouponRuleExample;
 
@@ -30,5 +31,6 @@ public interface MallGrouponRuleMapper {
 
     int updateByPrimaryKey(MallGrouponRule record);
     ArrayList<MallGrouponRule> queryMallGrouponRuleList(@Param("goodsId") String goodsId);
+    ArrayList<GrouponInfo> queryGrouponInfoList(@Param("id")String id);
 
 }

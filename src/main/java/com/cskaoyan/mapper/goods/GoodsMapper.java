@@ -14,7 +14,7 @@ public interface GoodsMapper {
     @Select("select count(id) from cskaoyan_mall_goods")
     long countTotalGoodsCount();
 
-
+    Goods findGoods(@Param("goodsId") Integer id);
     List<Goods> listAllGoods(/*@Param("limit") int limit, @Param("offset") int offset, */@Param("sort") String sort, @Param("order") String order);
 
 }
