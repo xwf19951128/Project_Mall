@@ -2,6 +2,7 @@ package com.cskaoyan.mapper.mall;
 
 import com.cskaoyan.bean.mall.brand.Brand;
 import com.cskaoyan.bean.mall.brand.BrandExample;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -31,6 +32,9 @@ public interface BrandMapper {
     int updateByPrimaryKey(Brand record);
 
     List<Brand> getBrandList();
+    List<Brand> getBrandListById(@Param("id") Integer id);
+    List<Brand> getBrandListByName(@Param("name") String name);
+    List<Brand> getBrandListByIdAndName(@Param("id") Integer id,@Param("name") String name);
 
     int updateBrandById(@Param("brand") Brand brand);
 

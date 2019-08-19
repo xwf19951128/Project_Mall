@@ -1,6 +1,7 @@
 package com.cskaoyan.bean.userManage;
 
 public class Address {
+
     String address; // 收获地址
     String area;    // 区域
     int areaId;  // 行政区域表的区县id

@@ -1,4 +1,4 @@
-package com.cskaoyan.controller.mall;
+package com.cskaoyan.controller;
 
 import com.cskaoyan.bean.mall.file.Storage;
 import com.cskaoyan.service.mall.StoragesService;
@@ -23,11 +23,12 @@ public class StoragesController {
     StoragesService storagesService;
 
     /*图片上传*/
-    @RequestMapping("storage/create")
+//    @RequestMapping("storage/create")
     public ResponseVo uploadPic(HttpServletRequest request, MultipartFile file) throws IOException {
         File pic = new File("c://spring", file.getOriginalFilename());
         file.transferTo(pic);
         Storage upload = new Storage();
+        upload.setUrl("123.fpg");
         upload.setType(file.getContentType());
         upload.setAddTime(new Date());
         upload.setUpdateTime(new Date());

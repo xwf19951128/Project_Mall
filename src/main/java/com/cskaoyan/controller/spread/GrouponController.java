@@ -25,8 +25,8 @@ public class GrouponController {
     }
     @ApiOperation(value = "显示团购订单？页面，包括模糊查询")
     @RequestMapping(value = "/listRecord")
-    public MessageBean<ListDate<GrouponInfo>> showGrouponInfoPage(int page, int limit, String content, String name){
-        return spreadService.showGrouponInfoListByPage(page,limit,content,name);
+    public MessageBean<ListDate<GrouponInfo>> showGrouponInfoPage(int page, int limit, String id){
+        return spreadService.showGrouponInfoListByPage(page,limit,id);
     }
     @ApiOperation(value = "更新单个团购规则")
     @RequestMapping(value = "/update")

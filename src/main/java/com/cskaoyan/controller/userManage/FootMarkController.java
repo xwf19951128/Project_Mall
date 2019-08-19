@@ -5,6 +5,8 @@ import com.cskaoyan.bean.userManage.FootMark;
 import com.cskaoyan.bean.userManage.ItemAndTotal;
 import com.cskaoyan.bean.userManage.VipCollect;
 import com.cskaoyan.service.userManage.FootMarkService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,31 +28,28 @@ public class FootMarkController {
         ItemAndTotal<FootMark> itemAndTotal = new ItemAndTotal<>();
         List<FootMark> footMarks;
 
+        PageHelper.startPage(page, limit);
+
         if ((userId == null || "".equals(userId)) && (goodsId == null || "".equals(goodsId))) {
             // 查询全部足迹
             footMarks = footMarkService.queryFootMark();
-            // 封装item和total
-            itemAndTotal.setItems(footMarks);
-            itemAndTotal.setTotal(footMarks.size());
         } else if (userId == null || "".equals(userId)) {
             // 通过商品id进行查询
             footMarks = footMarkService.queryFootMarkByGoodsId(goodsId);
-            // 封装item和total
-            itemAndTotal.setItems(footMarks);
-            itemAndTotal.setTotal(footMarks.size());
         } else if (goodsId == null || "".equals(goodsId)) {
             // 通过用户id进行查询
             footMarks = footMarkService.queryFootMarkByUserId(userId);
-            // 封装item和total
-            itemAndTotal.setItems(footMarks);
-            itemAndTotal.setTotal(footMarks.size());
         } else {
             // 通过用户id和商品id进行查询
             footMarks = footMarkService.queryFootMarkByUserIdAndGoodsId(userId, goodsId);
-            // 封装item和total
-            itemAndTotal.setItems(footMarks);
-            itemAndTotal.setTotal(footMarks.size());
         }
+
+        PageInfo<FootMark> pageInfo = new PageInfo<>(footMarks);
+        int total = (int) pageInfo.getTotal();
+
+        // 封装item和total
+        itemAndTotal.setItems(footMarks);
+        itemAndTotal.setTotal(total);
 
         // 封装data、errMsg、errno
         dataAndErr.setData(itemAndTotal);

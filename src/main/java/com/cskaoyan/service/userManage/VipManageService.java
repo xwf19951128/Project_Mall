@@ -16,4 +16,5 @@ public interface VipManageService {
 
     // 通过手机号查询用户
     List<User> queryUserByMobile(String mobile);
+
 }

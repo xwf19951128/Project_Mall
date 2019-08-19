@@ -9,4 +9,6 @@ import com.cskaoyan.bean.vo.DataBean;
  */
 public interface LogService {
     DataBean<Log> selectLogs(int page, int limit, String name, String sort, String order);
+
+    int insertLog(Log log);
 }

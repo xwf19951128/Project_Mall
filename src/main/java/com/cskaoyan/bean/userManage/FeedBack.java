@@ -1,28 +1,26 @@
 package com.cskaoyan.bean.userManage;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 import java.util.List;
 
 public class FeedBack {
-    String addTime;
-    String content;
-    int deleted;
-    String feedType;
-    int hasPicture;
-    int id;
-    String mobile;
-    List picUrls;
-    int status;
-    String updateTime;
-    int userId;
-    String username;
 
-    public String getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
-    }
+    private String content;
+    private int deleted;
+    private String feedType;
+    private int hasPicture;
+    private int id;
+    private String mobile;
+    private String[] picUrls;
+    private int status;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date addTime;
+    private int userId;
+    private String username;
 
     public String getContent() {
         return content;
@@ -72,11 +70,11 @@ public class FeedBack {
         this.mobile = mobile;
     }
 
-    public List getPicUrls() {
+    public String[] getPicUrls() {
         return picUrls;
     }
 
-    public void setPicUrls(List picUrls) {
+    public void setPicUrls(String[] picUrls) {
         this.picUrls = picUrls;
     }
 
@@ -88,12 +86,20 @@ public class FeedBack {
         this.status = status;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 
     public int getUserId() {

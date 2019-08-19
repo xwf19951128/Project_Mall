@@ -36,4 +36,19 @@ public class RoleServiceImpl implements RoleService {
     public List<Options> selectOptions() {
         return roleMapper.selectOptions();
     }
+
+    @Override
+    public int insertRole(Role role) {
+        return roleMapper.insertRole(role);
+    }
+
+    @Override
+    public int updateRole(Role role ) {
+        return roleMapper.updateRole(role);
+    }
+
+    @Override
+    public int deleteRole(Role role) {
+        return roleMapper.deleteByPrimaryKey(role.getId());
+    }
 }

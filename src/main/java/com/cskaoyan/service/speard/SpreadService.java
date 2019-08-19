@@ -40,5 +40,7 @@ public interface SpreadService {
 
     MessageBean<String> deleteRecord(MallCoupon ad);
 
-    MessageBean<ListDate<GrouponInfo>> showGrouponInfoListByPage(int page, int limit, String content, String name);
+
+
+    MessageBean<ListDate<GrouponInfo>> showGrouponInfoListByPage(int page, int limit, String id);
 }

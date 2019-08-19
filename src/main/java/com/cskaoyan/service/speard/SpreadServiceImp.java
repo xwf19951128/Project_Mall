@@ -1,6 +1,8 @@
 package com.cskaoyan.service.speard;
 
+import com.cskaoyan.bean.goods.Goods;
 import com.cskaoyan.bean.spread.*;
+import com.cskaoyan.mapper.goods.GoodsMapper;
 import com.cskaoyan.mapper.spread.*;
 
 import com.github.pagehelper.PageHelper;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class SpreadServiceImp implements SpreadService{
@@ -22,6 +25,8 @@ public class SpreadServiceImp implements SpreadService{
     MallTopicMapper topicMapper;
     @Autowired
     MallCouponMapper couponMapper;
+    @Autowired
+    GoodsMapper goodsMapper;
     @Override
     public MessageBean<MallTopic> updateRecord(MallTopic ad) {
         if(topicMapper.updateByPrimaryKey(ad)==1){
@@ -113,6 +118,11 @@ public class SpreadServiceImp implements SpreadService{
 
     @Override
     public MessageBean<MallGrouponRule> updateRecord(MallGrouponRule ad) {
+        Goods goods=goodsMapper.findGoods(ad.getGoodsId());
+        ad.setGoodsName(goods.getName());
+        ad.setPicUrl(goods.getPicUrl());
+        Date date = new Date();
+        ad.setUpdateTime(date);
         if(ruleMapper.updateByPrimaryKey(ad)==1){
             return new MessageBean<>("成功",0,ad);
         }
@@ -121,6 +131,11 @@ public class SpreadServiceImp implements SpreadService{
 
     @Override
     public MessageBean<MallGrouponRule> addRecord(MallGrouponRule ad) {
+        Goods goods=goodsMapper.findGoods(ad.getGoodsId());
+        ad.setGoodsName(goods.getName());
+        ad.setPicUrl(goods.getPicUrl());
+        Date date = new Date();
+        ad.setAddTime(date);
         if(ruleMapper.insertSelective(ad)==1){
             return new MessageBean<>("成功",0,ad);
         }
@@ -187,13 +202,9 @@ public class SpreadServiceImp implements SpreadService{
     }
 
     @Override
-    public MessageBean<ListDate<GrouponInfo>> showGrouponInfoListByPage(int page, int limit, String content, String name) {
+    public MessageBean<ListDate<GrouponInfo>> showGrouponInfoListByPage(int page, int limit, String id) {
         PageHelper.startPage(page,limit);
-        if(content!=null){
-            content="%"+content+"%";}
-        if(name!=null){
-            name="%"+name+"%";}
-        ArrayList<GrouponInfo> list=grouponMapper.queryGrouponInfoList(content,name);
+        ArrayList<GrouponInfo> list=ruleMapper.queryGrouponInfoList(id);
         PageInfo<GrouponInfo> pageInfo=new PageInfo<>(list);
         ListDate<GrouponInfo> listDate=new ListDate<>();
         listDate.setTotal(pageInfo.getTotal());

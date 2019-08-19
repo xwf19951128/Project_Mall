@@ -13,6 +13,56 @@
     <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+  <resultMap id="AdvanceMap" type="com.cskaoyan.bean.spread.GrouponInfo">
+    <association property="goods" javaType="com.cskaoyan.bean.goods.Goods">
+      <id property="id" column="id"></id>
+      <id property="goodsSn" column="goods_sn"></id>
+      <id property="name" column="name"></id>
+      <id property="categoryId" column="category_id"></id>
+      <id property="brandId" column="brand_id"></id>
+      <id property="gallery" column="gallery"></id>
+      <id property="keywords" column="keywords"></id>
+      <id property="brief" column="brief"></id>
+      <id property="isOnSale" column="is_on_sale"></id>
+      <id property="sortOrder" column="sort_order"></id>
+      <id property="picUrl" column="pic_url"></id>
+      <id property="shareUrl" column="share_url"></id>
+      <id property="isNew" column="is_new"></id>
+      <id property="isHot" column="is_hot"></id>
+      <id property="unit" column="unit"></id>
+      <id property="counterPrice" column="counter_price"></id>
+      <id property="retailPrice" column="retail_price"></id>
+      <id property="addTime" column="add_time"></id>
+      <id property="updateTime" column="update_time"></id>
+      <id property="deleted" column="deleted"></id>
+      <id property="detail" column="detail"></id>
+    </association>
+    <association property="groupon" javaType="com.cskaoyan.bean.spread.MallGroupon">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="order_id" jdbcType="INTEGER" property="orderId" />
+      <id column="groupon_id" jdbcType="INTEGER" property="grouponId" />
+      <id column="rules_id" jdbcType="INTEGER" property="rulesId" />
+      <id column="user_id" jdbcType="INTEGER" property="userId" />
+      <id column="creator_user_id" jdbcType="INTEGER" property="creatorUserId" />
+      <id column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <id column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <id column="share_url" jdbcType="VARCHAR" property="shareUrl" />
+      <id column="payed" jdbcType="BIT" property="payed" />
+      <id column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+    <association property="rules" javaType="com.cskaoyan.bean.spread.MallGrouponRule">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+      <id column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+      <id column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+      <id column="discount" jdbcType="DECIMAL" property="discount" />
+      <id column="discount_member" jdbcType="INTEGER" property="discountMember" />
+      <id column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <id column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <id column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+      <id column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -78,7 +128,7 @@
   <select id="queryMallGrouponRuleList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.spread.MallGrouponRule">
     select <include refid="Base_Column_List"></include> from cskaoyan_mall_groupon_rules where 1=1
     <if test="goodsId !=null">
-      and goods_id=#{goods_id}
+      and goods_id=#{goodsId}
     </if>
   </select>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.spread.MallGrouponRuleExample" resultMap="BaseResultMap">
@@ -294,4 +344,10 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryGrouponInfoList" resultMap="AdvanceMap" resultType="com.cskaoyan.bean.spread.GrouponInfo">
+    select * from cskaoyan_mall_goods g,cskaoyan_mall_groupon_rules r,cskaoyan_mall_groupon mg where mg.rules_id=r.id and r.goods_id=g.id
+    <if test="id != null">
+      and mg.id=#{id}
+    </if>
+  </select>
 </mapper>

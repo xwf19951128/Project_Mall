@@ -3,7 +3,10 @@ package com.cskaoyan.controller.userManage;
 import com.cskaoyan.bean.userManage.Address;
 import com.cskaoyan.bean.userManage.DataAndErr;
 import com.cskaoyan.bean.userManage.ItemAndTotal;
+import com.cskaoyan.bean.userManage.VipCollect;
 import com.cskaoyan.service.userManage.ShoppingAddressService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,33 +30,29 @@ public class ShoppingAddressController {
         ItemAndTotal<Address> itemAndTotal = new ItemAndTotal<>();
         List<Address> addresses;
 
+        // 开启分页
+        PageHelper.startPage(page, limit);
+
         if ((name == null || "".equals(name)) && (userId == null || "".equals(userId))) {
             // 查询全部
             addresses = shoppingAddressService.queryShoppingAddress();
-            // 封装item和total
-            itemAndTotal.setItems(addresses);
-            itemAndTotal.setTotal(addresses.size());
         } else if ("".equals(userId) || userId == null) {
-            // 只输入收货人名称
             // 根据收货人名称查询
             addresses = shoppingAddressService.queryAddressByUsername("%" + name + "%");
-            // 封装item和total
-            itemAndTotal.setItems(addresses);
-            itemAndTotal.setTotal(addresses.size());
         } else if ("".equals(name) || name == null) {
-            // 只输入用户id
             // 根据用户id查询
             addresses = shoppingAddressService.queryAddressByUserId(userId);
-            // 封装item和total
-            itemAndTotal.setItems(addresses);
-            itemAndTotal.setTotal(addresses.size());
         } else {
             // 根据用户id和收货人姓名查询
             addresses = shoppingAddressService.queryAddressByUsernameAndUserId("%" + name + "%", userId);
-            // 封装item和total
-            itemAndTotal.setItems(addresses);
-            itemAndTotal.setTotal(addresses.size());
         }
+
+        PageInfo<Address> pageInfo = new PageInfo<>(addresses);
+        int total = (int) pageInfo.getTotal();
+
+        // 封装item和total
+        itemAndTotal.setItems(addresses);
+        itemAndTotal.setTotal(total);
 
         // 封装data、errMsg、errno
         dataAndErr.setData(itemAndTotal);

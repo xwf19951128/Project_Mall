@@ -5,6 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.VipManageMapper">
+
     <resultMap id="userMapper" type="com.cskaoyan.bean.userManage.User">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
@@ -113,4 +114,7 @@
         from cskaoyan_mall_user
         where mobile = #{mobile}
     </select>
+
+
+
 </mapper>

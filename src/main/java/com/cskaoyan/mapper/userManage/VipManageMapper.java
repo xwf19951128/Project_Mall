@@ -1,10 +1,13 @@
 package com.cskaoyan.mapper.userManage;
 
 import com.cskaoyan.bean.userManage.User;
+
 import org.apache.ibatis.annotations.Param;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 
 public interface VipManageMapper {
     // 查询所有用户信息
@@ -18,4 +21,5 @@ public interface VipManageMapper {
 
     // 通过手机号查询用户
     List<User> queryUserByMobile(@Param("mobile") String mobile);
+
 }

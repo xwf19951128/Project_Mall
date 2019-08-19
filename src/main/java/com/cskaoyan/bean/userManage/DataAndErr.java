@@ -1,6 +1,8 @@
 package com.cskaoyan.bean.userManage;
 
 
+import java.util.List;
+
 public class DataAndErr {
     ItemAndTotal data;
     String errmsg;

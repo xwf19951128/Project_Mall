@@ -1,19 +1,26 @@
 package com.cskaoyan.bean.userManage;
 
-public class FootMark {
-    String addTime;
-    int deleted;
-    int goodsId;
-    int id;
-    String updateTime;
-    int userId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-    public String getAddTime() {
-        return addTime;
+import java.util.Date;
+
+public class FootMark {
+
+    private int userId;
+    private int deleted;
+    private int goodsId;
+    private int id;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getDeleted() {
@@ -40,19 +47,19 @@ public class FootMark {
         this.id = id;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public int getUserId() {
-        return userId;
+    public Date getAddTime() {
+        return addTime;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
     }
 }

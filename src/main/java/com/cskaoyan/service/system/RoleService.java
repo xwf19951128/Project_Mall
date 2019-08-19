@@ -14,4 +14,10 @@ public interface RoleService {
     DataBean<Role> selectRoles(int page, int limit, String name, String sort, String order);
 
     List<Options> selectOptions();
+
+    int insertRole(Role role);
+
+    int updateRole(Role role);
+
+    int deleteRole(Role role);
 }

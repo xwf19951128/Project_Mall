@@ -1,21 +1,20 @@
 package com.cskaoyan.bean.userManage;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class VipCollect {
-    String addTime;
-    int deleted;
-    int id;
-    int type;
-    String updateTime;
-    int userId;
-    int valueId;
 
-    public String getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
-    }
+    private int deleted;
+    private int id;
+    private int type;
+    private int userId;
+    private int valueId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date addTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
     public int getDeleted() {
         return deleted;
@@ -41,14 +40,6 @@ public class VipCollect {
         this.type = type;
     }
 
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public int getUserId() {
         return userId;
     }
@@ -63,5 +54,34 @@ public class VipCollect {
 
     public void setValueId(int valueId) {
         this.valueId = valueId;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "VipCollect{" +
+                "deleted=" + deleted +
+                ", id=" + id +
+                ", type=" + type +
+                ", userId=" + userId +
+                ", valueId=" + valueId +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
