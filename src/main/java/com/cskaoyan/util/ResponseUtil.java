@@ -10,6 +10,13 @@ public class ResponseUtil {
         return responseVo;
     }
 
+    public static ResponseVo success(){
+        ResponseVo<Object> responseVo = new ResponseVo<>();
+        responseVo.setErrno(0);
+        responseVo.setErrmsg("成功");
+        return responseVo;
+    }
+
     public static ResponseVo fail(Object data,String errmsg,int errno){
         ResponseVo<Object> responseVo = new ResponseVo<>();
         responseVo.setData(data);
