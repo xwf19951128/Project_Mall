@@ -5,6 +5,7 @@ import com.cskaoyan.bean.login.AdminExample;
 import com.cskaoyan.bean.login.AdminInfo;
 import com.cskaoyan.bean.login.DashBoard;
 import com.cskaoyan.mapper.login.LoginMapper;
+import com.cskaoyan.mapper.login.LoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,5 +33,14 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public DashBoard queryDashBoard() {
         return loginMapper.queryDashBoard();
+    }
+
+    @Override
+    public List<Admin> queryPasswordByName(String name) {
+        AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria criteria = adminExample.createCriteria();
+        criteria.andUsernameEqualTo(name);
+        List<Admin> adminList = loginMapper.selectByExample(adminExample);
+        return adminList;
     }
 }

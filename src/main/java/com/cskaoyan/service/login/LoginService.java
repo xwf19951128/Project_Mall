@@ -13,4 +13,6 @@ public interface LoginService {
     AdminInfo queryAdminInfoByUsername(String username);
     //查询首页数据
     DashBoard queryDashBoard();
+    //根据用户名查询密码
+    List<Admin> queryPasswordByName(String name);
 }
