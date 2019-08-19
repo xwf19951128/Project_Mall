@@ -1,6 +1,7 @@
 package com.cskaoyan.controller.mall;
 
 import com.cskaoyan.bean.mall.order.Order;
+import com.cskaoyan.bean.mall.order.OrderDetail;
 import com.cskaoyan.bean.mall.order.OrderPage;
 import com.cskaoyan.service.mall.OrderService;
 import com.cskaoyan.util.ResponseUtil;
@@ -30,5 +31,14 @@ public class OrderController {
         orderPage.setItems(items);
         orderPage.setTotal((int)orderPageInfo.getTotal());
         return ResponseUtil.success(orderPage);
+    }
+
+    @RequestMapping("detail")
+    public ResponseVo getOrderDetailById(int id) {
+        OrderDetail orderDetail = new OrderDetail();
+        orderDetail.setOrder(orderService.getOrderById(id));
+        orderDetail.setOrderGoods(orderService.getOrderGoodsById(id));
+        orderDetail.setUser(orderService.getOrderUserById(id));
+        return ResponseUtil.success(orderDetail);
     }
 }
