@@ -11,7 +11,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
-    <result column="role_ids" jdbcType="VARCHAR" property="roleIds" />
+    <result column="role_ids" jdbcType="VARCHAR" property="roleIds" typeHandler="com.cskaoyan.handler.OurTypeHandler"/>
   </resultMap>
 
   <resultMap id="adminMap" type="com.cskaoyan.bean.system.Admin">
@@ -84,13 +84,43 @@
     deleted, role_ids
   </sql>
 
-  <select id="selectAdmins" parameterType="com.cskaoyan.bean.system.AdminExample" resultMap="adminMap">
-    select id,username,avatar,role_ids  from cskaoyan_mall_admin where deleted = 0
+  <select id="selectAdmins"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_admin
     <if test="username!=null">
       and username like concat('%',#{username},'%')
     </if>
     order by #{sort} #{order}
   </select>
+
+    <!--增加管理员-->
+    <insert id="insertAdmin" parameterType="com.cskaoyan.bean.system.Admin" useGeneratedKeys="true" keyProperty="id">
+        insert into cskaoyan_mall_admin(
+        username,
+        password,
+        avatar,
+        role_ids)
+        values (
+        #{username},
+        #{password},
+        #{avatar},
+        #{roleIds,typeHandler=com.cskaoyan.handler.OurTypeHandler}
+        )
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+      </selectKey>
+    </insert>
+
+  <update id="updateAdmin">
+    update cskaoyan_mall_admin set
+    username=#{username},
+    password=#{password},
+    avatar=#{avatar},
+    deleted=#{deleted},
+    role_ids=#{roleIds,typeHandler=com.cskaoyan.handler.OurTypeHandler}
+    where id=#{id}
+  </update>
 
   <select id="selectByExample" parameterType="com.cskaoyan.bean.system.AdminExample" resultMap="BaseResultMap">
     select
@@ -122,6 +152,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insert" parameterType="com.cskaoyan.bean.system.Admin">
     insert into cskaoyan_mall_admin (id, username, password, 
       last_login_ip, last_login_time, avatar, 
@@ -132,6 +163,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, 
       #{roleIds,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.system.Admin">
     insert into cskaoyan_mall_admin
     <trim prefix="(" suffix=")" suffixOverrides=",">

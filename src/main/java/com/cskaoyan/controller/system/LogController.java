@@ -19,7 +19,7 @@ public class LogController {
     LogService logService;
 
     @RequestMapping("admin/log/list")
-    public ResponseVo LogList(int page, int limit, String name, String sort, String order){
+    public ResponseVo LogList(int page,int limit,String name,String sort,String order){
         ResponseVo<Object> responseVo = new ResponseVo<>();
         DataBean<Log> LogBean = logService.selectLogs(page,limit,name,sort,order);
         responseVo.setData(LogBean);

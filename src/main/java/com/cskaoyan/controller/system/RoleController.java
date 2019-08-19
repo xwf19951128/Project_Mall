@@ -6,9 +6,11 @@ import com.cskaoyan.bean.vo.Options;
 import com.cskaoyan.service.system.RoleService;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +42,11 @@ public class RoleController {
         return  responseVo;
     }
 
+    /**
+     * 查询角色options
+     * @return
+     */
+
     @RequestMapping("admin/role/options")
     public ResponseVo ListOptions(){
         List<Options> optionData = roleService.selectOptions();
@@ -49,4 +56,46 @@ public class RoleController {
         responseVo.setData(optionData);
         return responseVo;
     }
+
+    @RequestMapping("admin/role/create")
+    public ResponseVo addRole(@RequestBody Role role){
+        ResponseVo responseVo = new ResponseVo();
+        role.setUpdateTime(new Date());
+        role.setAddTime(new Date());
+        role.setEnabled(true);
+        role.setDeleted(false);
+        int insert= roleService.insertRole(role);
+        if(insert!=0){
+            responseVo.setData(role);
+            responseVo.setErrno(0);
+            responseVo.setErrmsg("成功");
+        }
+        return responseVo;
+    }
+
+    @RequestMapping("admin/role/update")
+    public ResponseVo updateRole(@RequestBody Role role){
+        ResponseVo responseVo = new ResponseVo();
+        role.setAddTime(new Date());
+        role.setUpdateTime(new Date());
+        int update =roleService.updateRole(role);
+        if(update!=0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+            responseVo.setData(update);
+        }
+        return responseVo;
+    }
+    @RequestMapping("admin/role/delete")
+    public ResponseVo deleteRole(@RequestBody Role role){
+        ResponseVo responseVo = new ResponseVo();
+        int i= roleService.deleteRole(role);
+        if(i!=0){
+            responseVo.setErrmsg("成功");
+            responseVo.setErrno(0);
+            responseVo.setData(i);
+        }
+        return responseVo;
+    }
+
 }
