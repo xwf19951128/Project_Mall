@@ -42,12 +42,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand insertBrand(Brand brand) {
-        int i = brandMapper.insert(brand);
-        if (i > 0) {
-            return brandMapper.queryBrandByAddTime(brand.getAddTime());
-        }
-        return null;
+    public void insertBrand(Brand brand) {
+        brandMapper.insert(brand);
     }
 
     @Override

@@ -40,5 +40,5 @@ public interface BrandMapper {
 
     Brand queryBrandById(@Param("id") Integer id);
 
-    Brand queryBrandByAddTime(@Param("addTime") Date addTime);
+    Brand queryBrandByBrandName(@Param("brandName") String name);
 }

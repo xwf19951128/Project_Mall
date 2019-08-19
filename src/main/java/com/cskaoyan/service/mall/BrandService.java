@@ -9,7 +9,7 @@ public interface BrandService {
 
     Brand updateBrandById(Brand brand);
 
-    Brand insertBrand(Brand brand);
+    void insertBrand(Brand brand);
 
     void deleteBrandById(Integer id);
 }

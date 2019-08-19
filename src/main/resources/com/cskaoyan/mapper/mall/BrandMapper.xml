@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, desc, pic_url, sort_order, floor_price, add_time, update_time, deleted
+    id, name, `desc`, pic_url, sort_order, floor_price, add_time, update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.brand.BrandExample" resultMap="BaseResultMap">
     select
@@ -112,6 +112,9 @@
       #{picUrl,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, #{floorPrice,jdbcType=DECIMAL},
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT  LAST_INSERT_ID()
+      </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.brand.Brand">
     insert into cskaoyan_mall_brand
@@ -349,7 +352,7 @@
             cskaoyan_mall_brand
         where id = #{id}
     </select>
-    <select id="queryBrandByAddTime" resultType="com.cskaoyan.bean.mall.brand.Brand">
+    <select id="queryBrandByBrandName" resultType="com.cskaoyan.bean.mall.brand.Brand">
         select
             id,
             NAME,
@@ -359,6 +362,6 @@
             update_time AS updateTime,deleted
         FROM
             cskaoyan_mall_brand
-        where add_time = #{addTime}
+        where name = #{brandName}
     </select>
 </mapper>
