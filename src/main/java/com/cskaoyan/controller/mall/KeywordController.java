@@ -8,9 +8,11 @@ import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,19 +26,32 @@ public class KeywordController {
     public ResponseVo getKeywordList(int page, int limit, String order, String sort, String keyword, String url) {
         String orderBy = sort + " " + order;
         PageHelper.startPage(page,limit,orderBy);
-        StringBuilder keywords = new StringBuilder();
-        StringBuilder urls = new StringBuilder();
-        if (keyword != null) {
-            keywords.append("%").append(keyword).append("%");
-        }
-        if (url != null) {
-            urls.append("%").append(url).append("%");
-        }
-        List<Keyword> items = keywordService.getKeywordList(keywords.toString(), urls.toString());
+        List<Keyword> items = keywordService.getKeywordList(keyword, url);
         KeywordPage keywordPage = new KeywordPage();
         PageInfo<Keyword> pageInfo = new PageInfo<>(items);
         keywordPage.setItems(items);
         keywordPage.setTotal((int)pageInfo.getTotal());
         return ResponseUtil.success(keywordPage);
+    }
+
+    @RequestMapping("delete")
+    public ResponseVo deleteKeyword(@RequestBody Keyword keyword) {
+        keywordService.deleteKeyword(keyword);
+        return ResponseUtil.success(null);
+    }
+
+    @RequestMapping("create")
+    public ResponseVo createKeyword(@RequestBody Keyword keyword) {
+        keyword.setSortOrder((int)(Math.ceil(Math.random() * 100)));
+        keyword.setAddTime(new Date());
+        keyword.setUpdateTime(new Date());
+        keyword = keywordService.createKeyword(keyword);
+        return ResponseUtil.success(keyword);
+    }
+
+    @RequestMapping("update")
+    public ResponseVo updateKeyword(@RequestBody Keyword keyword) {
+        keywordService.updateKeyword(keyword);
+        return ResponseUtil.success(null);
     }
 }

@@ -17,10 +17,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrderList(Short orderStatus, String orderSn, Integer userId) {
-        List<Order> items = null;
-        if (orderStatus == null && orderSn == null && userId == null) {
-            items = orderMapper.getOrderList();
-        }
-        return items;
+//        if (orderSn == null && orderStatus == null && userId == null) {
+//            return orderMapper.getOrderList();
+//        }
+        return orderMapper.getOrderListBy(orderStatus, orderSn,userId);
     }
 }

@@ -29,6 +29,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
+
+    List<Order> getOrderListBy(@Param("orderStatus") Short orderStatus, @Param("orderSn") String orderSn, @Param("id") Integer userId);
+
     List<Order> getOrderList();
 
 }

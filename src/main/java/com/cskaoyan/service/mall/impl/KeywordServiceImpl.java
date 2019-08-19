@@ -15,11 +15,23 @@ public class KeywordServiceImpl implements KeywordService {
     KeywordMapper keywordMapper;
 
     @Override
-    public List<Keyword> getKeywordList(String keywords, String urls) {
-        List<Keyword> items = null;
-        if (keywords.equals("") && urls.equals("")) {
-            items = keywordMapper.getKeywordList();
-        }
-        return items;
+    public List<Keyword> getKeywordList(String keyword, String url) {
+        return keywordMapper.getKeywordList(keyword, url);
+    }
+
+    @Override
+    public void deleteKeyword(Keyword keyword) {
+        keywordMapper.deleteByPrimaryKey(keyword.getId());
+    }
+
+    @Override
+    public Keyword createKeyword(Keyword keyword) {
+        keywordMapper.insert(keyword);
+        return keywordMapper.selectByKeyword(keyword.getKeyword());
+    }
+
+    @Override
+    public void updateKeyword(Keyword keyword) {
+        keywordMapper.updateByPrimaryKey(keyword);
     }
 }

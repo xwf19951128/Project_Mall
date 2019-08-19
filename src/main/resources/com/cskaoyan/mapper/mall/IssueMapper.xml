@@ -231,4 +231,19 @@
         <include refid="Base_Column_List"/>
         from cskaoyan_mall_issue
     </select>
+
+
+    <select id="getIssueListByQuestion" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_issue
+        where question like #{question}
+    </select>
+
+    <select id="selectByAnswer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_issue
+        where answer = #{answer}
+    </select>
 </mapper>
