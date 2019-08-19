@@ -21,4 +21,8 @@ public interface GoodsMapper {
     List<Goods> listSearchGoodsByName(@Param("sort")String sort, @Param("order")String order, @Param("like")String like);
 
     List<Goods> listSearchGoodsByGoodsSnAndName(@Param("sort")String sort, @Param("order")String order, @Param("like1")String like1, @Param("like2")String like2);
+
+    Goods getSingleGoodsById(@Param("id") int id);
+
+    int deleteSingleGoodsById(@Param("id") Integer goodsId);
 }

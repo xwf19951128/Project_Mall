@@ -17,4 +17,7 @@ public interface GoodsService {
 
     List<Goods> listPageGoodsByGoodsSnAndName(PageParams4Goods pageParams4Goods, String goodsSn, String name);
 
+    Goods getSingleGoodsById(int id);
+
+    int deleteSingleGoodsById(Integer goodsId);
 }

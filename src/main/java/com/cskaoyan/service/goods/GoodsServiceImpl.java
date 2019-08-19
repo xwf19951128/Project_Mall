@@ -67,4 +67,14 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
         return goodsMapper.listSearchGoodsByGoodsSnAndName(sort, order, like1, like2);
     }
+
+    @Override
+    public Goods getSingleGoodsById(int id) {
+        return goodsMapper.getSingleGoodsById(id);
+    }
+
+    @Override
+    public int deleteSingleGoodsById(Integer goodsId) {
+        return goodsMapper.deleteSingleGoodsById(goodsId);
+    }
 }
