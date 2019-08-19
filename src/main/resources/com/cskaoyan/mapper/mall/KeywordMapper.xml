@@ -277,5 +277,20 @@
         select
         <include refid="Base_Column_List"/>
         from cskaoyan_mall_keyword
+        <where>
+            <if test="keyword != null">
+                and keyword like  concat('%',#{keyword},'%')
+            </if>
+            <if test="url != null">
+                and url like concat('%',#{url},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByKeyword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cskaoyan_mall_keyword
+        where keyword like #{keyword}
     </select>
 </mapper>

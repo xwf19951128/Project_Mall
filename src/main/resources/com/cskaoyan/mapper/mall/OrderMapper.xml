@@ -541,9 +541,29 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <select id="getOrderList" resultMap="BaseResultMap">
+
+    <!--可选条件的模糊查询用where标签-->
+    <select id="getOrderListBy" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from cskaoyan_mall_order
+        <where>
+        <if test="orderStatus != null">
+             and order_status = #{orderStatus}
+        </if>
+        <if test="orderSn != null">
+            and order_sn = #{orderSn}
+        </if>
+        <if test="id != null">
+            and user_id = #{id}
+        </if>
+        </where>
     </select>
+
+<!--    <select id="getOrderList" resultMap="BaseResultMap">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List"/>-->
+<!--        from cskaoyan_mall_order-->
+<!--    </select>-->
+
 </mapper>

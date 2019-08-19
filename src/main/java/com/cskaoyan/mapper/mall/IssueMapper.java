@@ -4,6 +4,7 @@ import com.cskaoyan.bean.mall.issue.Issue;
 import com.cskaoyan.bean.mall.issue.IssueExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IssueMapper {
@@ -31,4 +32,7 @@ public interface IssueMapper {
 
     List<Issue> getIssueList();
 
+    List<Issue> getIssueListByQuestion(@Param("question") String question);
+
+    Issue selectByAnswer(@Param("answer")String answer);
 }

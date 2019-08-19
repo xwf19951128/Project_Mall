@@ -4,7 +4,9 @@ import com.cskaoyan.bean.goods.GoodsAttribute;
 import com.cskaoyan.bean.goods.GoodsAttributeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface GoodsAttributeMapper {
     long countByExample(GoodsAttributeExample example);
 
@@ -27,4 +29,5 @@ public interface GoodsAttributeMapper {
     int updateByPrimaryKeySelective(GoodsAttribute record);
 
     int updateByPrimaryKey(GoodsAttribute record);
+
 }

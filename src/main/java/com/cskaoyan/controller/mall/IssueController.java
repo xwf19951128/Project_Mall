@@ -10,9 +10,11 @@ import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,6 +38,30 @@ public class IssueController {
         issuePage.setItems(items);
         issuePage.setTotal((int)orderPageInfo.getTotal());
         return ResponseUtil.success(issuePage);
+    }
+
+
+    @RequestMapping("update")
+    public ResponseVo updateIssue(@RequestBody Issue issue) {
+        issue.setUpdateTime(new Date());
+        issueService.updateIssue(issue);
+        return ResponseUtil.success(null);
+    }
+
+    @RequestMapping("create")
+    public ResponseVo createIssue(@RequestBody Issue issue) {
+        issue.setAddTime(new Date());
+        issue.setUpdateTime(new Date());
+        issue.setDeleted(false);
+        issueService.insertIssue(issue);
+        issue = issueService.getIssueByAnswer(issue);
+        return ResponseUtil.success(issue);
+    }
+
+    @RequestMapping("delete")
+    public ResponseVo deleteIssue(@RequestBody Issue issue) {
+        issueService.deleteIssue(issue);
+        return ResponseUtil.success(null);
     }
 
 }
