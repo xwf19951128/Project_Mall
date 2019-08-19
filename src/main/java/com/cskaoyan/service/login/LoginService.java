@@ -15,4 +15,10 @@ public interface LoginService {
     DashBoard queryDashBoard();
     //根据用户名查询密码
     List<Admin> queryPasswordByName(String name);
+
+    //修改密码时，同时修改当前用户的密码以及更新时间update_time
+    int updatePasswordAndTime(Admin admin);
+
+    //登录时时候，修改最后一次登录时间以及IP地址
+    int updateIPAndLastTime(Admin admin);
 }

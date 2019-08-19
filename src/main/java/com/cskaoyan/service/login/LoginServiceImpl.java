@@ -43,4 +43,20 @@ public class LoginServiceImpl implements LoginService {
         List<Admin> adminList = loginMapper.selectByExample(adminExample);
         return adminList;
     }
+
+    @Override
+    public int updatePasswordAndTime(Admin admin) {
+        AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria criteria = adminExample.createCriteria();
+        criteria.andUsernameEqualTo(admin.getUsername());
+        return loginMapper.updateByExampleSelective(admin,adminExample);
+    }
+
+    @Override
+    public int updateIPAndLastTime(Admin admin) {
+        AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria criteria = adminExample.createCriteria();
+        criteria.andUsernameEqualTo(admin.getUsername());
+        return loginMapper.updateByExampleSelective(admin,adminExample);
+    }
 }

@@ -6,12 +6,11 @@ import com.cskaoyan.service.statistic.ConfigService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/admin/config")
@@ -20,7 +19,9 @@ public class ConfigController {
     @Autowired
     ConfigService configService;
 
-    @RequestMapping("/mall")
+    //在本模块中，get请求是查询所有记录，post请求是修改记录
+
+    @GetMapping("/mall")
     public ResponseVo configmall(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigMall();
@@ -32,7 +33,19 @@ public class ConfigController {
         return ResponseUtil.success(data);
     }
 
-    @RequestMapping("/express")
+    @PostMapping("/mall")
+    public ResponseVo updatemall(@RequestBody HashMap<String,String> map){
+        //把四个键值对以Map的形式接收，更加方法
+        //遍历这个Map。把四个键值对分别更新即可
+        Set<String> keys = map.keySet();
+        for (String key :keys) {
+            String value = map.get(key);
+            configService.updateKeyValueByName(key,value);
+        }
+        return ResponseUtil.success();
+    }
+
+    @GetMapping("/express")
     public ResponseVo configexpress(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigExpress();
@@ -44,7 +57,19 @@ public class ConfigController {
         return ResponseUtil.success(data);
     }
 
-    @RequestMapping("/order")
+    @PostMapping("/express")
+    public ResponseVo updateexpress(@RequestBody HashMap<String,String> map){
+        //把四个键值对以Map的形式接收，更加方法
+        //遍历这个Map。把四个键值对分别更新即可
+        Set<String> keys = map.keySet();
+        for (String key :keys) {
+            String value = map.get(key);
+            configService.updateKeyValueByName(key,value);
+        }
+        return ResponseUtil.success();
+    }
+
+    @GetMapping("/order")
     public ResponseVo configorder(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigOrder();
@@ -56,7 +81,19 @@ public class ConfigController {
         return ResponseUtil.success(data);
     }
 
-    @RequestMapping("/wx")
+    @PostMapping("/order")
+    public ResponseVo updateorder(@RequestBody HashMap<String,String> map){
+        //把四个键值对以Map的形式接收，更加方法
+        //遍历这个Map。把四个键值对分别更新即可
+        Set<String> keys = map.keySet();
+        for (String key :keys) {
+            String value = map.get(key);
+            configService.updateKeyValueByName(key,value);
+        }
+        return ResponseUtil.success();
+    }
+
+    @GetMapping("/wx")
     public ResponseVo configwx(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigWx();
@@ -67,4 +104,17 @@ public class ConfigController {
         }
         return ResponseUtil.success(data);
     }
+    @PostMapping("/wx")
+    public ResponseVo updatewx(@RequestBody HashMap<String,String> map){
+        //把四个键值对以Map的形式接收，更加方法
+        //遍历这个Map。把四个键值对分别更新即可
+        Set<String> keys = map.keySet();
+        for (String key :keys) {
+            String value = map.get(key);
+            configService.updateKeyValueByName(key,value);
+        }
+        return ResponseUtil.success();
+    }
+
+
 }
