@@ -9,7 +9,6 @@ import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -47,7 +46,6 @@ public class CategoryController {
         category.setAddTime(new Date());
         category.setUpdateTime((new Date()));
         categoryService.createCategory(category);
-        category = categoryService.getCategoryById(category.getId());
         return ResponseUtil.success(category);
     }
 

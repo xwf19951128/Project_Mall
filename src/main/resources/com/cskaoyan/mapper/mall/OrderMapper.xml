@@ -565,5 +565,37 @@
 <!--        <include refid="Base_Column_List"/>-->
 <!--        from cskaoyan_mall_order-->
 <!--    </select>-->
+    <select id="getOrderGoodsById" resultMap="getOrderGoodsByIdLeft">
+        select
+        o.id,
+        og.id as ogId,order_id, goods_id, goods_name, goods_sn, product_id, `number`,price,specifications,
+        pic_url,comment, og.add_time, og.update_time,og.deleted
+        from cskaoyan_mall_order o
+        left join cskaoyan_mall_order_goods og on o.id = og.order_id
+        where o.id = #{id}
+    </select>
+    
+    <resultMap id="getOrderGoodsByIdLeft" type="com.cskaoyan.bean.mall.order.GoodsDetail">
+        <result column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="goods_sn" property="goodsSn"/>
+        <result column="product_id" property="productId"/>
+        <result column="number" property="number"/>
+        <result column="price" property="price"/>
+        <result column="specifications" property="specification"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="comment" property="comment"/>
+        <result column="add_time" property="addTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
 
+    <select id="getOrderUserById"  resultType="com.cskaoyan.bean.userManage.User">
+        select avatar, nickname
+        from cskaoyan_mall_user u
+        left join cskaoyan_mall_order o on u.id = o.user_id
+        where o.user_id = #{id}
+    </select>
 </mapper>

@@ -8,10 +8,12 @@ import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -50,10 +52,9 @@ public class BrandController {
 
     @RequestMapping("create")
     public ResponseVo createBrand(@RequestBody Brand brand) {
-        brand.setPicUrl("123.fpg");
         brand.setAddTime(new Date());
         brand.setUpdateTime(new Date());
-        brand = brandService.insertBrand(brand);
+        brandService.insertBrand(brand);
         return ResponseUtil.success(brand);
     }
 

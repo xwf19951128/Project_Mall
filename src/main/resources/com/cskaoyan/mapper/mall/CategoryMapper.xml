@@ -118,6 +118,9 @@
       #{picUrl,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{sortOrder,jdbcType=TINYINT}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT  LAST_INSERT_ID()
+      </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.category.Category">
     insert into cskaoyan_mall_category

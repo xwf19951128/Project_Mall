@@ -45,12 +45,14 @@ public class Order {
 
     private String shipChannel;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipTime;
 
     private Date confirmTime;
 
     private Short comments;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

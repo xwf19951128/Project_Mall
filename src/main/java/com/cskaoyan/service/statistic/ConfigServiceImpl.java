@@ -52,4 +52,13 @@ public class ConfigServiceImpl implements ConfigService {
         List<LiteMall> liteMallList = configMapper.selectByExample(wxExample);
         return liteMallList;
     }
+
+    @Override
+    public void updateKeyValueByName(String key,String value) {
+        LiteMall liteMall = new LiteMall(key, value);
+        LiteMallExample liteMallExample = new LiteMallExample();
+        LiteMallExample.Criteria criteria = liteMallExample.createCriteria();
+        criteria.andKeyNameEqualTo(key);
+        configMapper.updateByExampleSelective(liteMall,liteMallExample);
+    }
 }
