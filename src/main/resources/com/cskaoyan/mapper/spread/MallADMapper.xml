@@ -119,7 +119,11 @@
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=BIT}, 
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
       )
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+        select last_insert_id()
+      </selectKey>
   </insert>
+
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.spread.MallAD">
     insert into cskaoyan_mall_ad
     <trim prefix="(" suffix=")" suffixOverrides=",">

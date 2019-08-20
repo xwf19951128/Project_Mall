@@ -132,7 +132,12 @@ public class SpreadServiceImp implements SpreadService{
     @Override
     public MessageBean<MallGrouponRule> addRecord(MallGrouponRule ad) {
         Goods goods=goodsMapper.findGoods(ad.getGoodsId());
-        ad.setGoodsName(goods.getName());
+        try {
+            ad.setGoodsName(goods.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new MessageBean<>("没有这个商品",404,ad);
+        }
         ad.setPicUrl(goods.getPicUrl());
         Date date = new Date();
         ad.setAddTime(date);
