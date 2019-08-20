@@ -1,10 +1,9 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.issue.Issue;
-import com.cskaoyan.bean.mall.issue.IssueExample;
+import com.cskaoyan.bean.admin.mall.issue.Issue;
+import com.cskaoyan.bean.admin.mall.issue.IssueExample;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface IssueMapper {

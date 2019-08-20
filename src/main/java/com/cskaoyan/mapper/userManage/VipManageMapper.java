@@ -1,10 +1,8 @@
 package com.cskaoyan.mapper.userManage;
 
-import com.cskaoyan.bean.userManage.User;
+import com.cskaoyan.bean.admin.userManage.User;
 
 import org.apache.ibatis.annotations.Param;
-
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

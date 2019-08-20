@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.statistic.StatisticMapper">
 
-    <select id="statUser" resultType="com.cskaoyan.bean.statistic.StatUser">
+    <select id="statUser" resultType="com.cskaoyan.bean.admin.statistic.StatUser">
         select
         substr(add_time,1,10) as day,
         count(distinct id) as users
@@ -10,7 +10,7 @@
         group by substr(add_time,1,10)
     </select>
 
-    <select id="statOrder" resultType="com.cskaoyan.bean.statistic.StatOrder">
+    <select id="statOrder" resultType="com.cskaoyan.bean.admin.statistic.StatOrder">
         select
         substr(add_time,1,10) as day,
         count(id) as orders,
@@ -22,7 +22,7 @@
         group by substr(add_time,1,10)
     </select>
 
-    <select id="statGoods" resultType="com.cskaoyan.bean.statistic.StatGoods">
+    <select id="statGoods" resultType="com.cskaoyan.bean.admin.statistic.StatGoods">
         select
         substr(add_time,1, 10) as day,
         count(distinct order_id) as orders,

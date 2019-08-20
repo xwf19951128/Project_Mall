@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.spread.MallCoupon;
-import com.cskaoyan.bean.spread.MallCouponExample;
+import com.cskaoyan.bean.admin.spread.MallCoupon;
+import com.cskaoyan.bean.admin.spread.MallCouponExample;
 
 import java.util.ArrayList;
 import java.util.List;

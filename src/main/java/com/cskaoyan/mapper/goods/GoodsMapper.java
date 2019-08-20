@@ -1,7 +1,6 @@
 package com.cskaoyan.mapper.goods;
 
-import com.cskaoyan.bean.goods.Goods;
-import com.cskaoyan.bean.goods.PageParams4Goods;
+import com.cskaoyan.bean.admin.goods.Goods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;

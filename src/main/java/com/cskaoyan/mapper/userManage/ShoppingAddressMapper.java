@@ -1,6 +1,6 @@
 package com.cskaoyan.mapper.userManage;
 
-import com.cskaoyan.bean.userManage.Address;
+import com.cskaoyan.bean.admin.userManage.Address;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.spread.MallTopic;
-import com.cskaoyan.bean.spread.MallTopicExample;
+import com.cskaoyan.bean.admin.spread.MallTopic;
+import com.cskaoyan.bean.admin.spread.MallTopicExample;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.cskaoyan.mapper.userManage;
 
-import com.cskaoyan.bean.userManage.FootMark;
+import com.cskaoyan.bean.admin.userManage.FootMark;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

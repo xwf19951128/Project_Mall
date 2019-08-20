@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.cart.CartMapper">
+    <select id="getUserIdByUsername" resultType="java.lang.Integer">
+        select id
+        from cskaoayan_mall_user
+        where username=#{username}
+    </select>
+
+    <select id="getGoodById" resultType="com.cskaoyan.bean.wx.GoodInCart">
+        select g.goods_id, g.goods_sn, g.goods_name, gp.price, gp.id as productId,
+        gp.price,gp.specifications,g.pic_url
+        from cskaoyan_mall_goods g
+        left join cskaoyan_mall_goods_product gp on g.goods_id = gp.goods_id
+        where g.goods_id = #{goodsId}
+    </select>
+
+    <insert id="insertCart">
+        insert into cskaoyan_mall_cart
+        (user_id,goods_id, goods_sn, gooods_name,product_id,price, `number`, specifications,checked,pic_url,
+        add_time,update_time,deleted)
+        values (#{userId},#{goodsId},#{goodsSn},#{goodsName},#{productId},#{price},#{number},#{specifications},
+        #{checked},#{picUrl},#{addTime}#{updateTime},#{deleted})
+    </insert>
+
+    <select id="goodCount">
+        select sum(`number`) from cskaoyan_mall_cart
+    </select>
+
+</mapper>

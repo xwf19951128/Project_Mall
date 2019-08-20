@@ -1,8 +1,8 @@
 package com.cskaoyan.config;
 
-import com.cskaoyan.bean.login.Admin;
-import com.cskaoyan.bean.login.AdminInfo;
-import com.cskaoyan.service.login.LoginService;
+import com.cskaoyan.bean.admin.login.Admin;
+import com.cskaoyan.bean.admin.login.AdminInfo;
+import com.cskaoyan.service.admin.login.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
