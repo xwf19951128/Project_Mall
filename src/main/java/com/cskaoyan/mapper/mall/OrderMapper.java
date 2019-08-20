@@ -1,10 +1,9 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.goods.Goods;
-import com.cskaoyan.bean.mall.order.GoodsDetail;
-import com.cskaoyan.bean.mall.order.Order;
-import com.cskaoyan.bean.mall.order.OrderExample;
-import com.cskaoyan.bean.userManage.User;
+import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
+import com.cskaoyan.bean.admin.mall.order.Order;
+import com.cskaoyan.bean.admin.mall.order.OrderExample;
+import com.cskaoyan.bean.admin.userManage.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

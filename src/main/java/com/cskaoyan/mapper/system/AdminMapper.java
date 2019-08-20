@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.system;
 
-import com.cskaoyan.bean.system.Admin;
-import com.cskaoyan.bean.system.AdminExample;
+import com.cskaoyan.bean.admin.system.Admin;
+import com.cskaoyan.bean.admin.system.AdminExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

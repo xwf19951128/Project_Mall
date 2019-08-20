@@ -1,9 +1,9 @@
 package com.cskaoyan.mapper.login;
 
-import com.cskaoyan.bean.login.Admin;
-import com.cskaoyan.bean.login.AdminExample;
-import com.cskaoyan.bean.login.AdminInfo;
-import com.cskaoyan.bean.login.DashBoard;
+import com.cskaoyan.bean.admin.login.Admin;
+import com.cskaoyan.bean.admin.login.AdminExample;
+import com.cskaoyan.bean.admin.login.AdminInfo;
+import com.cskaoyan.bean.admin.login.DashBoard;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

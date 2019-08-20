@@ -1,9 +1,8 @@
 package com.cskaoyan.mapper.statistic;
 
-import com.cskaoyan.bean.statistic.StatGoods;
-import com.cskaoyan.bean.statistic.StatOrder;
-import com.cskaoyan.bean.statistic.StatUser;
-import org.springframework.core.annotation.Order;
+import com.cskaoyan.bean.admin.statistic.StatGoods;
+import com.cskaoyan.bean.admin.statistic.StatOrder;
+import com.cskaoyan.bean.admin.statistic.StatUser;
 
 import java.util.List;
 

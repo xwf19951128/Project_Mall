@@ -1,13 +1,12 @@
 package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.spread.GrouponInfo;
-import com.cskaoyan.bean.spread.MallGroupon;
-import com.cskaoyan.bean.spread.MallGrouponExample;
+import com.cskaoyan.bean.admin.spread.GrouponInfo;
+import com.cskaoyan.bean.admin.spread.MallGroupon;
+import com.cskaoyan.bean.admin.spread.MallGrouponExample;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cskaoyan.bean.spread.MallGrouponRule;
 import org.apache.ibatis.annotations.Param;
 
 public interface MallGrouponMapper {

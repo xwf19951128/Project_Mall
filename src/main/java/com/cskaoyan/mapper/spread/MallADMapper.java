@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.spread.MallAD;
-import com.cskaoyan.bean.spread.MallADExample;
+import com.cskaoyan.bean.admin.spread.MallAD;
+import com.cskaoyan.bean.admin.spread.MallADExample;
 
 import java.util.ArrayList;
 import java.util.List;

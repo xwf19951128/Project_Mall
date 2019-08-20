@@ -5,7 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.FeedBackMapper">
-    <resultMap id="feedMapper" type="com.cskaoyan.bean.userManage.FeedBack">
+    <resultMap id="feedMapper" type="com.cskaoyan.bean.admin.userManage.FeedBack">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="username" column="username"/>

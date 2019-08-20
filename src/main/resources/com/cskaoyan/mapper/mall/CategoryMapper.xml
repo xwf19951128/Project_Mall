@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.mall.CategoryMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.mall.category.Category">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.mall.category.Category">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
@@ -77,7 +77,7 @@
     id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.mall.category.CategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.mall.category.CategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -101,13 +101,13 @@
     delete from cskaoyan_mall_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.mall.category.CategoryExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.mall.category.CategoryExample">
     delete from cskaoyan_mall_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.mall.category.Category">
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.mall.category.Category">
     insert into cskaoyan_mall_category (id, name, keywords, 
       `desc`, pid, icon_url,
       pic_url, level, sort_order, 
@@ -122,7 +122,7 @@
           SELECT  LAST_INSERT_ID()
       </selectKey>
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.mall.category.Category">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.mall.category.Category">
     insert into cskaoyan_mall_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -201,7 +201,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.mall.category.CategoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.mall.category.CategoryExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -269,7 +269,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.mall.category.Category">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.mall.category.Category">
     update cskaoyan_mall_category
     <set>
       <if test="name != null">
@@ -308,7 +308,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.mall.category.Category">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.mall.category.Category">
     update cskaoyan_mall_category
     set name = #{name,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
@@ -334,7 +334,7 @@
         where f.pid = 0
     </select>
 
-    <resultMap id="getCategoryLeft" type="com.cskaoyan.bean.mall.category.CategoryFirstClass">
+    <resultMap id="getCategoryLeft" type="com.cskaoyan.bean.admin.mall.category.CategoryFirstClass">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="keywords" column="keywords"/>
@@ -342,7 +342,7 @@
         <result property="iconUrl" column="icon_url"/>
         <result property="picUrl" column="pic_url"/>
         <result property="level" column="level"/>
-        <collection property="children" ofType="com.cskaoyan.bean.mall.category.CategorySecondClass">
+        <collection property="children" ofType="com.cskaoyan.bean.admin.mall.category.CategorySecondClass">
             <result property="id" column="sId"/>
             <result property="name" column="sName"/>
             <result property="keywords" column="sKeywords"/>
@@ -353,7 +353,7 @@
         </collection>
     </resultMap>
 
-    <select id="getLabel" resultType="com.cskaoyan.bean.mall.category.Label">
+    <select id="getLabel" resultType="com.cskaoyan.bean.admin.mall.category.Label">
         select name as label, id as value
         from cskaoyan_mall_category
         where pid = 0
@@ -366,7 +366,7 @@
         where id = #{cfc.id}
     </update>
 
-    <select id="selectById" resultType="com.cskaoyan.bean.mall.category.CategoryFirstClass">
+    <select id="selectById" resultType="com.cskaoyan.bean.admin.mall.category.CategoryFirstClass">
         select `desc`, icon_url as iconUrl, keywords, name, pic_url as picUrl, level
         from cskaoyan_mall_category
         where id = #{id}

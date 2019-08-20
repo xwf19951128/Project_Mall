@@ -1,10 +1,10 @@
 package com.cskaoyan.mapper.system;
 
-import com.cskaoyan.bean.system.Role;
-import com.cskaoyan.bean.system.RoleExample;
+import com.cskaoyan.bean.admin.system.Role;
+import com.cskaoyan.bean.admin.system.RoleExample;
 import java.util.List;
 
-import com.cskaoyan.bean.vo.Options;
+import com.cskaoyan.bean.admin.vo.Options;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
