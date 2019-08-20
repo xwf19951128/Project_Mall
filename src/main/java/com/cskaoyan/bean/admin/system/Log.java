@@ -1,6 +1,7 @@
 package com.cskaoyan.bean.admin.system;
 
 
+
 public class Log {
     private Integer id;
 

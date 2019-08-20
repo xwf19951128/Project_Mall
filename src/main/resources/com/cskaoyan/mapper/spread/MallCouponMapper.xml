@@ -146,6 +146,9 @@
       #{code,jdbcType=VARCHAR}, #{timeType,jdbcType=SMALLINT}, #{days,jdbcType=SMALLINT}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+    <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+      select last_insert_id()
+    </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.spread.MallCoupon">
     insert into cskaoyan_mall_coupon

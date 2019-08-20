@@ -1,7 +1,7 @@
 package com.cskaoyan.service.admin.speard;
 
 import com.cskaoyan.bean.admin.spread.*;
-import com.cskaoyan.bean.admin.spread.*;
+
 
 public interface SpreadService {
 

@@ -34,4 +34,8 @@ public interface AdminMapper {
     int insertAdmin(Admin admin);
 
     int updateAdmin(Admin admin);
+
+    String getPassWordByName(String username);
+
+    List<String> getPermissionsByName(String usernmae);
 }

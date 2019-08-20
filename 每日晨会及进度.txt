@@ -1,5 +1,4 @@
-8.16
-晨会：
+8.16晨会：
 ①. admin不是应用名而是Controller方法请求路径的一部分。应用名为/
 ②. 每个人在各个模块写的内容单独创建一个包存储，便于区分。
 ③. 数据库中用varchar存储数组 [ ]，如何赋值给int[ ]，待解决。
@@ -8,3 +7,19 @@
 ⑥. 注意不要把properties配置文件纳入版本控制
 
 
+8.17晨会：
+①. PageHelper有默认配置，引入依赖后可以直接使用
+②. @JsonFormat和 @DateFormat 调整日期格式
+
+
+8.19晨会：
+①. 不小心把.idea目录和target目录传到了远程仓库，导致其他组员pull了下来项目混乱。
+②. oss的配置项
+
+8.20晨会：
+①. <selectKey> 主键回填问题
+②. mallSessionManager中的request—header
+③. application.yml和properties配置文件无法识别，尝试各种方法无果，最终重建项目解决
+
+8.21晨会：
+①. ShiroFilter拦截器执行顺序问题。需要把Map的类型改为LinkedHashMap另其有序

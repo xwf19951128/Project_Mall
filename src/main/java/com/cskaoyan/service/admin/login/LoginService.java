@@ -15,4 +15,8 @@ public interface LoginService {
     DashBoard queryDashBoard();
     //根据用户名查询密码
     List<Admin> queryPasswordByName(String name);
+
+    int updatePasswordAndTime(Admin admin);
+
+    int updateIPAndLastTime(Admin admin);
 }

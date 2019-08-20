@@ -25,7 +25,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("谢文斐的mall后台管理系统")
+            .title("15期Java的mall后台管理系统")
                 .description("后台后台后台CN NO.1")
                 .contact("cskaoyan")
                 .version("1.0")

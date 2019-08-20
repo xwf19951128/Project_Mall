@@ -1,7 +1,7 @@
 package com.cskaoyan.controller.admin.goods;
 
 import com.cskaoyan.bean.admin.goods.*;
-import com.cskaoyan.bean.admin.goods.*;
+
 import com.cskaoyan.service.admin.goods.GoodsAttributeService;
 import com.cskaoyan.service.admin.goods.GoodsProductService;
 import com.cskaoyan.service.admin.goods.GoodsService;

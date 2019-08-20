@@ -16,5 +16,6 @@ public interface ConfigService {
 
     //在系统配置表中，查询和微信小程序配置相关的几条记录
     public List<LiteMall> queryConfigWx();
-
+    //根据keyname更新对应的keyValue
+    void updateKeyValueByName(String key,String value);
 }

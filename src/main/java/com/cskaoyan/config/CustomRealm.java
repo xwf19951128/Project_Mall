@@ -3,6 +3,12 @@ package com.cskaoyan.config;
 import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.service.admin.login.LoginService;
+
+import com.cskaoyan.bean.wx.login.ActiveUser;
+import com.cskaoyan.bean.wx.login.WxUser;
+
+import com.cskaoyan.service.wx.login.WxLoginService;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -22,18 +28,35 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     LoginService loginService;
+    @Autowired
+    WxLoginService wxLoginService;
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username = (String) authenticationToken.getPrincipal();
-        List<Admin> adminList = loginService.queryPasswordByName(username);
-        if (adminList.size()==0){
-            return null;
-        }else {
-            String password = adminList.get(0).getPassword();
-            SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, "customRealm");
-            return authenticationInfo;
+        TypeToken typeToken = (TypeToken) authenticationToken;
+        String type = typeToken.getType();
+        if (type.equals("admin")) {
+            List<Admin> adminList = loginService.queryPasswordByName(username);
+            if (adminList.size() == 0) {
+                return null;
+            } else {
+                String password = adminList.get(0).getPassword();
+                SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, "customRealm");
+                return authenticationInfo;
+            }
+        } else if (type.equals("wx")) {
+            String password = wxLoginService.queryWxPasswordByUsername(username);
+            if (password==null){
+                return null;
+            }else {
+                WxUser wxUser = wxLoginService.queryUserByUsername(username);
+                ActiveUser activeUser = new ActiveUser(wxUser.getId(),wxUser.getUsername());
+                SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(activeUser,password,"customRealm");
+                return simpleAuthenticationInfo;
+            }
         }
+        return null;
     }
 
     @Override

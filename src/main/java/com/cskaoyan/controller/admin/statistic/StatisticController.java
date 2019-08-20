@@ -1,7 +1,6 @@
 package com.cskaoyan.controller.admin.statistic;
 
 import com.cskaoyan.bean.admin.statistic.*;
-import com.cskaoyan.bean.admin.statistic.*;
 import com.cskaoyan.service.admin.statistic.StatService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;

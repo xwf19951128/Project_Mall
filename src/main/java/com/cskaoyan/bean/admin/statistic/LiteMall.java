@@ -62,4 +62,9 @@ public class LiteMall {
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
+
+    public LiteMall(String keyName, String keyValue) {
+        this.keyName = keyName;
+        this.keyValue = keyValue;
+    }
 }
