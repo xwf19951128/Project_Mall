@@ -19,6 +19,7 @@ public class MallSessionManager extends DefaultWebSessionManager {
 
         String id = request.getHeader("X-cskaoyanmall-Admin-Token");
 
+
         if (id != null && !"".equals(id) )
         {
             return id;

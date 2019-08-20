@@ -11,7 +11,7 @@
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -93,13 +93,12 @@
 
   <select id="selectLogs" resultMap="BaseResultMap">
     select
-    id,admin,ip,type,action,status,result,comment,add_time as addTime,update_time as updateTime,deleted
+    id,admin,ip,type,action,status,result,comment,add_time ,update_time ,deleted
     from cskaoyan_mall_log
     where deleted=0
     <if test="name!=null">
       and admin like concat('%',#{name},'%')
     </if>
-
     order by #{sort} #{order}
 
   </select>
@@ -132,6 +131,9 @@
       #{type,jdbcType=INTEGER}, #{action,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{result,jdbcType=VARCHAR}, 
       #{comment,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=BIT})
+      <selectKey resultType="java.lang.String" order="BEFORE" keyProperty="id">
+        SELECT  LAST_INSERT_ID()
+      </selectKey>
   </insert>
 
   <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.system.Log">

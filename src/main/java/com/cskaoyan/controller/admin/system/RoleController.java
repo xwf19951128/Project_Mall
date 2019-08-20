@@ -1,14 +1,16 @@
 package com.cskaoyan.controller.admin.system;
 
 import com.cskaoyan.bean.admin.system.Role;
+
+import com.cskaoyan.bean.admin.system.permission.PermissionDateOne;
 import com.cskaoyan.bean.admin.vo.DataBean;
 import com.cskaoyan.bean.admin.vo.Options;
+import com.cskaoyan.service.admin.system.PermissionsService;
+
 import com.cskaoyan.service.admin.system.RoleService;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,9 @@ public class RoleController {
 
     @Autowired
     RoleService roleService;
+
+    @Autowired
+    PermissionsService permissionsService;
 
     /**
      * 查询角色管理，以及列表展示
@@ -95,6 +100,17 @@ public class RoleController {
             responseVo.setErrno(0);
             responseVo.setData(i);
         }
+        return responseVo;
+    }
+
+    @GetMapping("admin/role/permissions")
+    public ResponseVo getPermissionsList(@RequestParam(value = "roleId") int roleId){
+        ResponseVo responseVo = new ResponseVo();
+        //根据给的id，查找出所有权限
+        PermissionDateOne permissionDateOne= permissionsService.selectPermission(roleId);
+        responseVo.setData(permissionDateOne);
+        responseVo.setErrmsg("成功");
+        responseVo.setErrno(0);
         return responseVo;
     }
 

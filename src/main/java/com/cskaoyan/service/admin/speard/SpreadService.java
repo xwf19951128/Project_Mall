@@ -2,6 +2,7 @@ package com.cskaoyan.service.admin.speard;
 
 import com.cskaoyan.bean.admin.spread.*;
 
+
 public interface SpreadService {
 
     MessageBean<MallTopic> updateRecord(MallTopic ad);
@@ -28,7 +29,7 @@ public interface SpreadService {
 
     MessageBean<String> deleteRecord(MallGrouponRule ad);
 
-    MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String type,String status,String name);
+    MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String type, String status, String name);
 
     MessageBean<ListDate<String>> showSingleCouponByPage(int page, int limit, String content, String name, String couponId);
 

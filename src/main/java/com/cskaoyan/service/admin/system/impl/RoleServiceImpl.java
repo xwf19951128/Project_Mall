@@ -51,4 +51,5 @@ public class RoleServiceImpl implements RoleService {
     public int deleteRole(Role role) {
         return roleMapper.deleteByPrimaryKey(role.getId());
     }
+
 }

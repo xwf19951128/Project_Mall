@@ -3,6 +3,10 @@ package com.cskaoyan.config;
 import com.cskaoyan.annotation.SystemLog;
 import com.cskaoyan.bean.admin.system.Log;
 import com.cskaoyan.service.admin.system.LogService;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,6 +19,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 /**
@@ -42,20 +48,38 @@ public class LogAspect {
         //方法如果存在这样的注解，则返回指定类型元素的注释，否则，则返回null
         SystemLog annotation = method.getAnnotation(SystemLog.class);
 
-        //判断登录状态
+        //如果存在该注解，则把注解的描述放入log
         if(annotation!=null){
             String desc = annotation.desc();
             log.setAction(desc);
         }
 
+        //通过工具类获取主题
+        Subject subject = SecurityUtils.getSubject();
+        if(subject!=null){
+            //这里是判断登录状态
+            String principal = (String) subject.getPrincipal();
+            log.setAdmin(principal);
+        }
+
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
+
+        //获取请求ip
         log.setIp(request.getRemoteAddr());
+//        System.out.println(request.getRemoteAddr());
         log.setStatus(true);
 
-        log.setAddTime(new Date());
-        log.setUpdateTime(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formatedDate = sdf.format(new Date());
+        //需要放入一个string类型，放入数据库，应该转为date类型
+        log.setAddTime(formatedDate);
+        log.setUpdateTime(formatedDate);
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        log.setAddTime(timestamp.toString());
+//        log.setUpdateTime(timestamp.toString());
         log.setType(0);
+        //把日志增加近数据库
         int i = logService.insertLog(log);
     }
 }
