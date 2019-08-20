@@ -4,6 +4,7 @@ import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.bean.admin.login.DashBoard;
 import com.cskaoyan.bean.admin.login.Password;
+import com.cskaoyan.config.TypeToken;
 import com.cskaoyan.service.admin.login.LoginService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,15 +37,23 @@ public class LoginController {
 
     @RequestMapping("/auth/login")
     @ResponseBody
-    public ResponseVo login(@RequestBody Admin admin, HttpSession session){
+    public ResponseVo login(@RequestBody Admin admin, HttpServletRequest request){
         String username = admin.getUsername();
         String password =admin.getPassword();
         ResponseVo responseVo =null;
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        TypeToken token = new TypeToken(username, password,"admin");
         try {
             subject.login(token);
             Serializable id = subject.getSession().getId();
+            //修改当前用户的last_login时间，以及登录IP！
+            Date date = new Date();
+            String remoteAddr = request.getRemoteAddr();
+            List<Admin> admins = loginService.queryPasswordByName(username);
+            Admin admin1 = admins.get(0);
+            admin1.setLastLoginIp(remoteAddr);
+            admin1.setLastLoginTime(date);
+            loginService.updateIPAndLastTime(admin1);
             responseVo = ResponseUtil.success(id);
         } catch (AuthenticationException e) {
             responseVo = ResponseUtil.fail(null, "用户名或密码不正确", 605);
@@ -72,8 +82,9 @@ public class LoginController {
     public ResponseVo logout(){
         SecurityUtils.getSubject().logout();
         return ResponseUtil.fail(
-          null,"注销成功",0);
+                null,"注销成功",0);
     }
+
     //修改密码
     @RequestMapping("/profile/password")
     @ResponseBody
