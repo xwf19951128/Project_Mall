@@ -1,11 +1,9 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.brand.Brand;
-import com.cskaoyan.bean.mall.brand.BrandExample;
-import io.swagger.models.auth.In;
+import com.cskaoyan.bean.admin.mall.brand.Brand;
+import com.cskaoyan.bean.admin.mall.brand.BrandExample;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface BrandMapper {

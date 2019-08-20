@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.storage.StorageMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.storage.Storage">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.storage.Storage">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -112,7 +112,7 @@
     order by #{sort} #{order}
   </select>
 
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.storage.StorageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.storage.StorageExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -136,13 +136,13 @@
     delete from cskaoyan_mall_storage
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.storage.StorageExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.storage.StorageExample">
     delete from cskaoyan_mall_storage
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.storage.Storage">
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.storage.Storage">
     insert into cskaoyan_mall_storage (id, key, name, 
       type, size, url, add_time, 
       update_time, deleted)
@@ -150,7 +150,7 @@
       #{type,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.storage.Storage">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.storage.Storage">
     insert into cskaoyan_mall_storage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -211,7 +211,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.storage.StorageExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.storage.StorageExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_storage
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -267,7 +267,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.storage.Storage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.storage.Storage">
     update cskaoyan_mall_storage
     <set>
       <if test="key != null">
@@ -297,7 +297,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.storage.Storage">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.storage.Storage">
     update cskaoyan_mall_storage
     set key = #{key,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

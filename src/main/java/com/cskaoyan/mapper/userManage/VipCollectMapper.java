@@ -1,6 +1,6 @@
 package com.cskaoyan.mapper.userManage;
 
-import com.cskaoyan.bean.userManage.VipCollect;
+import com.cskaoyan.bean.admin.userManage.VipCollect;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

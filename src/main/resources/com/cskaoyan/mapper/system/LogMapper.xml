@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.system.LogMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.system.Log">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.system.Log">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="admin" jdbcType="VARCHAR" property="admin" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
@@ -76,7 +76,7 @@
     id, admin, ip, type, action, status, result, comment, add_time, update_time, deleted
   </sql>
 
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.system.LogExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.system.LogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -116,14 +116,14 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.system.LogExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.system.LogExample">
     delete from cskaoyan_mall_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
 
-  <insert id="insert" parameterType="com.cskaoyan.bean.system.Log">
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.system.Log">
     insert into cskaoyan_mall_log (id, admin, ip, 
       type, action, status, result, 
       comment, add_time, update_time, 
@@ -134,7 +134,7 @@
       #{deleted,jdbcType=BIT})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.system.Log">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.system.Log">
     insert into cskaoyan_mall_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -208,7 +208,7 @@
     </trim>
   </insert>
 
-  <select id="countByExample" parameterType="com.cskaoyan.bean.system.LogExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.system.LogExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -273,7 +273,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.system.Log">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.system.Log">
     update cskaoyan_mall_log
     <set>
       <if test="admin != null">
@@ -309,7 +309,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.system.Log">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.system.Log">
     update cskaoyan_mall_log
     set admin = #{admin,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},

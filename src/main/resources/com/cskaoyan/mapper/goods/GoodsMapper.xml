@@ -52,7 +52,7 @@
     from cskaoyan_mall_goods
     order by #{sort} #{order}
   </select>
-    <resultMap id="goodsMap" type= "com.cskaoyan.bean.goods.Goods">
+    <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
         <result property="id" column="id"></result>
         <result property="goodsSn" column="goods_sn"></result>
         <result property="name" column="name"></result>

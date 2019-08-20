@@ -1,8 +1,8 @@
 package com.cskaoyan.mapper.spread;
 
-import com.cskaoyan.bean.spread.GrouponInfo;
-import com.cskaoyan.bean.spread.MallGrouponRule;
-import com.cskaoyan.bean.spread.MallGrouponRuleExample;
+import com.cskaoyan.bean.admin.spread.GrouponInfo;
+import com.cskaoyan.bean.admin.spread.MallGrouponRule;
+import com.cskaoyan.bean.admin.spread.MallGrouponRuleExample;
 
 import java.util.ArrayList;
 import java.util.List;

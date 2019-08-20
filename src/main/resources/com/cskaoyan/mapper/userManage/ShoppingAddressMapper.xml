@@ -5,7 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.ShoppingAddressMapper">
-    <resultMap id="addressMapper" type="com.cskaoyan.bean.userManage.Address">
+    <resultMap id="addressMapper" type="com.cskaoyan.bean.admin.userManage.Address">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="userId" column="user_id"/>

@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.mall;
 
-import com.cskaoyan.bean.mall.keyword.Keyword;
-import com.cskaoyan.bean.mall.keyword.KeywordExample;
+import com.cskaoyan.bean.admin.mall.keyword.Keyword;
+import com.cskaoyan.bean.admin.mall.keyword.KeywordExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cskaoyan.mapper.login.LoginMapper">
 
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.login.Admin">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.login.Admin">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -77,7 +77,7 @@
     id, username, password, last_login_ip, last_login_time, avatar, add_time, update_time, 
     deleted, role_ids
   </sql>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.login.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.login.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,13 +102,13 @@
     delete from cskaoyan_mall_admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.login.AdminExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.login.AdminExample">
     delete from cskaoyan_mall_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.login.Admin">
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.login.Admin">
     insert into cskaoyan_mall_admin (id, username, password, 
       last_login_ip, last_login_time, avatar, 
       add_time, update_time, deleted, 
@@ -118,7 +118,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, 
       #{roleIds,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.login.Admin">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.login.Admin">
     insert into cskaoyan_mall_admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -185,7 +185,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.login.AdminExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.login.AdminExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -245,7 +245,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.login.Admin">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.login.Admin">
     update cskaoyan_mall_admin
     <set>
       <if test="username != null">
@@ -278,7 +278,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.login.Admin">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.login.Admin">
     update cskaoyan_mall_admin
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -292,7 +292,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <resultMap id="infoMap" type="com.cskaoyan.bean.login.AdminInfo">
+  <resultMap id="infoMap" type="com.cskaoyan.bean.admin.login.AdminInfo">
       <result column="username" property="name"></result>
       <result column="avatar" property="avatar"></result>
       <collection property="roles" ofType="string">
@@ -311,7 +311,7 @@
   </select>
 
   <!--查询首页数据-->
-  <select id="queryDashBoard" resultType="com.cskaoyan.bean.login.DashBoard">
+  <select id="queryDashBoard" resultType="com.cskaoyan.bean.admin.login.DashBoard">
     select a.num as goodsTotal ,b.num as orderTotal,c.num as productTotal,d.num as userTotal from
       (select count(id) as num from cskaoyan_mall_goods) as a,
       (select count(id) as num from cskaoyan_mall_order) as b,
@@ -319,4 +319,8 @@
       (select count(id) as num from cskaoyan_mall_user) as d
   </select>
 
+  <!--查询微信用户名和密码-->
+  <select id="queryWxPasswordByUsername" resultType="string">
+      select password from cskaoyan_mall_user where username=#{username}
+  </select>
 </mapper>

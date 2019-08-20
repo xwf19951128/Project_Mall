@@ -1,7 +1,7 @@
 package com.cskaoyan.mapper.goods;
 
-import com.cskaoyan.bean.goods.GoodsSpecification;
-import com.cskaoyan.bean.goods.GoodsSpecificationExample;
+import com.cskaoyan.bean.admin.goods.GoodsSpecification;
+import com.cskaoyan.bean.admin.goods.GoodsSpecificationExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

@@ -6,7 +6,7 @@
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.VipManageMapper">
 
-    <resultMap id="userMapper" type="com.cskaoyan.bean.userManage.User">
+    <resultMap id="userMapper" type="com.cskaoyan.bean.admin.userManage.User">
         <result property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>

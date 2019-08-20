@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.spread.MallGrouponRuleMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.spread.MallGrouponRule">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -13,8 +13,8 @@
     <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
-  <resultMap id="AdvanceMap" type="com.cskaoyan.bean.spread.GrouponInfo">
-    <association property="goods" javaType="com.cskaoyan.bean.goods.Goods">
+  <resultMap id="AdvanceMap" type="com.cskaoyan.bean.admin.spread.GrouponInfo">
+    <association property="goods" javaType="com.cskaoyan.bean.admin.goods.Goods">
       <id property="id" column="id"></id>
       <id property="goodsSn" column="goods_sn"></id>
       <id property="name" column="name"></id>
@@ -37,7 +37,7 @@
       <id property="deleted" column="deleted"></id>
       <id property="detail" column="detail"></id>
     </association>
-    <association property="groupon" javaType="com.cskaoyan.bean.spread.MallGroupon">
+    <association property="groupon" javaType="com.cskaoyan.bean.admin.spread.MallGroupon">
       <id column="id" jdbcType="INTEGER" property="id" />
       <id column="order_id" jdbcType="INTEGER" property="orderId" />
       <id column="groupon_id" jdbcType="INTEGER" property="grouponId" />
@@ -50,7 +50,7 @@
       <id column="payed" jdbcType="BIT" property="payed" />
       <id column="deleted" jdbcType="BIT" property="deleted" />
     </association>
-    <association property="rules" javaType="com.cskaoyan.bean.spread.MallGrouponRule">
+    <association property="rules" javaType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
       <id column="id" jdbcType="INTEGER" property="id" />
       <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
       <id column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -125,13 +125,13 @@
     id, goods_id, goods_name, pic_url, discount, discount_member, add_time, update_time, 
     expire_time, deleted
   </sql>
-  <select id="queryMallGrouponRuleList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.spread.MallGrouponRule">
+  <select id="queryMallGrouponRuleList" resultMap="BaseResultMap" resultType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     select <include refid="Base_Column_List"></include> from cskaoyan_mall_groupon_rules where 1=1
     <if test="goodsId !=null">
       and goods_id=#{goodsId}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.cskaoyan.bean.spread.MallGrouponRuleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -155,13 +155,13 @@
     delete from cskaoyan_mall_groupon_rules
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.spread.MallGrouponRuleExample">
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRuleExample">
     delete from cskaoyan_mall_groupon_rules
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.bean.spread.MallGrouponRule">
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     insert into cskaoyan_mall_groupon_rules (id, goods_id, goods_name, 
       pic_url, discount, discount_member, 
       add_time, update_time, expire_time, 
@@ -171,7 +171,7 @@
       #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.bean.spread.MallGrouponRule">
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     insert into cskaoyan_mall_groupon_rules
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -238,7 +238,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cskaoyan.bean.spread.MallGrouponRuleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRuleExample" resultType="java.lang.Long">
     select count(*) from cskaoyan_mall_groupon_rules
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -298,7 +298,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.spread.MallGrouponRule">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     update cskaoyan_mall_groupon_rules
     <set>
       <if test="goodsId != null">
@@ -331,7 +331,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.spread.MallGrouponRule">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
     update cskaoyan_mall_groupon_rules
     set goods_id = #{goodsId,jdbcType=INTEGER},
       goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -344,7 +344,7 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="queryGrouponInfoList" resultMap="AdvanceMap" resultType="com.cskaoyan.bean.spread.GrouponInfo">
+  <select id="queryGrouponInfoList" resultMap="AdvanceMap" resultType="com.cskaoyan.bean.admin.spread.GrouponInfo">
     select * from cskaoyan_mall_goods g,cskaoyan_mall_groupon_rules r,cskaoyan_mall_groupon mg where mg.rules_id=r.id and r.goods_id=g.id
     <if test="id != null">
       and mg.id=#{id}

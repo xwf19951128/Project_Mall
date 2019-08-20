@@ -1,10 +1,9 @@
 package com.cskaoyan.mapper.statistic;
 
-import com.cskaoyan.bean.statistic.LiteMall;
-import com.cskaoyan.bean.statistic.LiteMallExample;
+import com.cskaoyan.bean.admin.statistic.LiteMall;
+import com.cskaoyan.bean.admin.statistic.LiteMallExample;
 import java.util.List;
 
-import com.cskaoyan.bean.statistic.LiteMallExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface ConfigMapper {

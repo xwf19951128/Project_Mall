@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.goods.GoodsProductMapper">
-    <resultMap id="goodsProductMap" type="com.cskaoyan.bean.goods.GoodsProduct">
+    <resultMap id="goodsProductMap" type="com.cskaoyan.bean.admin.goods.GoodsProduct">
         <result property="id" column="id"></result>
         <result property="goodsId" column="goods_id"></result>
         <result property="specifications" column="specifications"></result>

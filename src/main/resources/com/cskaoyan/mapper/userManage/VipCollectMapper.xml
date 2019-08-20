@@ -5,7 +5,7 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.VipCollectMapper">
-    <resultMap id="collectMapper" type="com.cskaoyan.bean.userManage.VipCollect">
+    <resultMap id="collectMapper" type="com.cskaoyan.bean.admin.userManage.VipCollect">
         <result property="id" column="id"/>
         <result property="userId" column="user_id"/>
         <result property="valueId" column="value_id"/>
