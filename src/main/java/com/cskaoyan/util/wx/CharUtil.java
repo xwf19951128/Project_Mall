@@ -1,4 +1,4 @@
-package com.cskaoyan.util;
+package com.cskaoyan.util.wx;
 
 import java.util.Random;
 

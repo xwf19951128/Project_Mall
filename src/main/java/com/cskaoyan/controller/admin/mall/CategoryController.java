@@ -6,6 +6,7 @@ import com.cskaoyan.bean.admin.mall.category.Label;
 import com.cskaoyan.service.admin.mall.CategoryService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
