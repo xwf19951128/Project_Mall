@@ -3,8 +3,8 @@ package com.cskaoyan.bean.admin.userManage;
 import java.util.List;
 
 public class ItemAndTotal<T> {
-    List<T> items;
-    int total;
+    private List<T> items;
+    private int total;
 
     public List<T> getItems() {
         return items;

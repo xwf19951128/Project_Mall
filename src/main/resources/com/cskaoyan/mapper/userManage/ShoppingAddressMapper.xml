@@ -20,90 +20,157 @@
         <result property="area" column="area"/>
     </resultMap>
 
-    <!--查询全部收货地址-->
-    <select id="queryShoppingAddress" resultMap="addressMapper">
-        select
-            address.id,
-            address.name,
-            address.user_id,
-            address.province_id,
-            address.city_id,
-            address.area_id,
-            address.address,
-            address.mobile,
-            address.is_default,
-            region1.name as province,
-            region2.name as city,
-            region3.name as area
-        from cskaoyan_mall_address address
+    <sql id="baseColumn">
+        address.id,
+        address.name,
+        address.user_id,
+        address.province_id,
+        address.city_id,
+        address.area_id,
+        address.address,
+        address.mobile,
+        address.is_default,
+        region1.name as province,
+        region2.name as city,
+        region3.name as area
+    </sql>
+
+    <sql id="baseLeftJoin">
         left join cskaoyan_mall_region region1 on address.province_id = region1.code
         left join cskaoyan_mall_region region2 on address.city_id = region2.code
         left join cskaoyan_mall_region region3 on address.area_id = region3.code
+    </sql>
+
+    <!--查询全部收货地址-->
+    <select id="queryShoppingAddress" resultMap="addressMapper">
+        select
+        <include refid="baseColumn"/>
+        from cskaoyan_mall_address address
+        <include refid="baseLeftJoin"/>
     </select>
 
     <!--根据收货人名称查询-->
     <select id="queryAddressByUsername" resultMap="addressMapper">
         select
-            address.id,
-            address.name,
-            address.user_id,
-            address.province_id,
-            address.city_id,
-            address.area_id,
-            address.address,
-            address.mobile,
-            address.is_default,
-            region1.name as province,
-            region2.name as city,
-            region3.name as area
+        <include refid="baseColumn"/>
         from cskaoyan_mall_address address
-        left join cskaoyan_mall_region region1 on address.province_id = region1.code
-        left join cskaoyan_mall_region region2 on address.city_id = region2.code
-        left join cskaoyan_mall_region region3 on address.area_id = region3.code
+        <include refid="baseLeftJoin"/>
         where address.name like #{name}
     </select>
 
     <!--根据用户id查询-->
     <select id="queryAddressByUserId" resultMap="addressMapper">
         select
-            address.id,
-            address.name,
-            address.user_id,
-            address.province_id,
-            address.city_id,
-            address.area_id,
-            address.address,
-            address.mobile,
-            address.is_default,
-            region1.name as province,
-            region2.name as city,
-            region3.name as area
+        <include refid="baseColumn"/>
         from cskaoyan_mall_address address
-        left join cskaoyan_mall_region region1 on address.province_id = region1.code
-        left join cskaoyan_mall_region region2 on address.city_id = region2.code
-        left join cskaoyan_mall_region region3 on address.area_id = region3.code
+        <include refid="baseLeftJoin"/>
         where address.user_id = #{userId}
     </select>
 
     <!--根据用户id和收货人姓名查询-->
     <select id="queryAddressByUsernameAndUserId" resultMap="addressMapper">
         select
-            address.id,
-            address.name,
-            address.user_id,
-            address.province_id,
-            address.city_id,
-            address.area_id,
-            address.address,
-            address.mobile,
-            address.is_default,
-            region1.name as province,
-            region2.name as city,
-            region3.name as area
+        <include refid="baseColumn"/>
         from cskaoyan_mall_address address
-        left join cskaoyan_mall_region region1 on address.province_id = region1.code
-        left join cskaoyan_mall_region region2 on address.city_id = region2.code
-        left join cskaoyan_mall_region region3 on address.area_id = region3.code
+        <include refid="baseLeftJoin"/>
         where address.user_id = #{userId} and address.name like #{name}
     </select>
+
+    <!--根据数据库中address的id查询地址详情-->
+    <select id="queryDetailAddressById" resultMap="addressMapper">
+        select
+        <include refid="baseColumn"/>
+        from cskaoyan_mall_address address
+        <include refid="baseLeftJoin"/>
+        where address.id = #{id}
+    </select>
+
+
+    <resultMap id="regionMap" type="com.cskaoyan.bean.wx.tools.Region_wx">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="code" column="code"/>
+    </resultMap>
+
+    <sql id="baseRegionColumn">
+        id,
+        pid,
+        name,
+        type,
+        code
+    </sql>
+    <!--查询区域-->
+    <select id="queryRegionByPid" resultMap="regionMap">
+        select
+        <include refid="baseRegionColumn"/>
+        from cskaoyan_mall_region
+        where pid = #{pid}
+    </select>
+
+    <select id="queryRegionByProvinceId" resultMap="regionMap">
+        select
+        <include refid="baseRegionColumn"/>
+        from cskaoyan_mall_region
+        where id = #{provinceId}
+    </select>
+
+    <select id="queryRegionByCityId" resultMap="regionMap">
+        select
+        <include refid="baseRegionColumn"/>
+        from cskaoyan_mall_region
+        where id = #{cityId}
+    </select>
+
+    <select id="queryRegionByAreaId" resultMap="regionMap">
+        select
+        <include refid="baseRegionColumn"/>
+        from cskaoyan_mall_region
+        where id = #{areaId}
+    </select>
+
+    <!--插入地址-->
+    <insert id="insertAddress">
+        insert into cskaoyan_mall_address (
+        user_id,
+        address,
+        area_id,
+        city_id,
+        id,
+        is_default,
+        mobile,
+        name,
+        province_id
+        ) values (
+        #{address.userId},
+        #{address.address},
+        #{address.areaId},
+        #{address.cityId},
+        #{address.id},
+        #{address.isDefault},
+        #{address.mobile},
+        #{address.name},
+        #{address.provinceId}
+        )
+    </insert>
+
+    <!--删除地址-->
+    <delete id="deleteAddress">
+        delete from cskaoyan_mall_address where id = #{id}
+    </delete>
+
+    <!--编辑地址-->
+    <update id="updateAddress">
+        update cskaoyan_mall_address set
+        user_id = #{address.userId},
+        address = #{address.address},
+        area_id = #{address.areaId},
+        city_id = #{address.cityId},
+        is_default = #{address.isDefault},
+        mobile = #{address.mobile},
+        name = #{address.name},
+        province_id = #{address.provinceId}
+        where id = #{address.id}
+    </update>
 </mapper>
