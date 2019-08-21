@@ -2,8 +2,10 @@ package com.cskaoyan.service.admin.goods;
 
 import com.cskaoyan.bean.admin.goods.Goods;
 import com.cskaoyan.bean.admin.goods.PageParams4Goods;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsService {
 
@@ -20,4 +22,8 @@ public interface GoodsService {
     Goods getSingleGoodsById(int id);
 
     int deleteSingleGoodsById(Integer goodsId);
+
+    int insertSingleGoods(@Param("goodsMap") Map<String, Object> goodsMap);
+
+    int updateSingleGoods(Map<String, Object> goodsMap);
 }
