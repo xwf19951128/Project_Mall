@@ -33,5 +33,5 @@ public interface IssueMapper {
 
     List<Issue> getIssueListByQuestion(@Param("question") String question);
 
-    Issue selectByAnswer(@Param("answer") String answer);
+    Issue selectByAnswer(@Param("answer")String answer);
 }

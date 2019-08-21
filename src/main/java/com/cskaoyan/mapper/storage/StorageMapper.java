@@ -28,7 +28,7 @@ public interface StorageMapper {
 
     int updateByPrimaryKey(Storage record);
 
-    List<Storage> selectStorage(@Param("key") String key, @Param("name") String name, @Param("order") String order, @Param("sort") String sort);
+    List<Storage> selectStorage(@Param("key") String key,@Param("name") String name,@Param("order") String order,@Param("sort") String sort);
 
     int createStorage(Storage storage);
 

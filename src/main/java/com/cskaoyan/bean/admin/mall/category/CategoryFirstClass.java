@@ -76,4 +76,6 @@ public class CategoryFirstClass {
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
+
+
 }

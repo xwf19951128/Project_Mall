@@ -32,7 +32,7 @@ public interface BrandMapper {
     List<Brand> getBrandList();
     List<Brand> getBrandListById(@Param("id") Integer id);
     List<Brand> getBrandListByName(@Param("name") String name);
-    List<Brand> getBrandListByIdAndName(@Param("id") Integer id, @Param("name") String name);
+    List<Brand> getBrandListByIdAndName(@Param("id") Integer id,@Param("name") String name);
 
     int updateBrandById(@Param("brand") Brand brand);
 

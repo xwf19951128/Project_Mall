@@ -3,10 +3,8 @@ package com.cskaoyan.config;
 import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.service.admin.login.LoginService;
-
 import com.cskaoyan.bean.wx.login.ActiveUser;
 import com.cskaoyan.bean.wx.login.WxUser;
-
 import com.cskaoyan.service.wx.login.WxLoginService;
 
 import org.apache.shiro.SecurityUtils;

@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.admin.spread;//package com.cskaoyan.bean.admin.spread;
+//package com.cskaoyan.bean.admin.spread;
 //
 //import com.cskaoyan.bean.admin.system.AdminExample;
 //import com.cskaoyan.mapper.system.AdminMapper;

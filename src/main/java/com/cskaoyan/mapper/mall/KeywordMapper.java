@@ -38,5 +38,5 @@ public interface KeywordMapper {
     //查询微信搜索需要的index三种索引
     SearchIndex querySearchIndex();
     //查询searchHelper，查询时可以自动提示相关商品字段
-    List<HistoryKeyword> querySearchHelper(@Param("keyword") String keyword);
+    List<HistoryKeyword> querySearchHelper(@Param("keyword")String keyword);
 }

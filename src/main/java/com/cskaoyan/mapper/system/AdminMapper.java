@@ -28,7 +28,7 @@ public interface AdminMapper {
 
     int updateByPrimaryKey(Admin record);
 
-    List<Admin> selectAdmins(@Param("username") String username, @Param("sort") String sort, @Param("order") String order);
+    List<Admin> selectAdmins(@Param("username") String username,@Param("sort") String sort,@Param("order") String order);
 
     //插入admin
     int insertAdmin(Admin admin);
