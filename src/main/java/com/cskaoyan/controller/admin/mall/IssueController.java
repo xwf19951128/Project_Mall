@@ -7,6 +7,8 @@ import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/issue")
+@Api(tags = "issue")
 public class IssueController {
 
     @Autowired
     IssueService issueService;
 
     @RequestMapping("list")
+    @ApiOperation(value = "条件查询和分页")
     public ResponseVo getIssueList(int page, int limit,String question, String order, String sort) {
         StringBuilder stringBuilder = new StringBuilder();
         if (question != null) {

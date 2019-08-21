@@ -4,7 +4,6 @@ import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminExample;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.bean.admin.login.DashBoard;
-
 import com.cskaoyan.bean.wx.login.WxUser;
 import com.cskaoyan.bean.wx.login.WxUserExample;
 import com.cskaoyan.mapper.login.LoginMapper;
