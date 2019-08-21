@@ -328,4 +328,9 @@
   <select id="queryHistory" resultType="com.cskaoyan.bean.wx.search.HistoryKeyword">
       select keyword from cskaoyan_mall_keyword
   </select>
+
+  <!--查询所有的和keyword相似的商品-->
+  <select id="querySearchHelper" resultType="com.cskaoyan.bean.wx.search.HistoryKeyword">
+      select name as keyword from cskaoyan_mall_goods where name like #{keyword}
+  </select>
 </mapper>

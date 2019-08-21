@@ -1,6 +1,7 @@
 package com.cskaoyan.service.admin.mall.impl;
 
 import com.cskaoyan.bean.admin.mall.category.Category;
+import com.cskaoyan.bean.admin.mall.category.CategoryExample;
 import com.cskaoyan.bean.admin.mall.category.CategoryFirstClass;
 import com.cskaoyan.bean.admin.mall.category.Label;
 import com.cskaoyan.mapper.mall.CategoryMapper;
@@ -48,5 +49,26 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategoryById(Integer id) {
         categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Category> listFirstLevelCategories() {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andPidEqualTo(0);
+        return categoryMapper.selectByExample(categoryExample);
+    }
+
+    @Override
+    public List<Category> listSecondLevelCategories() {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andPidNotEqualTo(0);
+        return categoryMapper.selectByExample(categoryExample);
+    }
+
+    @Override
+    public List<Category> listSecondLevelCategoriesByCategoryId(int categoryId) {
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andPidEqualTo(categoryId);
+        return categoryMapper.selectByExample(categoryExample);
     }
 }

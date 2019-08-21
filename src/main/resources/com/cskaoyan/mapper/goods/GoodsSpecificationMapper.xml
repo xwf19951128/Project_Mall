@@ -255,4 +255,30 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <sql id="specificationColumns">
+    goods_id,
+    specification,
+    `value`,
+    pic_url,
+    add_time,
+    update_time,
+    deleted
+  </sql>
+  <insert id="insertSpecifications">
+    insert into cskaoyan_mall_goods_specification
+    (<include refid="specificationColumns"></include>)
+    values
+      <foreach collection="goodsSpecificationMapList" item="goodsSpecificationMap" separator=",">
+      (
+        #{goodsSpecificationMap.goodsId,jdbcType=INTEGER},
+        #{goodsSpecificationMap.specification,jdbcType=VARCHAR},
+        #{goodsSpecificationMap.value,jdbcType=VARCHAR},
+        #{goodsSpecificationMap.picUrl,jdbcType=VARCHAR},
+        #{goodsSpecificationMap.addTime},
+        #{goodsSpecificationMap.updateTime},
+        #{goodsSpecificationMap.deleted}
+        )
+      </foreach>
+  </insert>
 </mapper>

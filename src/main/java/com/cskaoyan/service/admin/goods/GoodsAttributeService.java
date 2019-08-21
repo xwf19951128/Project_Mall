@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GoodsAttributeService {
     List<GoodsAttribute> listGoodsAttributesByGoodsId(int id);
+
+    int insertGoodsAttributes(List<GoodsAttribute> goodsAttributeList, Integer lastInsertGoodsId);
 }

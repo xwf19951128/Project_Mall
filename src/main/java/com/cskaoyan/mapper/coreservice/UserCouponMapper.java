@@ -1,8 +1,12 @@
-package com.cskaoyan.mapper.spread;
+package com.cskaoyan.mapper.coreservice;
 
-import com.cskaoyan.bean.admin.spread.UserCoupon;
+
+import com.cskaoyan.bean.admin.spread.MallCoupon;
+
 import com.cskaoyan.bean.admin.spread.UserCouponExample;
 import java.util.List;
+
+import com.cskaoyan.bean.wx.coreservice.UserCoupon;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserCouponMapper {
@@ -27,4 +31,6 @@ public interface UserCouponMapper {
     int updateByPrimaryKeySelective(UserCoupon record);
 
     int updateByPrimaryKey(UserCoupon record);
+
+    List<MallCoupon> queryUserCouponList(@Param("username") String username, @Param("status") short status);
 }
