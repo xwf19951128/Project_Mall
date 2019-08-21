@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CategoryMapper {
+
     long countByExample(CategoryExample example);
 
     int deleteByExample(CategoryExample example);

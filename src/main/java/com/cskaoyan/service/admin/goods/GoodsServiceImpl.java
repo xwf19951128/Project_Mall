@@ -7,7 +7,10 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class GoodsServiceImpl implements GoodsService {
@@ -35,8 +38,9 @@ public class GoodsServiceImpl implements GoodsService {
 //        int offset = (pageParams4Goods.getPage() - 1) * limit;
         String sort = pageParams4Goods.getSort();
         String order = pageParams4Goods.getOrder();
-        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit());
-        return goodsMapper.listAllGoods(sort, order);
+        PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit(), pageParams4Goods.getSort() + " " + pageParams4Goods.getOrder());
+        return goodsMapper.listAllGoods();
+        //        return goodsMapper.listAllGoods(sort, order);
 
     }
 
@@ -76,5 +80,37 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int deleteSingleGoodsById(Integer goodsId) {
         return goodsMapper.deleteSingleGoodsById(goodsId);
+    }
+
+    @Override
+    public int insertSingleGoods(Map<String, Object> goodsMap) {
+        ArrayList<String> galleryList = (ArrayList<String>)goodsMap.get("gallery");
+        String[] galleryArray = galleryList.toArray(new String[galleryList.size()]);
+//        goodsMap.put("id", 0);
+        goodsMap.put("gallery", galleryArray);
+        goodsMap.put("sortOrder", 123);
+        goodsMap.put("shareUrl", "");
+        goodsMap.put("addTime", new Date());
+        goodsMap.put("updateTime", new Date());
+        goodsMap.put("deleted", 0);
+        int result = goodsMapper.insertSingleGoods(goodsMap);
+        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
+//        System.out.println("lastInsertGoodsId = " + lastInsertGoodsId);
+//        return lastInsertGoodsId;
+        return result;
+    }
+
+    @Override
+    public int updateSingleGoods(Map<String, Object> goodsMap) {
+        ArrayList<String> galleryList = (ArrayList<String>)goodsMap.get("gallery");
+        String[] galleryArray = galleryList.toArray(new String[galleryList.size()]);
+        goodsMap.put("gallery", galleryArray);
+        goodsMap.put("sortOrder", 123);
+        goodsMap.put("shareUrl", "");
+        goodsMap.put("updateTime", new Date());
+        goodsMap.put("deleted", 0);
+        int result = goodsMapper.updateSingleGoods(goodsMap);
+        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
+        return result;
     }
 }

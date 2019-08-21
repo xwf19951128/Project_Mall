@@ -8,6 +8,8 @@ import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +18,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/order")
+@Api(tags = "order")
 public class OrderController {
 
     @Autowired
     OrderService orderService;
 
     @RequestMapping("list")
+    @ApiOperation(value = "条件查询和分页")
     public ResponseVo getOrderList(int page, int limit, Short orderStatus, String sort, String order, String orderSn,Integer userId) {
         String orderBy = sort + " " + order;
         PageHelper.startPage(page,limit,orderBy);

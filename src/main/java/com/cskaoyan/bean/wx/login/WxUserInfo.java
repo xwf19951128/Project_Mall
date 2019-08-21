@@ -4,15 +4,16 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class WxUserInfo {
-    String token;
+    Object token;
     LocalDateTime tokenExpire;
     HashMap<String,String> userInfo;
 
-    public String getToken() {
+
+    public Object getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(Object token) {
         this.token = token;
     }
 

@@ -2,9 +2,11 @@ package com.cskaoyan.mapper.goods;
 
 import com.cskaoyan.bean.admin.goods.GoodsSpecification;
 import com.cskaoyan.bean.admin.goods.GoodsSpecificationExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface GoodsSpecificationMapper {
@@ -29,4 +31,6 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKeySelective(GoodsSpecification record);
 
     int updateByPrimaryKey(GoodsSpecification record);
+
+    int insertSpecifications(@Param("goodsSpecificationMapList") List<Map<String, Object>> goodsSpecificationMapList);
 }

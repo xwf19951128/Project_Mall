@@ -6,6 +6,9 @@ import com.cskaoyan.bean.admin.mall.category.Label;
 import com.cskaoyan.service.admin.mall.CategoryService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/category")
+@Api(tags = "category")
 public class CategoryController {
 
     @Autowired
     CategoryService categoryService;
 
     @RequestMapping("/list")
+    @ApiOperation(value = "条件查询和分页")
     public ResponseVo getCategory() {
         List<CategoryFirstClass> data = categoryService.getCategory();
         return ResponseUtil.success(data);

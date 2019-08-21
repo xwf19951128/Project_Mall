@@ -1,11 +1,14 @@
 package com.cskaoyan.controller.admin.goods;
 
 import com.cskaoyan.bean.admin.goods.*;
-
+import com.cskaoyan.bean.admin.mall.brand.Brand;
+import com.cskaoyan.bean.admin.mall.category.CategoryFirstClass;
 import com.cskaoyan.service.admin.goods.GoodsAttributeService;
 import com.cskaoyan.service.admin.goods.GoodsProductService;
 import com.cskaoyan.service.admin.goods.GoodsService;
 import com.cskaoyan.service.admin.goods.GoodsSpecificationService;
+import com.cskaoyan.service.admin.mall.BrandService;
+import com.cskaoyan.service.admin.mall.CategoryService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageInfo;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/goods")
@@ -33,6 +37,12 @@ public class GoodsController {
 
     @Autowired
     GoodsSpecificationService goodsSpecificationService;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    BrandService brandService;
 
     /*分页查询*/
     @RequestMapping("/list")
@@ -112,14 +122,69 @@ public class GoodsController {
         return ResponseUtil.success(data);
     }
 
+    /*添加商品的分类、品牌商回显*/
+    @RequestMapping("/catAndBrand")
+    public ResponseVo getCatAndBrand(){
+        HashMap<String, Object> data = new HashMap<>(2);
+        List<CategoryFirstClass> categoryList = categoryService.getCategory();
+        List<Brand> brandList = brandService.getBrandList(null, null);
+        data.put("categoryList", categoryList);
+        data.put("brandList", brandList);
+        return ResponseUtil.success(data);
+    }
+
+
+
     /*添加商品*/
-/*    @RequestMapping("/create")
-    public ResponseVo insertGoods(@RequestBody GoodsAttribute[] goodsAttributeArray,
-                                  @RequestBody Goods goods,
-                                  @RequestBody GoodsProduct[] goodsProductArray,
-                                  @RequestBody GoodsSpecification[] specificationArray){
-        return null;
-    }*/
+    @RequestMapping("/create")
+    public ResponseVo insertGoods(@RequestBody Map<String, Object> map){
+        Map<String, Object> goodsMap = (Map<String, Object>) map.get("goods");
+        int result1 = goodsService.insertSingleGoods(goodsMap);
+        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
+
+        List<GoodsAttribute> goodsAttributeList = (List<GoodsAttribute>) map.get("attributes");
+        int result2 = goodsAttributeService.insertGoodsAttributes(goodsAttributeList, lastInsertGoodsId);
+//        System.out.println("result2 = " + result2);
+        List<Map<String, Object>> goodsProductMapList = (List<Map<String, Object>>) map.get("products");
+        int result3 = goodsProductService.insertGoodsProduct(goodsProductMapList, lastInsertGoodsId);
+//        System.out.println("result3 = " + result3);
+
+        List<Map<String, Object>> goodsSpecificationMapList = (List<Map<String, Object>>) map.get("specifications");
+        int result4 = goodsSpecificationService.insertSpecifications(goodsSpecificationMapList, lastInsertGoodsId);
+        if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0) {
+            return ResponseUtil.success();
+        }
+        return ResponseUtil.fail(null, "添加失败", 1);
+    }
+
+    /**
+     * 编辑商品
+     * TO DO
+     * @param map
+     * @return
+     */
+    @RequestMapping("/update")
+    public ResponseVo updateSingleGoods(@RequestBody Map<String, Object> map){
+        Map<String, Object> goodsMap = (Map<String, Object>) map.get("goods");
+        int result1 = goodsService.updateSingleGoods(goodsMap);
+        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
+
+        List<GoodsAttribute> goodsAttributeList = (List<GoodsAttribute>) map.get("attributes");
+        int result2 = goodsAttributeService.insertGoodsAttributes(goodsAttributeList, lastInsertGoodsId);
+//        System.out.println("result2 = " + result2);
+        List<Map<String, Object>> goodsProductMapList = (List<Map<String, Object>>) map.get("products");
+        int result3 = goodsProductService.insertGoodsProduct(goodsProductMapList, lastInsertGoodsId);
+//        System.out.println("result3 = " + result3);
+
+        List<Map<String, Object>> goodsSpecificationMapList = (List<Map<String, Object>>) map.get("specifications");
+        int result4 = goodsSpecificationService.insertSpecifications(goodsSpecificationMapList, lastInsertGoodsId);
+        if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0) {
+            return ResponseUtil.success();
+        }
+        return ResponseUtil.fail(null, "添加失败", 1);
+    }
+
+
 
     /*删除商品*/
     @RequestMapping("/delete")
