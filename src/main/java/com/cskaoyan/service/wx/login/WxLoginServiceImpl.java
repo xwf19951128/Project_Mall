@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class WxLoginServiceImpl implements WxLoginService {
@@ -45,26 +44,5 @@ public class WxLoginServiceImpl implements WxLoginService {
         }
         criteria.andOrderStatusIn(list);
         return (int) orderMapper.countByExample(example);
-    }
-
-    @Override
-    public void registerUser(WxUser wxUser) {
-        wxUserMapper.insertSelective(wxUser);
-    }
-
-    @Override
-    public List<WxUser> queryUserByMobile(String mobile) {
-        WxUserExample wxUserExample = new WxUserExample();
-        WxUserExample.Criteria criteria = wxUserExample.createCriteria();
-        criteria.andMobileEqualTo(mobile);
-        return wxUserMapper.selectByExample(wxUserExample);
-    }
-
-    @Override
-    public void updatePassword(WxUser wxUser) {
-        WxUserExample userExample = new WxUserExample();
-        WxUserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andMobileEqualTo(wxUser.getMobile());
-        wxUserMapper.updateByExampleSelective(wxUser,userExample);
     }
 }

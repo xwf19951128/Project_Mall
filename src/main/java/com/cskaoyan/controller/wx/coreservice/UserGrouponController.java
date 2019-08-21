@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 public class UserGrouponController {
     @Autowired
     CoreService coreService;
-    @RequestMapping("/list")
-    public MessageBean showCouponList(int page, int size, short type, HttpServletRequest request){
-        return coreService.showGrouponList(page,size,type,request);
+    @RequestMapping("/my")
+    public MessageBean showCouponList(short showType , HttpServletRequest request){
+        return coreService.showGrouponList(showType,request);
     }
 }

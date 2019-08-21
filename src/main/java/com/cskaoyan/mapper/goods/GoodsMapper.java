@@ -30,5 +30,4 @@ public interface GoodsMapper {
     int insertSingleGoods(@Param("goodsMap") Map<String, Object> goodsMap);
 
     int updateSingleGoods(Map<String, Object> goodsMap);
-
 }

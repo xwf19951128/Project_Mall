@@ -35,4 +35,5 @@ public interface MallGrouponMapper {
     ArrayList<GrouponInfo> queryGrouponInfoList(@Param("content") String content, @Param("name") String name);
 
 
+    List<MallGroupon> queryListByUser(@Param("id") int uid, @Param("type") short showType);
 }
