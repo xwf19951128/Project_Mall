@@ -2,6 +2,7 @@ package com.cskaoyan.mapper.mall;
 
 import com.cskaoyan.bean.admin.mall.keyword.Keyword;
 import com.cskaoyan.bean.admin.mall.keyword.KeywordExample;
+import com.cskaoyan.bean.wx.search.HistoryKeyword;
 import com.cskaoyan.bean.wx.search.SearchIndex;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +37,6 @@ public interface KeywordMapper {
 
     //查询微信搜索需要的index三种索引
     SearchIndex querySearchIndex();
+    //查询searchHelper，查询时可以自动提示相关商品字段
+    List<HistoryKeyword> querySearchHelper(@Param("keyword")String keyword);
 }

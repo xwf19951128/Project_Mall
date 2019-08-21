@@ -336,7 +336,7 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIn(List<Short> values) {
+        public Criteria andOrderStatusIn(ArrayList<Object> values) {
             addCriterion("order_status in", values, "orderStatus");
             return (Criteria) this;
         }

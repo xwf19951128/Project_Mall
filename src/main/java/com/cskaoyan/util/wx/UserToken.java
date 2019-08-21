@@ -2,6 +2,9 @@ package com.cskaoyan.util.wx;
 
 import java.time.LocalDateTime;
 
+/**
+ * userToken是持久化保存在服务器端的数据，用于记录用户信息
+ * */
 public class UserToken {
     private Integer userId;
     private String token;

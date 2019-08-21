@@ -1,5 +1,6 @@
 package com.cskaoyan.controller.wx.login;
 
+import com.cskaoyan.bean.wx.login.IndexOrder;
 import com.cskaoyan.bean.wx.login.WxUser;
 import com.cskaoyan.bean.wx.login.WxUserInfo;
 import com.cskaoyan.config.TypeToken;
@@ -22,12 +23,12 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/wx/auth")
+@RequestMapping("/wx")
 public class WxLoginController {
     @Autowired
     WxLoginService wxLoginService;
 
-    @RequestMapping("/login")
+    @RequestMapping("/auth/login")
     public ResponseVo login(@RequestBody WxUser user){
         String username = user.getUsername();
         String password = user.getPassword();
@@ -52,10 +53,27 @@ public class WxLoginController {
             }
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("/user/index")
+    //这个方法是用来读取四种订单的数量并显示出来
+    public ResponseVo index(){
+        IndexOrder order = new IndexOrder();
+        int num1 = wxLoginService.queryOrderNumByStatus(new int[]{101});
+        order.setUnpaid(num1);
+        int num2 = wxLoginService.queryOrderNumByStatus(new int[]{201});
+        order.setUnship(num2);
+        int num3 = wxLoginService.queryOrderNumByStatus(new int[]{301});
+        order.setUnrecv(num3);
+        int num4 = wxLoginService.queryOrderNumByStatus(new int[]{401, 402});
+        order.setUncomment(num4);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("order",order);
+        return ResponseUtil.success(map);
+    }
+
+    @RequestMapping("/auth/logout")
     public ResponseVo logout() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+//        Subject subject = SecurityUtils.getSubject();
+//        subject.logout();
         return ResponseUtil.success();
     }
 }
