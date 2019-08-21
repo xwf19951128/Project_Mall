@@ -25,4 +25,6 @@ public interface GoodsMapper {
     Goods getSingleGoodsById(@Param("id") int id);
 
     int deleteSingleGoodsById(@Param("id") Integer goodsId);
+
+
 }

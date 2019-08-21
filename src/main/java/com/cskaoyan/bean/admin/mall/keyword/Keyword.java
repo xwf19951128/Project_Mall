@@ -57,12 +57,20 @@ public class Keyword {
         this.isHot = isHot;
     }
 
-    public Boolean getIsDefault() {
+    public Boolean getHot() {
+        return isHot;
+    }
+
+    public void setHot(Boolean hot) {
+        isHot = hot;
+    }
+
+    public Boolean getDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
     }
 
     public Integer getSortOrder() {
