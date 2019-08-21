@@ -20,4 +20,5 @@ public interface RoleService {
     int updateRole(Role role);
 
     int deleteRole(Role role);
+    
 }

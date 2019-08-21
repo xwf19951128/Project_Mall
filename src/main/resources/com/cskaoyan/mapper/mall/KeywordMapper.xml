@@ -293,4 +293,44 @@
         from cskaoyan_mall_keyword
         where keyword like #{keyword}
     </select>
+
+  <!--查询微信端搜索功能所需的SearchIndex-->
+  <resultMap id="searchMap" type="com.cskaoyan.bean.wx.search.SearchIndex">
+      <association property="defaultKeyword" javaType="com.cskaoyan.bean.admin.mall.keyword.Keyword">
+          <result column="id" jdbcType="INTEGER" property="id" />
+          <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+          <result column="url" jdbcType="VARCHAR" property="url" />
+          <result column="is_hot" jdbcType="BIT" property="isHot" />
+          <result column="is_default" jdbcType="BIT" property="isDefault" />
+          <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+          <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+          <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+          <result column="deleted" jdbcType="BIT" property="deleted" />
+      </association>
+      <collection property="hotKeywordList" column="url" select="com.cskaoyan.mapper.mall.KeywordMapper.queryHotKeyword"></collection>
+      <collection property="historyKeywordList" column="url" select="com.cskaoyan.mapper.mall.KeywordMapper.queryHistory"></collection>
+  </resultMap>
+  <!--第一次查询，查询默认关键字-->
+  <select id="querySearchIndex" resultMap="searchMap">
+      select
+      <include refid="Base_Column_List"/>
+      from cskaoyan_mall_keyword
+      where is_default = 1
+  </select>
+  <!--第二次查询，查询热门搜索关键字-->
+  <select id="queryHotKeyword" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from cskaoyan_mall_keyword
+    where is_hot = 1
+  </select>
+  <!--第三次查询，查询所有搜索记录-->
+  <select id="queryHistory" resultType="com.cskaoyan.bean.wx.search.HistoryKeyword">
+      select keyword from cskaoyan_mall_keyword
+  </select>
+
+  <!--查询所有的和keyword相似的商品-->
+  <select id="querySearchHelper" resultType="com.cskaoyan.bean.wx.search.HistoryKeyword">
+      select name as keyword from cskaoyan_mall_goods where name like #{keyword}
+  </select>
 </mapper>

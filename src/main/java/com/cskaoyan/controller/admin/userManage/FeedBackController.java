@@ -1,6 +1,10 @@
 package com.cskaoyan.controller.admin.userManage;
 
-import com.cskaoyan.bean.admin.userManage.*;
+
+import com.cskaoyan.bean.admin.userManage.DataAndErr;
+import com.cskaoyan.bean.admin.userManage.FeedBack;
+import com.cskaoyan.bean.admin.userManage.ItemAndTotal;
+
 import com.cskaoyan.service.admin.userManage.FeedBackService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

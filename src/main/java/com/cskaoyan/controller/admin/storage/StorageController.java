@@ -71,7 +71,7 @@ public class StorageController {
     }
 
     @RequestMapping("/admin/storage/update")
-    @SystemLog(desc = "删除存储对象")
+    @SystemLog(desc = "更新存储对象")
     public ResponseVo updateStorage(@RequestBody Storage storage){
         ResponseVo responseVo = new ResponseVo();
 

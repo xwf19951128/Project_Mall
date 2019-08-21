@@ -156,7 +156,7 @@ public class SpreadServiceImp implements SpreadService{
     }
 
     @Override
-    public MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String content,String status,String name) {
+    public MessageBean<ListDate<MallCoupon>> showCouponListByPage(int page, int limit, String content, String status, String name) {
         if(name!=null){
             name="%"+name+"%";}
         ArrayList<MallCoupon> list=couponMapper.queryCouponList(page-1,limit,content,status,name);

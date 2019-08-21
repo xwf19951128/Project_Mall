@@ -1,15 +1,14 @@
 package com.cskaoyan.controller.wx.cart;
 
 import com.cskaoyan.bean.admin.goods.Goods;
-import com.cskaoyan.bean.admin.userManage.User;
 import com.cskaoyan.bean.wx.cart.CartIndex;
 import com.cskaoyan.bean.wx.cart.CartTotal;
 import com.cskaoyan.bean.wx.cart.GoodInCart;
 import com.cskaoyan.service.admin.goods.GoodsService;
-import com.cskaoyan.service.wx.CartService;
+import com.cskaoyan.service.wx.cart.CartService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
-import org.apache.shiro.SecurityUtils;
+import com.cskaoyan.util.wx.UserTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +29,10 @@ public class CartController {
     GoodsService goodsService;
 
     @RequestMapping("add")
-    public ResponseVo addCart(@RequestBody GoodInCart goodInCart) {
+    public ResponseVo addCart(HttpServletRequest request, @RequestBody GoodInCart goodInCart) {
         int number = goodInCart.getNumber();
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        int userId = cartService.getUserIdByUsername(username);
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
         goodInCart = cartService.getGoodById(goodInCart.getGoodsId());
         goodInCart.setUserId(userId);
         goodInCart.setAddTime(new Date());
@@ -47,11 +46,12 @@ public class CartController {
     @RequestMapping("index")
     public ResponseVo index(HttpServletRequest request) {
         String tokenKey = request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tokenKey);
         CartIndex cartIndex = new CartIndex();
-//        List<Goods> cartList = cartService.getGoods();
-//        CartTotal cartTotal = cartService.getCartTotal();
-//        cartIndex.setCartList(cartList);
-//        cartIndex.setCartTotal(cartTotal);
+        List<Goods> cartList = cartService.getGoods(userId);
+        CartTotal cartTotal = cartService.getCartTotal(userId);
+        cartIndex.setCartList(cartList);
+        cartIndex.setCartTotal(cartTotal);
         return ResponseUtil.success(cartIndex);
     }
 }

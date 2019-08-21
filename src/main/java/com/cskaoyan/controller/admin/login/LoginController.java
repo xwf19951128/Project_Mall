@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -81,7 +82,7 @@ public class LoginController {
     public ResponseVo logout(){
         SecurityUtils.getSubject().logout();
         return ResponseUtil.fail(
-          null,"注销成功",0);
+                null,"注销成功",0);
     }
 
     //修改密码
@@ -109,7 +110,7 @@ public class LoginController {
         admin.setUpdateTime(date);
         int i = loginService.updatePasswordAndTime(admin);
         if (i==1){
-           return ResponseUtil.success(null);
+            return ResponseUtil.success(null);
         }else {
             return ResponseUtil.fail(null,"修改失败",0);
         }
