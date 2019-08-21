@@ -26,6 +26,7 @@
     deleted
     from cskaoyan_mall_goods where id=#{goodsId}
     </select>
+
   <select id="listAllGoods" resultMap="goodsMap">
     select
     id,
@@ -50,7 +51,6 @@
     update_time,
     deleted
     from cskaoyan_mall_goods
-    order by #{sort} #{order}
   </select>
     <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
         <result property="id" column="id"></result>
@@ -192,4 +192,59 @@
     delete from cskaoyan_mall_goods
     where id = #{id}
   </delete>
+
+    <sql id ="goodsColumns">
+        goods_sn,
+        name,
+        category_id,
+        brand_id,
+        gallery,
+        keywords,
+        brief,
+        is_on_sale,
+        sort_order,
+        pic_url,
+        share_url,
+        is_new,
+        is_hot,
+        unit,
+        counter_price,
+        retail_price,
+        detail,
+        add_time,
+        update_time,
+        deleted
+    </sql>
+    <!--添加商品-->
+    <insert id="insertSingleGoods">
+        <selectKey keyProperty="goodsMap.id" order="AFTER" keyColumn="id" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
+        insert into cskaoyan_mall_goods
+        (<include refid="goodsColumns"></include>)
+        values
+        (
+        #{goodsMap.goodsSn},
+        #{goodsMap.name},
+        #{goodsMap.categoryId},
+        #{goodsMap.brandId},
+        #{goodsMap.gallery},
+        #{goodsMap.keywords},
+        #{goodsMap.brief},
+        #{goodsMap.isOnSale},
+        #{goodsMap.sortOrder},
+        #{goodsMap.picUrl},
+        #{goodsMap.shareUrl},
+        #{goodsMap.isNew},
+        #{goodsMap.isHot},
+        #{goodsMap.unit},
+        #{goodsMap.counterPrice},
+        #{goodsMap.retailPrice},
+        #{goodsMap.detail},
+        #{goodsMap.addTime},
+        #{goodsMap.updateTime},
+        #{goodsMap.deleted}
+        )
+    </insert>
+
 </mapper>

@@ -240,4 +240,30 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <sql id="goodsAttributeColumns">
+    goods_id,
+    attribute,
+    `value`,
+    add_time,
+    update_time,
+    deleted
+  </sql>
+  <insert id="insertGoodsAttributeByLastGoodsId">
+      insert into cskaoyan_mall_goods_attribute
+      (
+      <include refid="goodsAttributeColumns"></include>
+      )
+      values
+      <foreach collection="goodsAttributeList" item="goodsAttribute" separator=",">
+        (
+        #{lastInsertGoodsId},
+        #{goodsAttribute.attribute},
+        #{goodsAttribute.value},
+        #{otherAttributeMap.addTime},
+        #{otherAttributeMap.updateTime},
+        #{otherAttributeMap.deleted}
+        )
+      </foreach>
+  </insert>
 </mapper>
