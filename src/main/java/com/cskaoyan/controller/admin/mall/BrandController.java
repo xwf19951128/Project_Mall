@@ -7,6 +7,8 @@ import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin/brand")
+@Api(tags = "brand", description = "品牌制造商")
 public class BrandController {
 
     @Autowired
@@ -24,6 +27,7 @@ public class BrandController {
 
     /*品牌分页*/
     @RequestMapping("list")
+    @ApiOperation(value = "条件查询和分页")
     public ResponseVo getBrandList(int page, int limit, String sort, String order, Integer id, String name) {
         StringBuilder term = new StringBuilder();
         if (name != null) {

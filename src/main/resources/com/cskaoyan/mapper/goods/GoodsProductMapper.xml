@@ -27,4 +27,32 @@
         where goods_id = #{goodsId}
     </select>
 
+
+    <sql id="goodsProductColumns">
+        goods_id,
+        specifications,
+        price,
+        number,
+        url,
+        add_time,
+        update_time,
+        deleted
+    </sql>
+    <insert id="insertGoodsProduct">
+        insert into cskaoyan_mall_goods_product
+        (<include refid="goodsProductColumns"></include>)
+        values
+        <foreach collection="goodsProductMapList" item="goodsProductMap" separator=",">
+            (
+            #{lastInsertGoodsId},
+            #{goodsProductMap.specifications},
+            #{goodsProductMap.price},
+            #{goodsProductMap.number},
+            #{goodsProductMap.url},
+            #{otherAttributeMap.addTime},
+            #{otherAttributeMap.updateTime},
+            #{otherAttributeMap.deleted}
+            )
+        </foreach>
+    </insert>
 </mapper>

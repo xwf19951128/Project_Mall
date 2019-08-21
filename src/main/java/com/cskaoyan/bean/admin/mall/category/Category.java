@@ -32,6 +32,23 @@ public class Category {
 
     private Boolean deleted;
 
+    public Category() {
+    }
+
+    public Category(Integer id, String name, String keywords, String desc, Integer pid, String iconUrl, String picUrl, String level, Date addTime, Date updateTime, Boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.keywords = keywords;
+        this.desc = desc;
+        this.pid = pid;
+        this.iconUrl = iconUrl;
+        this.picUrl = picUrl;
+        this.level = level;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.deleted = deleted;
+    }
+
     public Integer getId() {
         return id;
     }
