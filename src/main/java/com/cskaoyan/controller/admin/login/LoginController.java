@@ -4,6 +4,7 @@ import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.bean.admin.login.DashBoard;
 import com.cskaoyan.bean.admin.login.Password;
+import com.cskaoyan.config.TypeToken;
 import com.cskaoyan.service.admin.login.LoginService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
@@ -40,7 +41,7 @@ public class LoginController {
         String password =admin.getPassword();
         ResponseVo responseVo =null;
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        TypeToken token = new TypeToken(username, password,"admin");
         try {
             subject.login(token);
             Serializable id = subject.getSession().getId();

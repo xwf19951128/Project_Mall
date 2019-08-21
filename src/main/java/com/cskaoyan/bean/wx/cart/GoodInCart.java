@@ -1,4 +1,4 @@
-package com.cskaoyan.bean.wx;
+package com.cskaoyan.bean.wx.cart;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

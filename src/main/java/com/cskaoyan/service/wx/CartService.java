@@ -1,6 +1,6 @@
 package com.cskaoyan.service.wx;
 
-import com.cskaoyan.bean.wx.GoodInCart;
+import com.cskaoyan.bean.wx.cart.GoodInCart;
 
 public interface CartService {
 

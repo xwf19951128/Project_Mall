@@ -1,6 +1,6 @@
 package com.cskaoyan.service.wx.impl;
 
-import com.cskaoyan.bean.wx.GoodInCart;
+import com.cskaoyan.bean.wx.cart.GoodInCart;
 import com.cskaoyan.mapper.cart.CartMapper;
 import com.cskaoyan.service.wx.CartService;
 import org.springframework.beans.factory.annotation.Autowired;

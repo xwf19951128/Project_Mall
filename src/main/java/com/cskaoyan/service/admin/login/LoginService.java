@@ -21,4 +21,5 @@ public interface LoginService {
 
     //登录时时候，修改最后一次登录时间以及IP地址
     int updateIPAndLastTime(Admin admin);
+
 }

@@ -7,7 +7,7 @@
         where username=#{username}
     </select>
 
-    <select id="getGoodById" resultType="com.cskaoyan.bean.wx.GoodInCart">
+    <select id="getGoodById" resultType="com.cskaoyan.bean.wx.cart.GoodInCart">
         select g.goods_id, g.goods_sn, g.goods_name, gp.price, gp.id as productId,
         gp.price,gp.specifications,g.pic_url
         from cskaoyan_mall_goods g
