@@ -122,12 +122,16 @@ public class GoodsController {
         return ResponseUtil.success(data);
     }
 
-    /*添加商品的分类、品牌商回显*/
+
+    /**
+     * 添加商品时分类、品牌商回显
+     * @return
+     */
     @RequestMapping("/catAndBrand")
     public ResponseVo getCatAndBrand(){
         HashMap<String, Object> data = new HashMap<>(2);
         List<CategoryFirstClass> categoryList = categoryService.getCategory();
-        List<Brand> brandList = brandService.getBrandList(null, null);
+        List<Brand> brandList = brandService.getBrandList(null, "");
         data.put("categoryList", categoryList);
         data.put("brandList", brandList);
         return ResponseUtil.success(data);

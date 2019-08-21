@@ -15,6 +15,7 @@ public interface GoodsMapper {
     long countTotalGoodsCount();
 
     Goods findGoods(@Param("goodsId") Integer id);
+
     List<Goods> listAllGoods(/*@Param("limit") int limit, @Param("offset") int offset, *//*@Param("sort") String sort, @Param("order") String order*/);
 
     List<Goods> listSearchGoodsByGoodsSn(@Param("sort") String sort, @Param("order") String order, @Param("like") String like);

@@ -257,9 +257,9 @@
       values
       <foreach collection="goodsAttributeList" item="goodsAttribute" separator=",">
         (
-        #{lastInsertGoodsId},
-        #{goodsAttribute.attribute},
-        #{goodsAttribute.value},
+        #{lastInsertGoodsId,jdbcType=INTEGER},
+        #{goodsAttribute.attribute,jdbcType=VARCHAR},
+        #{goodsAttribute.value,jdbcType=VARCHAR},
         #{otherAttributeMap.addTime},
         #{otherAttributeMap.updateTime},
         #{otherAttributeMap.deleted}

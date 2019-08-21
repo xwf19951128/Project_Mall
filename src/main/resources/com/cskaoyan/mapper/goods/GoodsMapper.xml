@@ -1,55 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.goods.GoodsMapper">
+    <sql id="goodsColumns">
+        id,
+        goods_sn,
+        name,
+        category_id,
+        brand_id,
+        gallery,
+        keywords,
+        brief,
+        is_on_sale,
+        sort_order,
+        pic_url,
+        share_url,
+        is_new,
+        is_hot,
+        unit,
+        counter_price,
+        retail_price,
+        detail,
+        add_time,
+        update_time,
+        deleted
+    </sql>
+
     <select id="findGoods" resultMap="goodsMap">
          select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
-    from cskaoyan_mall_goods where id=#{goodsId}
+        <include refid="goodsColumns"></include>
+        from cskaoyan_mall_goods where id=#{goodsId}
     </select>
 
   <select id="listAllGoods" resultMap="goodsMap">
     select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
+      <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
   </select>
     <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
@@ -78,27 +62,7 @@
 
     <select id="listSearchGoodsByGoodsSn" resultMap="goodsMap">
     select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
+     <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
     where goods_sn like #{like}
     order by #{sort} #{order}
@@ -106,27 +70,7 @@
 
     <select id="listSearchGoodsByName" resultMap="goodsMap">
     select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
+    <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
     where name like #{like}
     order by #{sort} #{order}
@@ -134,27 +78,7 @@
 
     <select id="listSearchGoodsByGoodsSnAndName" resultMap="goodsMap">
     select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
+    <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
     where goods_sn like #{like1}
     and name like #{like2}
@@ -163,27 +87,7 @@
 
   <select id="getSingleGoodsById" resultMap="goodsMap">
     select
-    id,
-    goods_sn,
-    name,
-    category_id,
-    brand_id,
-    gallery,
-    keywords,
-    brief,
-    is_on_sale,
-    sort_order,
-    pic_url,
-    share_url,
-    is_new,
-    is_hot,
-    unit,
-    counter_price,
-    retail_price,
-    detail,
-    add_time,
-    update_time,
-    deleted
+      <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
     where id = #{id}
   </select>
@@ -193,7 +97,13 @@
     where id = #{id}
   </delete>
 
-    <sql id ="goodsColumns">
+    <!--添加商品-->
+    <insert id="insertSingleGoods">
+        <selectKey keyProperty="goodsMap.id" order="AFTER" keyColumn="id" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID() as id
+        </selectKey>
+        insert into cskaoyan_mall_goods
+        (
         goods_sn,
         name,
         category_id,
@@ -214,18 +124,11 @@
         add_time,
         update_time,
         deleted
-    </sql>
-    <!--添加商品-->
-    <insert id="insertSingleGoods">
-        <selectKey keyProperty="goodsMap.id" order="AFTER" keyColumn="id" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID() as id
-        </selectKey>
-        insert into cskaoyan_mall_goods
-        (<include refid="goodsColumns"></include>)
+        )
         values
         (
-        #{goodsMap.goodsSn},
-        #{goodsMap.name},
+        #{goodsMap.goodsSn,jdbcType=VARCHAR},
+        #{goodsMap.name,jdbcType=VARCHAR},
         #{goodsMap.categoryId},
         #{goodsMap.brandId},
         #{goodsMap.gallery},

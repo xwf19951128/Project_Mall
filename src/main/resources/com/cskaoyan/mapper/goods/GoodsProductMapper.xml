@@ -44,10 +44,10 @@
         values
         <foreach collection="goodsProductMapList" item="goodsProductMap" separator=",">
             (
-            #{lastInsertGoodsId},
-            #{goodsProductMap.specifications},
-            #{goodsProductMap.price},
-            #{goodsProductMap.number},
+            #{lastInsertGoodsId,jdbcType=INTEGER},
+            #{goodsProductMap.specifications,jdbcType=VARCHAR},
+            #{goodsProductMap.price,jdbcType=VARCHAR},
+            #{goodsProductMap.number,jdbcType=VARCHAR},
             #{goodsProductMap.url},
             #{otherAttributeMap.addTime},
             #{otherAttributeMap.updateTime},
