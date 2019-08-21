@@ -350,4 +350,41 @@
       and mg.id=#{id}
     </if>
   </select>
+
+  <resultMap id="MyFloorList" type="com.cskaoyan.bean.wx.index.GroupOnList">
+    <result column="discount_member" property="grouponMember"></result>
+    <result column="price" property="grouponPrice"/>
+    <association property="goods" javaType="com.cskaoyan.bean.admin.goods.Goods">
+      <result property="id" column="id"></result>
+      <result property="goodsSn" column="goods_sn"></result>
+      <result property="name" column="name"></result>
+      <result property="categoryId" column="category_id"></result>
+      <result property="brandId" column="brand_id"></result>
+      <result property="gallery" column="gallery"></result>
+      <result property="keywords" column="keywords"></result>
+      <result property="brief" column="brief"></result>
+      <result property="isOnSale" column="is_on_sale"></result>
+      <result property="sortOrder" column="sort_order"></result>
+      <result property="picUrl" column="pic_url"></result>
+      <result property="shareUrl" column="share_url"></result>
+      <result property="isNew" column="is_new"></result>
+      <result property="isHot" column="is_hot"></result>
+      <result property="unit" column="unit"></result>
+      <result property="counterPrice" column="counter_price"></result>
+      <result property="retailPrice" column="retail_price"></result>
+      <result property="addTime" column="add_time"></result>
+      <result property="updateTime" column="update_time"></result>
+      <result property="deleted" column="deleted"></result>
+      <result property="detail" column="detail"></result>
+    </association>
+  </resultMap>
+
+  <select id="getFloorList" resultMap="MyFloorList">
+      select cmg.*,
+       cmgr.discount_member,(cmg.retail_price-cmgr.discount) as price
+      from cskaoyan_mall_groupon_rules cmgr
+      left join cskaoyan_mall_goods cmg
+      on cmgr.goods_id =cmg.id
+  </select>
+
 </mapper>

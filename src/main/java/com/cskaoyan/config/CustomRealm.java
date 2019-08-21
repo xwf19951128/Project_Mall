@@ -62,6 +62,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        //身份信息，进行授权
         String username = (String) principalCollection.getPrimaryPrincipal();
         AdminInfo adminInfo = loginService.queryAdminInfoByUsername(username);
         List<String> perms = adminInfo.getPerms();

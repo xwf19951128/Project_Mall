@@ -4,8 +4,10 @@ import com.cskaoyan.bean.admin.login.Admin;
 import com.cskaoyan.bean.admin.login.AdminInfo;
 import com.cskaoyan.bean.admin.login.DashBoard;
 import com.cskaoyan.bean.admin.login.Password;
+import com.cskaoyan.bean.admin.system.Log;
 import com.cskaoyan.config.TypeToken;
 import com.cskaoyan.service.admin.login.LoginService;
+import com.cskaoyan.service.admin.system.LogService;
 import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import org.apache.shiro.SecurityUtils;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +33,9 @@ import java.util.List;
 public class LoginController {
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    LogService logService;
 
     @RequestMapping("/auth/unauthorized")
     public String unauthorized(){
@@ -55,10 +62,30 @@ public class LoginController {
             admin1.setLastLoginTime(date);
             loginService.updateIPAndLastTime(admin1);
             responseVo = ResponseUtil.success(id);
+            //插入登录状态
+            insertLogInAuth(admin1.getUsername(),remoteAddr,"登录");
+
         } catch (AuthenticationException e) {
             responseVo = ResponseUtil.fail(null, "用户名或密码不正确", 605);
         }
         return responseVo;
+    }
+
+    private int insertLogInAuth(String username, String remoteAddr, String desc) {
+        Log log = new Log();
+        log.setType(1);
+        log.setStatus(true);
+        log.setAction(desc);
+        log.setAdmin(username);
+        log.setIp(remoteAddr);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formatedDate = sdf.format(new Date());
+        //需要放入一个string类型，放入数据库，应该转为date类型
+        log.setAddTime(formatedDate);
+        log.setUpdateTime(formatedDate);
+
+        return logService.insertLog(log);
     }
 
     @RequestMapping("/auth/info")
@@ -79,8 +106,16 @@ public class LoginController {
 
     @RequestMapping("/auth/logout")
     @ResponseBody
-    public ResponseVo logout(){
-        SecurityUtils.getSubject().logout();
+    public ResponseVo logout(HttpServletRequest request){
+        //SecurityUtils.getSubject().logout();
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
+
+        subject.logout();
+
+        //插入注销状态
+        insertLogInAuth(username,request.getRemoteAddr(),"注销");
+
         return ResponseUtil.fail(
                 null,"注销成功",0);
     }

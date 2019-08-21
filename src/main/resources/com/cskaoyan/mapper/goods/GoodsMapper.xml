@@ -76,6 +76,37 @@
         <result property="detail" column="detail"></result>
     </resultMap>
 
+    <resultMap id="mygoodsMap" type="com.cskaoyan.bean.wx.index.GoodsVo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result property="brief" column="brief"></result>
+        <result property="counterPrice" column="counter_price"></result>
+        <result property="isHot" column="is_hot"></result>
+        <result property="isNew" column="is_new"></result>
+        <result property="name" column="name"></result>
+        <result property="picUrl" column="pic_url"></result>
+        <result property="retailPrice" column="retail_price"></result>
+        <result property="categoryId" column="category_id"></result>
+    </resultMap>
+
+    <select id="selectGoodByCategoryId" resultMap="mygoodsMap">
+        select good.id,
+        good.brief,
+        good.counter_price,
+        good.is_hot,is_new,
+        good.name,
+        good.pic_url,
+        good.retail_price,
+        good.category_id,
+        good.retail_price
+         from cskaoyan_mall_goods good
+         left join cskaoyan_mall_category category
+         on
+         category.pid = #{id}
+         and good.category_id =category.id
+         limit 20
+    </select>
+
+
     <select id="listSearchGoodsByGoodsSn" resultMap="goodsMap">
     select
     id,
@@ -192,4 +223,12 @@
     delete from cskaoyan_mall_goods
     where id = #{id}
   </delete>
+
+    <select id="selectHotGoods" resultMap="goodsMap">
+      select * from cskaoyan_mall_goods where is_hot =1
+    </select>
+
+    <select id="selectNewGoods" resultMap="goodsMap">
+        select * from cskaoyan_mall_goods where is_new=1
+    </select>
 </mapper>

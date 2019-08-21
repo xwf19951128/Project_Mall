@@ -21,6 +21,7 @@ public class ShiroConfig {
         return new CustomRealm();
     }*/
     //SecurityManager
+    //告诉securityManager使用的域是什么
     @Bean
     public DefaultWebSecurityManager securityManager(CustomRealm realm, EhCacheManager cacheManager,
                                                      DefaultWebSessionManager sessionManager){
@@ -35,6 +36,7 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
+        //当认证没有通过时的请求到该url
         shiroFilterFactoryBean.setLoginUrl("/index");
 
         shiroFilterFactoryBean.setSecurityManager(securityManager);
