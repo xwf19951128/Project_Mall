@@ -18,4 +18,10 @@ public interface CategoryService {
     Category getCategoryById(Integer id);
 
     void deleteCategoryById(Integer id);
+
+    List<Category> listFirstLevelCategories();
+
+    List<Category> listSecondLevelCategories();
+
+    List<Category> listSecondLevelCategoriesByCategoryId(int categoryId);
 }
