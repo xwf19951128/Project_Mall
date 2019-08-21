@@ -5,7 +5,116 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.VipManageMapper">
-    <select id="VipManageMapper" resultMap="">
 
+    <resultMap id="userMapper" type="com.cskaoyan.bean.admin.userManage.User">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+        <result property="userLevel" column="user_level"/>
+        <result property="nickname" column="nickname"/>
+        <result property="mobile" column="mobile"/>
+        <result property="avatar" column="avatar"/>
+        <result property="weixinOpenid" column="weixin_openid"/>
+        <result property="status" column="status"/>
+        <result property="addTime" column="add_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+    <!--查询全部用户-->
+    <select id="queryAllUser" resultMap="userMapper">
+        select
+        id,
+        username,
+        password,
+        gender,
+        birthday,
+        last_login_time,
+        last_login_ip,
+        user_level,
+        nickname,
+        mobile,
+        avatar,
+        weixin_openid,
+        status,
+        add_time,
+        update_time,
+        deleted
+        from cskaoyan_mall_user
     </select>
+
+    <!--根据用户名和手机号查询-->
+    <select id="queryUserByUsernameAndMobile" resultMap="userMapper">
+        select
+        id,
+        username,
+        password,
+        gender,
+        birthday,
+        last_login_time,
+        last_login_ip,
+        user_level,
+        nickname,
+        mobile,
+        avatar,
+        weixin_openid,
+        status,
+        add_time,
+        update_time,
+        deleted
+        from cskaoyan_mall_user
+        where username like #{username} and mobile = #{mobile}
+    </select>
+
+    <!--根据用户名查询-->
+    <select id="queryUserByUsername" resultMap="userMapper">
+        select
+        id,
+        username,
+        password,
+        gender,
+        birthday,
+        last_login_time,
+        last_login_ip,
+        user_level,
+        nickname,
+        mobile,
+        avatar,
+        weixin_openid,
+        status,
+        add_time,
+        update_time,
+        deleted
+        from cskaoyan_mall_user
+        where username like #{username}
+    </select>
+
+    <!--根据用户名和手机号查询-->
+    <select id="queryUserByMobile" resultMap="userMapper">
+        select
+        id,
+        username,
+        password,
+        gender,
+        birthday,
+        last_login_time,
+        last_login_ip,
+        user_level,
+        nickname,
+        mobile,
+        avatar,
+        weixin_openid,
+        status,
+        add_time,
+        update_time,
+        deleted
+        from cskaoyan_mall_user
+        where mobile = #{mobile}
+    </select>
+
+
+
 </mapper>
