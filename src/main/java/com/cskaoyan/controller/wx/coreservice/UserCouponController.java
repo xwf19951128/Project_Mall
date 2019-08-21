@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserCouponController {
     @Autowired
     CoreService coreService;
     @RequestMapping("/mylist")
-    public MessageBean showCouponList(int page,int size,short status){
-        return coreService.showCouponList(page,size,status);
+    public MessageBean showCouponList(int page, int size, short status, HttpServletRequest request){
+        return coreService.showCouponList(page,size,status,request);
     }
 }
