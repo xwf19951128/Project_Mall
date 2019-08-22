@@ -31,4 +31,6 @@ public interface MallADMapper {
     int updateByPrimaryKey(MallAD record);
 
     ArrayList<MallAD> queryMallADList(@Param("content") String content, @Param("name") String name);
+
+    List<MallAD> selectMallAdForIndex();
 }

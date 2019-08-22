@@ -77,6 +77,17 @@
     id, name, keywords, `desc`, pid, icon_url, pic_url, level, sort_order, add_time, update_time,
     deleted
   </sql>
+
+  <resultMap id="MygetGroupList" type="com.cskaoyan.bean.wx.index.FloorGoodList">
+    <result column="id" property="id"></result>
+    <result column="name" property="name"></result>
+    <collection property="goodsList" column="id" select="com.cskaoyan.mapper.goods.GoodsMapper.selectGoodByCategoryId"></collection>
+  </resultMap>
+
+  <select id="getGroupList" resultMap="MygetGroupList">
+   select * from  cskaoyan_mall_category where level='L1' limit 4;
+  </select>
+
   <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.mall.category.CategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

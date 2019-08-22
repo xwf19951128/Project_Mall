@@ -335,4 +335,9 @@
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectMallAdForIndex" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_ad
+  </select>
+
 </mapper>

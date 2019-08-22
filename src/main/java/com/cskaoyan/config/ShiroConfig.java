@@ -24,6 +24,7 @@ public class ShiroConfig {
         return new CustomRealm();
     }*/
     //SecurityManager
+    //告诉securityManager使用的域是什么
 
     @Bean
     public DefaultWebSecurityManager securityManager(CustomRealm realm, EhCacheManager cacheManager,
@@ -39,7 +40,9 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
-        //shiroFilterFactoryBean.setLoginUrl("/index");
+
+        //当认证没有通过时的请求到该url
+        shiroFilterFactoryBean.setLoginUrl("/index");
 
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
