@@ -1,5 +1,6 @@
 package com.cskaoyan.controller.admin.system;
 
+import com.cskaoyan.bean.admin.system.PermissionL1;
 import com.cskaoyan.bean.admin.system.Role;
 
 import com.cskaoyan.bean.admin.system.permission.PermissionDateOne;
@@ -8,11 +9,14 @@ import com.cskaoyan.bean.admin.vo.Options;
 import com.cskaoyan.service.admin.system.PermissionsService;
 
 import com.cskaoyan.service.admin.system.RoleService;
+import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -103,15 +107,20 @@ public class RoleController {
         return responseVo;
     }
 
-    @GetMapping("admin/role/permissions")
-    public ResponseVo getPermissionsList(@RequestParam(value = "roleId") int roleId){
-        ResponseVo responseVo = new ResponseVo();
-        //根据给的id，查找出所有权限
-        PermissionDateOne permissionDateOne= permissionsService.selectPermission(roleId);
-        responseVo.setData(permissionDateOne);
-        responseVo.setErrmsg("成功");
-        responseVo.setErrno(0);
-        return responseVo;
+    @RequestMapping("admin/role/permissions")
+    public ResponseVo permissions(String roleId){
+        //查询所有的权限
+        List<PermissionL1> permissionList = permissionsService.queryAllPermissions();
+        //查询当前用户已经有的权限
+        List<String> assignedPermissions = new ArrayList<>();
+        assignedPermissions  = permissionsService.queryAssignPermissionByRoleId(roleId);
+        //如果当前用户的权限是 * ，那么会返回一个 * ，我们实际需要的是所有权限的名字而不是* ，需要再次调用方法查询所有权限
+        if ("*".equals(assignedPermissions.get(0))){
+            assignedPermissions = permissionsService.queryAllPermissionName();
+        }
+        HashMap<String, List> map = new HashMap<>();
+        map.put("assignedPermissions",assignedPermissions);
+        map.put("systemPermissions",permissionList);
+        return ResponseUtil.success(map);
     }
-
 }
