@@ -42,7 +42,7 @@ public class GoodsCommentController {
         Integer id = goodsComment.getId();
         int deleteResult = goodsCommentService.deleteGoodsCommentById(id);
         if(deleteResult == 0){
-            return ResponseUtil.fail("null", "删除失败", 502);
+            return ResponseUtil.fail(null, "删除失败", 502);
         }
         return ResponseUtil.success();
     }

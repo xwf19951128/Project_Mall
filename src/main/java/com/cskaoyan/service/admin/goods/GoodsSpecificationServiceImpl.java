@@ -28,9 +28,18 @@ public class GoodsSpecificationServiceImpl implements GoodsSpecificationService 
         for (Map<String, Object> goodsSpecificationMap : goodsSpecificationMapList) {
             goodsSpecificationMap.put("goodsId", lastInsertGoodsId);
             goodsSpecificationMap.put("addTime", new Date());
-            goodsSpecificationMap.put("updateTime", new Date());
             goodsSpecificationMap.put("deleted", 0);
         }
         return goodsSpecificationMapper.insertSpecifications(goodsSpecificationMapList);
+    }
+
+    @Override
+    public int updateSpecifications(List<Map<String, Object>> goodsSpecificationMapList, Integer lastUpdateGoodsId) {
+        for (Map<String, Object> goodsSpecificationMap : goodsSpecificationMapList) {
+            goodsSpecificationMap.put("goodsId", lastUpdateGoodsId);
+            goodsSpecificationMap.put("updateTime", new Date());
+            goodsSpecificationMap.put("deleted", 0);
+        }
+        return goodsSpecificationMapper.updateSpecifications(goodsSpecificationMapList);
     }
 }

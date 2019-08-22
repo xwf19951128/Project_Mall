@@ -265,9 +265,17 @@
     update_time,
     deleted
   </sql>
+  <!--新增-->
   <insert id="insertSpecifications">
     insert into cskaoyan_mall_goods_specification
-    (<include refid="specificationColumns"></include>)
+    (
+    goods_id,
+    specification,
+    `value`,
+    pic_url,
+    add_time,
+    deleted
+    )
     values
       <foreach collection="goodsSpecificationMapList" item="goodsSpecificationMap" separator=",">
       (
@@ -276,9 +284,22 @@
         #{goodsSpecificationMap.value,jdbcType=VARCHAR},
         #{goodsSpecificationMap.picUrl,jdbcType=VARCHAR},
         #{goodsSpecificationMap.addTime},
-        #{goodsSpecificationMap.updateTime},
         #{goodsSpecificationMap.deleted}
         )
       </foreach>
   </insert>
+
+  <!--编辑-->
+  <update id="updateSpecifications">
+    <foreach collection="goodsSpecificationMapList" item="goodsSpecificationMap">
+      update cskaoyan_mall_goods_specification
+      set
+      specification = #{goodsSpecificationMap.specification,jdbcType=VARCHAR},
+      `value` = #{goodsSpecificationMap.value,jdbcType=VARCHAR},
+      pic_url = #{goodsSpecificationMap.picUrl,jdbcType=VARCHAR},
+      update_time = #{goodsSpecificationMap.updateTime},
+      deleted = #{goodsSpecificationMap.deleted}
+      where goods_id = #{goodsSpecificationMap.goodsId,jdbcType=INTEGER}
+    </foreach>
+  </update>
 </mapper>

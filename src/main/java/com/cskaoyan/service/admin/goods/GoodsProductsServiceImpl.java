@@ -31,8 +31,20 @@ public class GoodsProductsServiceImpl implements GoodsProductService {
         }
         HashMap<String, Object> otherAttributeMap = new HashMap<>();
         otherAttributeMap.put("addTime", new Date());
-        otherAttributeMap.put("updateTime", new Date());
         otherAttributeMap.put("deleted", 0);
         return goodsProductMapper.insertGoodsProduct(goodsProductMapList, lastInsertGoodsId, otherAttributeMap);
+    }
+
+    @Override
+    public int updateGoodsProduct(List<Map<String, Object>> goodsProductMapList, Integer lastUpdateGoodsId) {
+        for (Map<String, Object> goodsProductMap : goodsProductMapList) {
+            List<GoodsSpecification> goodsSpecificationList = (List<GoodsSpecification>) goodsProductMap.get("specifications");
+            String[] goodsSpecificationArray = goodsSpecificationList.toArray(new String[goodsProductMapList.size()]);
+            goodsProductMap.put("goodsId", lastUpdateGoodsId);
+            goodsProductMap.put("specifications", goodsSpecificationArray);
+            goodsProductMap.put("updateTime", new Date());
+            goodsProductMap.put("deleted", 0);
+        }
+        return goodsProductMapper.updateGoodsProduct(goodsProductMapList);
     }
 }

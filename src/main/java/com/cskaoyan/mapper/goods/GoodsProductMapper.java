@@ -13,4 +13,6 @@ public interface GoodsProductMapper {
     List<GoodsProduct> listGoodsProductsByGoodsId(@Param("goodsId") int id);
 
     int insertGoodsProduct(@Param("goodsProductMapList") List<Map<String, Object>> goodsProductMapList, @Param("lastInsertGoodsId") Integer lastInsertGoodsId, @Param("otherAttributeMap") Map<String, Object> otherAttributeMap);
+
+    int updateGoodsProduct(@Param("goodsProductMapList")List<Map<String, Object>> goodsProductMapList);
 }
