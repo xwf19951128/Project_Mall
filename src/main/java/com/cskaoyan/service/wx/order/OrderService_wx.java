@@ -6,14 +6,19 @@ import java.util.List;
 
 public interface OrderService_wx {
 
+    // 全部订单
     List<OrderVo> queryAllOrder();
 
-    List<OrderVo> queryUnpayOrder();
+    // 待付款
+    List<OrderVo> queryUnpayOrder(int showType, int userId);
 
+    // 代发货
     List<OrderVo> queryUndeliveryOrder();
 
+    // 待收货
     List<OrderVo> queryUnreceiptOrder();
 
+    // 未评价
     List<OrderVo> queryUnjudgeOrder();
 
 }
