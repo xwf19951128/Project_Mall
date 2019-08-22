@@ -7,6 +7,7 @@ import com.cskaoyan.util.ResponseUtil;
 import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,19 @@ public class GoodsCommentController {
         long total = pageInfo.getTotal();
         data.put("items", goodsCommentList);
         data.put("total", total);
+        if(data == null){
+            return ResponseUtil.fail(data, "查询失败", 502);
+        }
         return ResponseUtil.success(data);
+    }
+
+    @RequestMapping("/delete")
+    public ResponseVo deleteGoodsComment(@RequestBody GoodsComment goodsComment){
+        Integer id = goodsComment.getId();
+        int deleteResult = goodsCommentService.deleteGoodsCommentById(id);
+        if(deleteResult == 0){
+            return ResponseUtil.fail("null", "删除失败", 502);
+        }
+        return ResponseUtil.success();
     }
 }

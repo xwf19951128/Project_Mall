@@ -5,6 +5,7 @@ import com.cskaoyan.bean.admin.mall.category.Category;
 import com.cskaoyan.bean.admin.mall.category.CategoryExample;
 import com.cskaoyan.bean.admin.mall.category.CategoryFirstClass;
 import com.cskaoyan.bean.admin.mall.category.Label;
+import com.cskaoyan.bean.wx.index.FloorGoodList;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -41,4 +42,5 @@ public interface CategoryMapper {
 
     CategoryFirstClass selectById(@Param("id") int id);
 
+    List<FloorGoodList> getGroupList();
 }

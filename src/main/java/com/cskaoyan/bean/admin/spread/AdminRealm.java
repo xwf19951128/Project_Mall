@@ -1,6 +1,6 @@
-//package com.cskaoyan.bean.admin.spread;
+//package com.cskaoyan.index.admin.spread;
 //
-//import com.cskaoyan.bean.admin.system.AdminExample;
+//import com.cskaoyan.index.admin.system.AdminExample;
 //import com.cskaoyan.mapper.system.AdminMapper;
 //import org.apache.shiro.authc.AuthenticationException;
 //import org.apache.shiro.authc.AuthenticationInfo;

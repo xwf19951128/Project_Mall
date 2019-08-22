@@ -58,6 +58,9 @@ public class GoodsController {
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
+        if(goodsDataVo == null){
+            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
+        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -71,7 +74,9 @@ public class GoodsController {
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-//        System.out.println("goodsSn");
+        if(goodsDataVo == null){
+            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
+        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -86,7 +91,9 @@ public class GoodsController {
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-//        System.out.println("name");
+        if(goodsDataVo == null){
+            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
+        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -101,7 +108,9 @@ public class GoodsController {
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-//        System.out.println("goodsSn name");
+        if(goodsDataVo == null){
+            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
+        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -119,6 +128,9 @@ public class GoodsController {
         data.put("goods", goods);
         data.put("products", goodsProductList);
         data.put("specifications", goodsSpecificationList);
+        if(data.size() == 0){
+            return ResponseUtil.fail(data, "编辑回显失败", 502);
+        }
         return ResponseUtil.success(data);
     }
 
@@ -134,6 +146,9 @@ public class GoodsController {
         List<Brand> brandList = brandService.getBrandList(null, "");
         data.put("categoryList", categoryList);
         data.put("brandList", brandList);
+        if(data == null){
+            return ResponseUtil.fail(data, "添加商品时分类、品牌商回显失败", 502);
+        }
         return ResponseUtil.success(data);
     }
 
@@ -152,13 +167,12 @@ public class GoodsController {
         List<Map<String, Object>> goodsProductMapList = (List<Map<String, Object>>) map.get("products");
         int result3 = goodsProductService.insertGoodsProduct(goodsProductMapList, lastInsertGoodsId);
 //        System.out.println("result3 = " + result3);
-
         List<Map<String, Object>> goodsSpecificationMapList = (List<Map<String, Object>>) map.get("specifications");
         int result4 = goodsSpecificationService.insertSpecifications(goodsSpecificationMapList, lastInsertGoodsId);
-        if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0) {
-            return ResponseUtil.success();
+        if(result1 == 0 || result2  == 0 || result3  == 0 || result4  == 0) {
+            return ResponseUtil.fail(null, "添加失败", 502);
         }
-        return ResponseUtil.fail(null, "添加失败", 1);
+        return ResponseUtil.success();
     }
 
     /**
@@ -195,8 +209,8 @@ public class GoodsController {
     public ResponseVo deleteSingleGoods(@RequestBody Goods goods){
         Integer goodsId = goods.getId();
         int deleteResult = goodsService.deleteSingleGoodsById(goodsId);
-        if(deleteResult != 1){
-            return ResponseUtil.fail(null, "删除失败", 4);
+        if(deleteResult == 0){
+            return ResponseUtil.fail(null, "删除失败", 502);
         }
         return ResponseUtil.success();
     }

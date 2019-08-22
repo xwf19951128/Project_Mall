@@ -333,4 +333,21 @@
   <select id="querySearchHelper" resultType="com.cskaoyan.bean.wx.search.HistoryKeyword">
       select name as keyword from cskaoyan_mall_goods where name like #{keyword}
   </select>
+
+  <!--根据关键字模糊查询，已经去除了空格并且把字符串拆分为字符数组，下面就需要foreach批量模糊查询-->
+  <select id="queryGoodsByKeyword" resultType="com.cskaoyan.bean.wx.search.SearchGoods">
+      select brief,category_id as categoryId,counter_price as counterPrice,id,is_hot as isHot,is_new as isNew,name,pic_url as picUrl,retail_price as retailPrice from cskaoyan_mall_goods
+      <where>
+        1=1
+        <foreach collection="chars" item="char">
+          and name like CONCAT('%',#{char},'%')
+        </foreach>
+
+        <if test="categoryId!=0">
+            and category_id = #{categoryId}
+        </if>
+      </where>
+    order by ${sort} ${order}
+
+  </select>
 </mapper>
