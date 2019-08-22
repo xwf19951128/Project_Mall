@@ -107,7 +107,7 @@ public class IndexController {
 
         List<MallTopic> mallTopics = mallTopicMapper.selectByExample(mallTopicExample);
         int c =random.nextInt(mallTopics.size()-4);
-        List<MallTopic> mallTopics1 =mallTopics.subList(c,c+6);
+        List<MallTopic> mallTopics1 =mallTopics.subList(c,c+4);
         indexList.setTopicList(mallTopics1);
 
         //团购专区，最低价，有number和价格，去rule查询
