@@ -38,9 +38,18 @@
         update_time,
         deleted
     </sql>
+    <!--新增-->
     <insert id="insertGoodsProduct">
         insert into cskaoyan_mall_goods_product
-        (<include refid="goodsProductColumns"></include>)
+        (
+        goods_id,
+        specifications,
+        price,
+        number,
+        url,
+        add_time,
+        deleted
+        )
         values
         <foreach collection="goodsProductMapList" item="goodsProductMap" separator=",">
             (
@@ -50,9 +59,23 @@
             #{goodsProductMap.number,jdbcType=VARCHAR},
             #{goodsProductMap.url},
             #{otherAttributeMap.addTime},
-            #{otherAttributeMap.updateTime},
             #{otherAttributeMap.deleted}
             )
         </foreach>
     </insert>
+
+    <!--编辑-->
+    <update id="updateGoodsProduct">
+        <foreach collection="goodsProductMapList" item="goodsProductMap">
+            update cskaoyan_mall_goods_product
+            set
+            specifications = #{goodsProductMap.specifications,jdbcType=VARCHAR},
+            price = #{goodsProductMap.price,jdbcType=VARCHAR},
+            number = #{goodsProductMap.number,jdbcType=VARCHAR},
+            url = #{goodsProductMap.url},
+            update_time = #{goodsProductMap.updateTime},
+            deleted = #{goodsProductMap.deleted}
+            where goods_id = #{goodsProductMap.goodsId,jdbcType=INTEGER}
+        </foreach>
+    </update>
 </mapper>

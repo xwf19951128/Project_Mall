@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.mapper.system.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.bean.admin.system.Permission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="api" jdbcType="VARCHAR" property="api" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pid, level, label, api, name
+  </sql>
+  <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.system.PermissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_permission_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cskaoyan_mall_permission_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cskaoyan_mall_permission_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cskaoyan.bean.admin.system.PermissionExample">
+    delete from cskaoyan_mall_permission_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cskaoyan.bean.admin.system.Permission">
+    insert into cskaoyan_mall_permission_list (id, pid, level, 
+      label, api, name)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
+      #{label,jdbcType=VARCHAR}, #{api,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cskaoyan.bean.admin.system.Permission">
+    insert into cskaoyan_mall_permission_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="api != null">
+        api,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cskaoyan.bean.admin.system.PermissionExample" resultType="java.lang.Long">
+    select count(*) from cskaoyan_mall_permission_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cskaoyan_mall_permission_list
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.label != null">
+        label = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.api != null">
+        api = #{record.api,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cskaoyan_mall_permission_list
+    set id = #{record.id,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      label = #{record.label,jdbcType=VARCHAR},
+      api = #{record.api,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.bean.admin.system.Permission">
+    update cskaoyan_mall_permission_list
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="api != null">
+        api = #{api,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.system.Permission">
+    update cskaoyan_mall_permission_list
+    set pid = #{pid,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      api = #{api,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--分为三级，查询所有的权限用于展示-->
+  <resultMap id="perMap" type="com.cskaoyan.bean.admin.system.PermissionL1">
+      <result column="name" property="id"></result>
+      <result column="label" property="label"></result>
+      <collection property="children" column="id" select="com.cskaoyan.mapper.system.PermissionMapper.L2"></collection>
+  </resultMap>
+  <!--第一次查询，查出所有的L1权限-->
+  <select id="queryAllPermissions" resultMap="perMap">
+        select id, name ,label from cskaoyan_mall_permission_list where level ='L1'
+  </select>
+  <!--第二次查询，查出所有的L2权限-->
+    <resultMap id="L2Map" type="com.cskaoyan.bean.admin.system.PermissionL2">
+        <result column="name" property="id"></result>
+        <result column="label" property="label"></result>
+        <collection property="children" column="id" select="com.cskaoyan.mapper.system.PermissionMapper.L3"></collection>
+    </resultMap>
+  <select id="L2" resultMap="L2Map">
+      select id,name,label from cskaoyan_mall_permission_list where level='L2' and pid=#{id}
+  </select>
+  <!--第三次查询，查出所有的L3权限-->
+    <select id="L3" resultType="com.cskaoyan.bean.admin.system.PermissionL3">
+        select name as id,label,api from cskaoyan_mall_permission_list where level = 'L3' and pid=#{id}
+    </select>
+
+  <!--查询当前用户的权限名-->
+  <select id="queryAssignPermissionByRoleId" resultType="string">
+      select permission from cskaoyan_mall_permission where role_id=#{roleId}
+  </select>
+
+  <!--查询所有权限的名字-->
+  <select id="queryAllPermissionName" resultType="string">
+      select name from cskaoyan_mall_permission_list where level='L3'
+  </select>
+</mapper>

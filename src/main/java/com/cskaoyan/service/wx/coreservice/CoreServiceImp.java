@@ -16,7 +16,6 @@ import com.cskaoyan.util.StatusMap;
 import com.cskaoyan.util.wx.TokenUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

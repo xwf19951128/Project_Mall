@@ -1,7 +1,5 @@
 package com.cskaoyan.controller.wx.tools;
 
-import com.cskaoyan.bean.admin.mall.region.Region;
-import com.cskaoyan.bean.admin.userManage.Address;
 import com.cskaoyan.bean.wx.tools.Address_wx;
 import com.cskaoyan.bean.wx.tools.DetailedAddress_wx;
 import com.cskaoyan.bean.wx.tools.Region_wx;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;

@@ -28,7 +28,14 @@ public interface GoodsMapper {
 
     int deleteSingleGoodsById(@Param("id") Integer goodsId);
 
+
+    //查询热门商品和最新商品
+    List<Goods> selectHotGoods();
+
+    List<Goods> selectNewGoods();
+
     int insertSingleGoods(@Param("goodsMap") Map<String, Object> goodsMap);
 
-    int updateSingleGoods(Map<String, Object> goodsMap);
+    int updateSingleGoods(@Param("goodsMap")Map<String, Object> goodsMap);
+
 }

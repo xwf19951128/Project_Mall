@@ -10,4 +10,6 @@ public interface GoodsProductService {
     List<GoodsProduct> listGoodsProductsByGoodsId(int id);
 
     int insertGoodsProduct(List<Map<String, Object>> goodsProductList, Integer lastInsertGoodsId);
+
+    int updateGoodsProduct(List<Map<String, Object>> goodsProductMapList, Integer lastUpdateGoodsId);
 }

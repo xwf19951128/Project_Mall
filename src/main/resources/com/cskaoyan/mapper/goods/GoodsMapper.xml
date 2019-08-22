@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.mapper.goods.GoodsMapper">
+
+    <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
+        <result property="id" column="id"></result>
+        <result property="goodsSn" column="goods_sn"></result>
+        <result property="name" column="name"></result>
+        <result property="categoryId" column="category_id"></result>
+        <result property="brandId" column="brand_id"></result>
+        <result property="gallery" column="gallery"></result>
+        <result property="keywords" column="keywords"></result>
+        <result property="brief" column="brief"></result>
+        <result property="isOnSale" column="is_on_sale"></result>
+        <result property="sortOrder" column="sort_order"></result>
+        <result property="picUrl" column="pic_url"></result>
+        <result property="shareUrl" column="share_url"></result>
+        <result property="isNew" column="is_new"></result>
+        <result property="isHot" column="is_hot"></result>
+        <result property="unit" column="unit"></result>
+        <result property="counterPrice" column="counter_price"></result>
+        <result property="retailPrice" column="retail_price"></result>
+        <result property="addTime" column="add_time"></result>
+        <result property="updateTime" column="update_time"></result>
+        <result property="deleted" column="deleted"></result>
+        <result property="detail" column="detail"></result>
+    </resultMap>
+
+    <resultMap id="mygoodsMap" type="com.cskaoyan.bean.wx.index.GoodsVo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result property="brief" column="brief"></result>
+        <result property="counterPrice" column="counter_price"></result>
+        <result property="isHot" column="is_hot"></result>
+        <result property="isNew" column="is_new"></result>
+        <result property="name" column="name"></result>
+        <result property="picUrl" column="pic_url"></result>
+        <result property="retailPrice" column="retail_price"></result>
+        <result property="categoryId" column="category_id"></result>
+    </resultMap>
+
+
     <sql id="goodsColumns">
         id,
         goods_sn,
@@ -26,9 +64,29 @@
     </sql>
 
     <select id="findGoods" resultMap="goodsMap">
-         select
-        <include refid="goodsColumns"></include>
-        from cskaoyan_mall_goods where id=#{goodsId}
+    select
+    id,
+    goods_sn,
+    name,
+    category_id,
+    brand_id,
+    gallery,
+    keywords,
+    brief,
+    is_on_sale,
+    sort_order,
+    pic_url,
+    share_url,
+    is_new,
+    is_hot,
+    unit,
+    counter_price,
+    retail_price,
+    detail,
+    add_time,
+    update_time,
+    deleted
+    from cskaoyan_mall_goods where id=#{goodsId}
     </select>
 
   <select id="listAllGoods" resultMap="goodsMap">
@@ -36,29 +94,25 @@
       <include refid="goodsColumns"></include>
     from cskaoyan_mall_goods
   </select>
-    <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
-        <result property="id" column="id"></result>
-        <result property="goodsSn" column="goods_sn"></result>
-        <result property="name" column="name"></result>
-        <result property="categoryId" column="category_id"></result>
-        <result property="brandId" column="brand_id"></result>
-        <result property="gallery" column="gallery"></result>
-        <result property="keywords" column="keywords"></result>
-        <result property="brief" column="brief"></result>
-        <result property="isOnSale" column="is_on_sale"></result>
-        <result property="sortOrder" column="sort_order"></result>
-        <result property="picUrl" column="pic_url"></result>
-        <result property="shareUrl" column="share_url"></result>
-        <result property="isNew" column="is_new"></result>
-        <result property="isHot" column="is_hot"></result>
-        <result property="unit" column="unit"></result>
-        <result property="counterPrice" column="counter_price"></result>
-        <result property="retailPrice" column="retail_price"></result>
-        <result property="addTime" column="add_time"></result>
-        <result property="updateTime" column="update_time"></result>
-        <result property="deleted" column="deleted"></result>
-        <result property="detail" column="detail"></result>
-    </resultMap>
+
+    <select id="selectGoodByCategoryId" resultMap="mygoodsMap">
+        select good.id,
+        good.brief,
+        good.counter_price,
+        good.is_hot,is_new,
+        good.name,
+        good.pic_url,
+        good.retail_price,
+        good.category_id,
+        good.retail_price
+         from cskaoyan_mall_goods good
+         left join cskaoyan_mall_category category
+         on
+         category.pid = #{id}
+         and good.category_id =category.id
+         limit 20
+    </select>
+
 
     <select id="listSearchGoodsByGoodsSn" resultMap="goodsMap">
     select
@@ -97,6 +151,15 @@
     where id = #{id}
   </delete>
 
+
+    <select id="selectHotGoods" resultMap="goodsMap">
+      select * from cskaoyan_mall_goods where is_hot =1
+    </select>
+
+    <select id="selectNewGoods" resultMap="goodsMap">
+        select * from cskaoyan_mall_goods where is_new=1
+    </select>
+
     <!--添加商品-->
     <insert id="insertSingleGoods">
         <selectKey keyProperty="goodsMap.id" order="AFTER" keyColumn="id" resultType="java.lang.Integer">
@@ -122,7 +185,6 @@
         retail_price,
         detail,
         add_time,
-        update_time,
         deleted
         )
         values
@@ -145,9 +207,34 @@
         #{goodsMap.retailPrice},
         #{goodsMap.detail},
         #{goodsMap.addTime},
-        #{goodsMap.updateTime},
         #{goodsMap.deleted}
         )
     </insert>
+
+    <!--编辑商品-->
+    <update id="updateSingleGoods">
+        update cskaoyan_mall_goods
+        set
+        goods_sn = #{goodsMap.goodsSn,jdbcType=VARCHAR},
+        name = #{goodsMap.name,jdbcType=VARCHAR},
+        category_id = #{goodsMap.categoryId},
+        brand_id = #{goodsMap.brandId},
+        gallery = #{goodsMap.gallery},
+        keywords = #{goodsMap.keywords},
+        brief = #{goodsMap.brief},
+        is_on_sale = #{goodsMap.isOnSale},
+        sort_order = #{goodsMap.sortOrder},
+        pic_url = #{goodsMap.picUrl},
+        share_url = #{goodsMap.shareUrl},
+        is_new = #{goodsMap.isNew},
+        is_hot = #{goodsMap.isHot},
+        unit = #{goodsMap.unit},
+        counter_price = #{goodsMap.counterPrice},
+        retail_price = #{goodsMap.retailPrice},
+        detail = #{goodsMap.detail},
+        update_time = #{goodsMap.updateTime},
+        deleted = #{goodsMap.deleted}
+        where id = #{goodsMap.id}
+    </update>
 
 </mapper>

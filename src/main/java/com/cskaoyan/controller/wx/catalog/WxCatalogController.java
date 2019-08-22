@@ -38,9 +38,15 @@ public class WxCatalogController {
             firstLevelCategory.setLevel(categoryFirstClass.getLevel());
         }*/
         List<Category> firstLevelCategoryList = categoryService.listFirstLevelCategories();
+        if(firstLevelCategoryList == null){
+            return ResponseUtil.fail(null, "firstLevelCategoryList查询失败", 502);
+        }
         Integer currentCategoryId = firstLevelCategoryList.get(0).getId();
         Category currentCategory = categoryService.getCategoryById(currentCategoryId);
         List<Category> secondLevelCategoryList = categoryService.listSecondLevelCategories();
+        if(secondLevelCategoryList == null){
+            return ResponseUtil.fail(null, "secondLevelCategoryList查询失败", 502);
+        }
         data.put("categoryList", firstLevelCategoryList);
         data.put("currentCategory", currentCategory);
         data.put("currentSubCategory", secondLevelCategoryList);
@@ -52,6 +58,9 @@ public class WxCatalogController {
         HashMap<Object, Object> data = new HashMap<>(2);
         Category currentCategory = categoryService.getCategoryById(id);
         List<Category> currentSubCategoryList = categoryService.listSecondLevelCategoriesByCategoryId(id);
+        if(currentSubCategoryList == null){
+            return ResponseUtil.fail(null, "currentSubCategoryList查询失败", 502);
+        }
         data.put("currentCategory", currentCategory);
         data.put("currentSubCategory", currentSubCategoryList);
         return ResponseUtil.success(data);

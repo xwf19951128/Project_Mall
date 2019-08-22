@@ -32,4 +32,6 @@ public interface MallCouponMapper {
 
     ArrayList<MallCoupon> queryCouponList(@Param("page")int page,@Param("limit") int limit,@Param("type") String type,@Param("status") String status, @Param("name") String name);
     long countNumber();
+
+    List<MallCoupon> selectMallCouponForIndex();
 }
