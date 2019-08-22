@@ -33,4 +33,9 @@ public class GoodsCommentServiceImpl implements GoodsCommentService {
         PageHelper.startPage(pageParams4Goods.getPage(), pageParams4Goods.getLimit(), sort + " " + order);
         return goodsCommentMapper.selectByExample(goodsCommentExample);
     }
+
+    @Override
+    public int deleteGoodsCommentById(Integer id) {
+        return goodsCommentMapper.deleteByPrimaryKey(id);
+    }
 }

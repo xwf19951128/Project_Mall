@@ -44,6 +44,9 @@ public class WxCatalogController {
         data.put("categoryList", firstLevelCategoryList);
         data.put("currentCategory", currentCategory);
         data.put("currentSubCategory", secondLevelCategoryList);
+        if(data == null){
+            return ResponseUtil.fail(data, "查询失败", 502);
+        }
         return ResponseUtil.success(data);
     }
 
