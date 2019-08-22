@@ -52,32 +52,14 @@ public class GoodsController {
             return ResponseUtil.fail(null, "总数为0", 0);
         }*/
         List<Goods> goodsList = goodsService.listPageGoods(pageParams4Goods);
-        if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
-        }
-        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
-        long total = pageInfo.getTotal();
-        GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
-        return ResponseUtil.success(goodsDataVo);
+        return getResponseVo(goodsList);
     }
 
     /*模糊查询*/
     @RequestMapping(value = "/list", params = {"goodsSn"})
     public ResponseVo listPageGoodsByGoodsSn(PageParams4Goods pageParams4Goods, String goodsSn){
         List<Goods> goodsList = goodsService.listPageGoodsByGoodsSn(pageParams4Goods, goodsSn);
-        if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
-        }
-        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
-        long total = pageInfo.getTotal();
-        GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
-        return ResponseUtil.success(goodsDataVo);
+        return getResponseVo(goodsList);
     }
 
 
@@ -85,15 +67,16 @@ public class GoodsController {
     @RequestMapping(value = "/list", params = {"name"})
     public ResponseVo listPageGoodsByName(PageParams4Goods pageParams4Goods, String name){
         List<Goods> goodsList = goodsService.listPageGoodsByName(pageParams4Goods, name);
+        return getResponseVo(goodsList);
+    }
+
+    private ResponseVo getResponseVo(List<Goods> goodsList) {
         if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
+            return ResponseUtil.fail(null, "查询失败", 502);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -102,16 +85,7 @@ public class GoodsController {
     @RequestMapping(value = "/list", params = {"goodsSn", "name"})
     public ResponseVo listPageGoodsByGoodsSnAndName(PageParams4Goods pageParams4Goods, String goodsSn, String name){
         List<Goods> goodsList = goodsService.listPageGoodsByGoodsSnAndName(pageParams4Goods, goodsSn, name);
-        if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
-        }
-        PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
-        long total = pageInfo.getTotal();
-        GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
-        return ResponseUtil.success(goodsDataVo);
+        return getResponseVo(goodsList);
     }
 
     /*编辑回显*/
@@ -119,18 +93,27 @@ public class GoodsController {
     public ResponseVo getGoodsDetail(int id){
         HashMap<String, Object> data = new HashMap<>(5);
         List<GoodsAttribute> goodsAttributeList = goodsAttributeService.listGoodsAttributesByGoodsId(id);
+        if(goodsAttributeList == null){
+            return ResponseUtil.fail(null, "goodsAttributeList查询失败", 502);
+        }
         Goods goods = goodsService.getSingleGoodsById(id);
         List<Integer> categoryIds = Arrays.asList(1005000, goods.getCategoryId());
+        if(categoryIds == null){
+            return ResponseUtil.fail(null, "categoryIds查询失败", 502);
+        }
         List<GoodsProduct> goodsProductList = goodsProductService.listGoodsProductsByGoodsId(id);
+        if(goodsProductList == null){
+            return ResponseUtil.fail(null, "goodsProductList查询失败", 502);
+        }
         List<GoodsSpecification> goodsSpecificationList = goodsSpecificationService.listGoodsSpecificationsByGoodsId(id);
+        if(goodsSpecificationList == null){
+            return ResponseUtil.fail(null, "goodsSpecificationList查询失败", 502);
+        }
         data.put("attributes", goodsAttributeList);
         data.put("categoryIds", categoryIds);
         data.put("goods", goods);
         data.put("products", goodsProductList);
         data.put("specifications", goodsSpecificationList);
-        if(data.size() == 0){
-            return ResponseUtil.fail(data, "编辑回显失败", 502);
-        }
         return ResponseUtil.success(data);
     }
 
@@ -143,12 +126,15 @@ public class GoodsController {
     public ResponseVo getCatAndBrand(){
         HashMap<String, Object> data = new HashMap<>(2);
         List<CategoryFirstClass> categoryList = categoryService.getCategory();
+        if(categoryList == null){
+            return ResponseUtil.fail(null, "categoryList查询失败", 502);
+        }
         List<Brand> brandList = brandService.getBrandList(null, "");
+        if(brandList == null){
+            return ResponseUtil.fail(null, "brandList查询失败", 502);
+        }
         data.put("categoryList", categoryList);
         data.put("brandList", brandList);
-        if(data == null){
-            return ResponseUtil.fail(data, "添加商品时分类、品牌商回显失败", 502);
-        }
         return ResponseUtil.success(data);
     }
 
@@ -177,7 +163,6 @@ public class GoodsController {
 
     /**
      * 编辑商品
-     * TO DO
      * @param map
      * @return
      */
@@ -185,21 +170,22 @@ public class GoodsController {
     public ResponseVo updateSingleGoods(@RequestBody Map<String, Object> map){
         Map<String, Object> goodsMap = (Map<String, Object>) map.get("goods");
         int result1 = goodsService.updateSingleGoods(goodsMap);
-        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
-
-        List<GoodsAttribute> goodsAttributeList = (List<GoodsAttribute>) map.get("attributes");
-        int result2 = goodsAttributeService.insertGoodsAttributes(goodsAttributeList, lastInsertGoodsId);
+//        System.out.println("result1 = " + result1);
+        Integer lastUpdateGoodsId = (Integer) goodsMap.get("id");
+//        System.out.println("lastUpdateGoodsId = " + lastUpdateGoodsId);
+        List<Map<String, Object>> goodsAttributeMapList = (List<Map<String, Object>>) map.get("attributes");
+        int result2 = goodsAttributeService.updateGoodsAttributes(goodsAttributeMapList, lastUpdateGoodsId);
 //        System.out.println("result2 = " + result2);
         List<Map<String, Object>> goodsProductMapList = (List<Map<String, Object>>) map.get("products");
-        int result3 = goodsProductService.insertGoodsProduct(goodsProductMapList, lastInsertGoodsId);
+        int result3 = goodsProductService.updateGoodsProduct(goodsProductMapList, lastUpdateGoodsId);
 //        System.out.println("result3 = " + result3);
-
         List<Map<String, Object>> goodsSpecificationMapList = (List<Map<String, Object>>) map.get("specifications");
-        int result4 = goodsSpecificationService.insertSpecifications(goodsSpecificationMapList, lastInsertGoodsId);
-        if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0) {
-            return ResponseUtil.success();
+        int result4 = goodsSpecificationService.updateSpecifications(goodsSpecificationMapList, lastUpdateGoodsId);
+//        System.out.println("result4 = " + result4);
+        if(result1 == 0 || result2 == 0 || result3 == 0 || result4 == 0) {
+            return ResponseUtil.fail(null, "编辑失败", 502);
         }
-        return ResponseUtil.fail(null, "添加失败", 1);
+        return ResponseUtil.success();
     }
 
 

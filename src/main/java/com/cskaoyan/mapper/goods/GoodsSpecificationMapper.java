@@ -33,4 +33,6 @@ public interface GoodsSpecificationMapper {
     int updateByPrimaryKey(GoodsSpecification record);
 
     int insertSpecifications(@Param("goodsSpecificationMapList") List<Map<String, Object>> goodsSpecificationMapList);
+
+    int updateSpecifications(@Param("goodsSpecificationMapList")List<Map<String, Object>> goodsSpecificationMapList);
 }

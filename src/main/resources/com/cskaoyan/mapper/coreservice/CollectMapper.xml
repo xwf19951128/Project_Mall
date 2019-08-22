@@ -10,28 +10,14 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
-  <resultMap id="goodsMap" type= "com.cskaoyan.bean.admin.goods.Goods">
+  <resultMap id="goodsMap" type= "com.cskaoyan.bean.wx.coreservice.CollectGoods">
     <result property="id" column="id"></result>
-    <result property="goodsSn" column="goods_sn"></result>
+    <result property="valueId" column="goods_sn"></result>
     <result property="name" column="name"></result>
-    <result property="categoryId" column="category_id"></result>
-    <result property="brandId" column="brand_id"></result>
-    <result property="gallery" column="gallery"></result>
-    <result property="keywords" column="keywords"></result>
     <result property="brief" column="brief"></result>
-    <result property="isOnSale" column="is_on_sale"></result>
-    <result property="sortOrder" column="sort_order"></result>
     <result property="picUrl" column="pic_url"></result>
-    <result property="shareUrl" column="share_url"></result>
-    <result property="isNew" column="is_new"></result>
-    <result property="isHot" column="is_hot"></result>
-    <result property="unit" column="unit"></result>
-    <result property="counterPrice" column="counter_price"></result>
     <result property="retailPrice" column="retail_price"></result>
-    <result property="addTime" column="add_time"></result>
-    <result property="updateTime" column="update_time"></result>
-    <result property="deleted" column="deleted"></result>
-    <result property="detail" column="detail"></result>
+    <result property="type" column="type"></result>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -94,29 +80,16 @@
   <sql id="Base_Column_List">
     id, user_id, value_id, type, add_time, update_time, deleted
   </sql>
-  <select id="queryListByUser" resultMap="goodsMap" resultType="com.cskaoyan.bean.admin.goods.Goods">
+  <select id="queryListByUser" resultMap="goodsMap" resultType="com.cskaoyan.bean.wx.coreservice.CollectGoods">
     select
     g.id,
     g.goods_sn,
     g.name,
-    g.category_id,
-    g.brand_id,
-    g.gallery,
-    g.keywords,
     g.brief,
-    g.is_on_sale,
-    g.sort_order,
     g.pic_url,
-    g.share_url,
-    g.is_new,
-    g.is_hot,
-    g.unit,
-    g.counter_price,
-    g.retail_price,
-    g.detail,
-    g.add_time,
-    g.update_time,
-    g.deleted from cskaoyan_mall_collect c,cskaoyan_mall_goods g where c.user_id=#{id} and c.type=#{type} and c.value_id=g.id
+    c.type,
+    g.retail_price
+    from cskaoyan_mall_collect c,cskaoyan_mall_goods g where c.user_id=#{id} and c.type=#{type} and c.value_id=g.id
   </select>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.wx.coreservice.CollectExample" resultMap="BaseResultMap">
     select

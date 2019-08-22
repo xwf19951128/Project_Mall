@@ -27,13 +27,13 @@ public class GoodsCommentController {
     public ResponseVo listPageGoods(PageParams4Goods pageParams4Goods, Integer userId, Integer valueId){
         Map<Object, Object> data = new HashMap<>(2);
         List<GoodsComment> goodsCommentList = goodsCommentService.listPageSearchGoodsComments(pageParams4Goods, userId, valueId);
+        if(goodsCommentList == null){
+            return ResponseUtil.fail(null, "goodsCommentList查询失败", 502);
+        }
         PageInfo<GoodsComment> pageInfo = new PageInfo<>(goodsCommentList);
         long total = pageInfo.getTotal();
         data.put("items", goodsCommentList);
         data.put("total", total);
-        if(data == null){
-            return ResponseUtil.fail(data, "查询失败", 502);
-        }
         return ResponseUtil.success(data);
     }
 
@@ -42,7 +42,7 @@ public class GoodsCommentController {
         Integer id = goodsComment.getId();
         int deleteResult = goodsCommentService.deleteGoodsCommentById(id);
         if(deleteResult == 0){
-            return ResponseUtil.fail("null", "删除失败", 502);
+            return ResponseUtil.fail(null, "删除失败", 502);
         }
         return ResponseUtil.success();
     }

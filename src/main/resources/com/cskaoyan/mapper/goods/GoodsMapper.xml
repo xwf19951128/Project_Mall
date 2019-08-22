@@ -166,8 +166,27 @@
             SELECT LAST_INSERT_ID() as id
         </selectKey>
         insert into cskaoyan_mall_goods
-
-        (<include refid="goodsColumns"></include>)
+        (
+        goods_sn,
+        name,
+        category_id,
+        brand_id,
+        gallery,
+        keywords,
+        brief,
+        is_on_sale,
+        sort_order,
+        pic_url,
+        share_url,
+        is_new,
+        is_hot,
+        unit,
+        counter_price,
+        retail_price,
+        detail,
+        add_time,
+        deleted
+        )
         values
         (
         #{goodsMap.goodsSn,jdbcType=VARCHAR},
@@ -188,9 +207,34 @@
         #{goodsMap.retailPrice},
         #{goodsMap.detail},
         #{goodsMap.addTime},
-        #{goodsMap.updateTime},
         #{goodsMap.deleted}
         )
     </insert>
+
+    <!--编辑商品-->
+    <update id="updateSingleGoods">
+        update cskaoyan_mall_goods
+        set
+        goods_sn = #{goodsMap.goodsSn,jdbcType=VARCHAR},
+        name = #{goodsMap.name,jdbcType=VARCHAR},
+        category_id = #{goodsMap.categoryId},
+        brand_id = #{goodsMap.brandId},
+        gallery = #{goodsMap.gallery},
+        keywords = #{goodsMap.keywords},
+        brief = #{goodsMap.brief},
+        is_on_sale = #{goodsMap.isOnSale},
+        sort_order = #{goodsMap.sortOrder},
+        pic_url = #{goodsMap.picUrl},
+        share_url = #{goodsMap.shareUrl},
+        is_new = #{goodsMap.isNew},
+        is_hot = #{goodsMap.isHot},
+        unit = #{goodsMap.unit},
+        counter_price = #{goodsMap.counterPrice},
+        retail_price = #{goodsMap.retailPrice},
+        detail = #{goodsMap.detail},
+        update_time = #{goodsMap.updateTime},
+        deleted = #{goodsMap.deleted}
+        where id = #{goodsMap.id}
+    </update>
 
 </mapper>

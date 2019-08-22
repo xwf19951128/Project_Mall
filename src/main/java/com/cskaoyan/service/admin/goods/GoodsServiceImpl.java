@@ -84,14 +84,13 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int insertSingleGoods(Map<String, Object> goodsMap) {
-        ArrayList<String> galleryList = (ArrayList<String>)goodsMap.get("gallery");
+        List<String> galleryList = (ArrayList<String>)goodsMap.get("gallery");
         String[] galleryArray = galleryList.toArray(new String[galleryList.size()]);
 //        goodsMap.put("id", 0);
         goodsMap.put("gallery", galleryArray);
         goodsMap.put("sortOrder", 123);
         goodsMap.put("shareUrl", "");
         goodsMap.put("addTime", new Date());
-        goodsMap.put("updateTime", new Date());
         goodsMap.put("deleted", 0);
         int result = goodsMapper.insertSingleGoods(goodsMap);
         Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
@@ -102,15 +101,13 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int updateSingleGoods(Map<String, Object> goodsMap) {
-        ArrayList<String> galleryList = (ArrayList<String>)goodsMap.get("gallery");
+        List<String> galleryList = (List<String>) goodsMap.get("gallery");
         String[] galleryArray = galleryList.toArray(new String[galleryList.size()]);
         goodsMap.put("gallery", galleryArray);
         goodsMap.put("sortOrder", 123);
         goodsMap.put("shareUrl", "");
         goodsMap.put("updateTime", new Date());
         goodsMap.put("deleted", 0);
-        int result = goodsMapper.updateSingleGoods(goodsMap);
-        Integer lastInsertGoodsId = (Integer)goodsMap.get("id");
-        return result;
+        return goodsMapper.updateSingleGoods(goodsMap);
     }
 }

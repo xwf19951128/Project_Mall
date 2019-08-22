@@ -17,4 +17,8 @@ public class CollectController {
     public MessageBean showCouponList(int page, int size, short type, HttpServletRequest request){
         return coreService.showCollectList(page,size,type,request);
     }
+    @RequestMapping("/addordelete")
+    public MessageBean addOrDeleteCollect(int valueId, HttpServletRequest request){
+        return coreService.insertCollect(valueId,request);
+    }
 }
