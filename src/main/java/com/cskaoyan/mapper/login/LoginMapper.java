@@ -36,5 +36,5 @@ public interface LoginMapper {
     DashBoard queryDashBoard();
 
     //从user表中,根据用户名查询微信密码
-    String queryWxPasswordByUsername(@Param("username")String username);
+    String queryWxPasswordByUsername(@Param("username") String username);
 }

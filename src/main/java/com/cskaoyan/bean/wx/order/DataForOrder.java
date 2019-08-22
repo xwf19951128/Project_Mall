@@ -2,7 +2,7 @@ package com.cskaoyan.bean.wx.order;
 
 import java.util.List;
 
-public class DataVo<T> {
+public class DataForOrder<T> {
     private List<T> data;
     private int count;
     private int totalPages;
