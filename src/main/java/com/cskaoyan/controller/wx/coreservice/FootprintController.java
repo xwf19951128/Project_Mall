@@ -14,7 +14,7 @@ public class FootprintController {
     @Autowired
     CoreService coreService;
     @RequestMapping("/list")
-    public MessageBean showCouponList(int page, int size, short type, HttpServletRequest request){
-        return coreService.showFootprintList(page,size,type,request);
+    public MessageBean showCouponList(int page, int size, HttpServletRequest request){
+        return coreService.showFootprintList(page,size,request);
     }
 }

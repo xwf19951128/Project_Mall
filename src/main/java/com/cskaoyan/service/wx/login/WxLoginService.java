@@ -2,8 +2,6 @@ package com.cskaoyan.service.wx.login;
 
 import com.cskaoyan.bean.wx.login.WxUser;
 
-import java.util.List;
-
 public interface WxLoginService {
     //从user表中,根据用户名查询微信密码
     String queryWxPasswordByUsername(String username);
@@ -13,10 +11,4 @@ public interface WxLoginService {
 
     //查询根据状态码，查询对应的的订单数量
     int queryOrderNumByStatus(int[] status);
-
-    void registerUser(WxUser wxUser);
-
-    List<WxUser> queryUserByMobile(String mobile);
-
-    void updatePassword(WxUser wxUser);
 }
