@@ -53,14 +53,11 @@ public class GoodsController {
         }*/
         List<Goods> goodsList = goodsService.listPageGoods(pageParams4Goods);
         if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
+            return ResponseUtil.fail(null, "查询失败", 502);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -69,14 +66,11 @@ public class GoodsController {
     public ResponseVo listPageGoodsByGoodsSn(PageParams4Goods pageParams4Goods, String goodsSn){
         List<Goods> goodsList = goodsService.listPageGoodsByGoodsSn(pageParams4Goods, goodsSn);
         if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
+            return ResponseUtil.fail(null, "查询失败", 502);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -86,14 +80,11 @@ public class GoodsController {
     public ResponseVo listPageGoodsByName(PageParams4Goods pageParams4Goods, String name){
         List<Goods> goodsList = goodsService.listPageGoodsByName(pageParams4Goods, name);
         if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
+            return ResponseUtil.fail(null, "查询失败", 502);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -103,14 +94,11 @@ public class GoodsController {
     public ResponseVo listPageGoodsByGoodsSnAndName(PageParams4Goods pageParams4Goods, String goodsSn, String name){
         List<Goods> goodsList = goodsService.listPageGoodsByGoodsSnAndName(pageParams4Goods, goodsSn, name);
         if(goodsList == null){
-            return ResponseUtil.fail(null, "无商品信息", 0);
+            return ResponseUtil.fail(null, "查询失败", 502);
         }
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         long total = pageInfo.getTotal();
         GoodsDataVo<Goods> goodsDataVo = new GoodsDataVo<Goods>(total, goodsList);
-        if(goodsDataVo == null){
-            return ResponseUtil.fail(goodsDataVo, "查询失败", 502);
-        }
         return ResponseUtil.success(goodsDataVo);
     }
 
@@ -119,18 +107,27 @@ public class GoodsController {
     public ResponseVo getGoodsDetail(int id){
         HashMap<String, Object> data = new HashMap<>(5);
         List<GoodsAttribute> goodsAttributeList = goodsAttributeService.listGoodsAttributesByGoodsId(id);
+        if(goodsAttributeList == null){
+            return ResponseUtil.fail(null, "goodsAttributeList查询失败", 502);
+        }
         Goods goods = goodsService.getSingleGoodsById(id);
         List<Integer> categoryIds = Arrays.asList(1005000, goods.getCategoryId());
+        if(categoryIds == null){
+            return ResponseUtil.fail(null, "categoryIds查询失败", 502);
+        }
         List<GoodsProduct> goodsProductList = goodsProductService.listGoodsProductsByGoodsId(id);
+        if(goodsProductList == null){
+            return ResponseUtil.fail(null, "goodsProductList查询失败", 502);
+        }
         List<GoodsSpecification> goodsSpecificationList = goodsSpecificationService.listGoodsSpecificationsByGoodsId(id);
+        if(goodsSpecificationList == null){
+            return ResponseUtil.fail(null, "goodsSpecificationList查询失败", 502);
+        }
         data.put("attributes", goodsAttributeList);
         data.put("categoryIds", categoryIds);
         data.put("goods", goods);
         data.put("products", goodsProductList);
         data.put("specifications", goodsSpecificationList);
-        if(data.size() == 0){
-            return ResponseUtil.fail(data, "编辑回显失败", 502);
-        }
         return ResponseUtil.success(data);
     }
 
@@ -143,12 +140,15 @@ public class GoodsController {
     public ResponseVo getCatAndBrand(){
         HashMap<String, Object> data = new HashMap<>(2);
         List<CategoryFirstClass> categoryList = categoryService.getCategory();
+        if(categoryList == null){
+            return ResponseUtil.fail(null, "categoryList查询失败", 502);
+        }
         List<Brand> brandList = brandService.getBrandList(null, "");
+        if(brandList == null){
+            return ResponseUtil.fail(null, "brandList查询失败", 502);
+        }
         data.put("categoryList", categoryList);
         data.put("brandList", brandList);
-        if(data == null){
-            return ResponseUtil.fail(data, "添加商品时分类、品牌商回显失败", 502);
-        }
         return ResponseUtil.success(data);
     }
 
