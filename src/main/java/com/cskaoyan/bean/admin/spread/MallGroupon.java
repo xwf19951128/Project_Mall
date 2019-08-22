@@ -1,10 +1,12 @@
 package com.cskaoyan.bean.admin.spread;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
 public class MallGroupon {
+
     private Integer id;
 
     private Integer orderId;

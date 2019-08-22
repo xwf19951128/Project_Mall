@@ -9,11 +9,29 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
+  <resultMap id="goodsMap" type= "com.cskaoyan.bean.wx.coreservice.CollectGoods">
+    <result property="id" column="id"></result>
+    <result property="goodsId" column="goods_sn"></result>
+    <result property="name" column="name"></result>
+    <result property="brief" column="brief"></result>
+    <result property="picUrl" column="pic_url"></result>
+    <result property="retailPrice" column="retail_price"></result>
+    <result property="type" column="type"></result>
+    <result property="addTime" column="add_time"></result>
+  </resultMap>
   <sql id="Base_Column_List">
     id, user_id, goods_id, add_time, update_time, deleted
   </sql>
-  <select id="queryListByUser" resultType="com.cskaoyan.bean.wx.coreservice.Collect" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List"></include> from cskaoyan_mall_footprint where user_id=#{id}
+  <select id="queryListByUser" resultMap="goodsMap" resultType="com.cskaoyan.bean.wx.coreservice.CollectGoods">
+    select
+    g.id,
+    g.goods_sn,
+    g.name,
+    g.brief,
+    g.pic_url,
+    g.retail_price,
+    g.add_time
+    from cskaoyan_mall_footprint c,cskaoyan_mall_goods g where c.user_id=#{id} and c.goods_id=g.id
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

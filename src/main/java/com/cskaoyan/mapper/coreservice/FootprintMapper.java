@@ -1,5 +1,6 @@
 package com.cskaoyan.mapper.coreservice;
 
+import com.cskaoyan.bean.wx.coreservice.CollectGoods;
 import com.cskaoyan.bean.wx.coreservice.Footprint;
 import com.cskaoyan.bean.wx.coreservice.FootprintExample;
 import java.util.List;
@@ -28,5 +29,5 @@ public interface FootprintMapper {
 
     int updateByPrimaryKey(Footprint record);
 
-    List<Footprint> queryListByUser(int uid);
+    List<CollectGoods> queryListByUser(int uid);
 }

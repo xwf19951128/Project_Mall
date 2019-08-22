@@ -7,6 +7,7 @@ import com.cskaoyan.bean.admin.spread.MallGrouponExample;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cskaoyan.bean.wx.coreservice.RabbishBean;
 import org.apache.ibatis.annotations.Param;
 
 public interface MallGrouponMapper {
@@ -35,5 +36,7 @@ public interface MallGrouponMapper {
     ArrayList<GrouponInfo> queryGrouponInfoList(@Param("content") String content, @Param("name") String name);
 
 
-    List<MallGroupon> queryListByUser(@Param("id") int uid, @Param("type") short showType);
+    List<RabbishBean> queryListByUser(@Param("id") int uid, @Param("type") short showType);
+
+    long countByGroupon(@Param("id") Integer grouponId);
 }
