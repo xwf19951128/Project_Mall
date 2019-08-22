@@ -4,6 +4,8 @@ import com.cskaoyan.bean.admin.userManage.Address;
 import com.cskaoyan.bean.admin.userManage.DataAndErr;
 import com.cskaoyan.bean.admin.userManage.ItemAndTotal;
 import com.cskaoyan.service.admin.userManage.ShoppingAddressService;
+import com.cskaoyan.util.ResponseUtil;
+import com.cskaoyan.util.ResponseVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,10 @@ public class ShoppingAddressController {
     @Autowired
     ShoppingAddressService shoppingAddressService;
 
-    // 查询所有用户的地址信息
+    // 查询用户的地址信息
     @RequestMapping("/admin/address/list")
     @ResponseBody
-
-    public DataAndErr queryShoppingAddress(String name, String userId, String sort, String order, int page, int limit) {
-        DataAndErr dataAndErr = new DataAndErr();
+    public ResponseVo queryShoppingAddress(String name, String userId, String sort, String order, int page, int limit) {
         ItemAndTotal<Address> itemAndTotal = new ItemAndTotal<>();
         List<Address> addresses;
 
@@ -53,36 +53,7 @@ public class ShoppingAddressController {
         itemAndTotal.setItems(addresses);
         itemAndTotal.setTotal(total);
 
-        // 封装data、errMsg、errno
-        dataAndErr.setData(itemAndTotal);
-        dataAndErr.setErrmsg("成功");
-        dataAndErr.setErrno(0);
-
-        // 返回这个JavaBean
-        return dataAndErr;
+        // 封装data、errMsg、errno 并返回
+        return ResponseUtil.success(itemAndTotal);
     }
-
-
-
-    /*DataAndErr queryShoppingAddress() {
-        DataAndErr dataAndErr = new DataAndErr();
-        ItemAndTotal<Address> addressItemAndTotal = new ItemAndTotal<>();
-        // 调用service查询所有地址
-        List<Address> addresses = shoppingAddressService.queryShoppingAddress();
-        // 判断有没有查询出数据
-        if (addresses != null) {
-            // 封装itemAndTotal
-            addressItemAndTotal.setItems(addresses);
-            addressItemAndTotal.setTotal(addresses.size());
-            // 封装dataAndErr
-            dataAndErr.setData(addressItemAndTotal);
-            dataAndErr.setErrmsg("成功");
-            dataAndErr.setErrno(0);
-        } else {
-            dataAndErr.setErrmsg("失败");
-            dataAndErr.setErrno(-1);
-        }
-        // 返回dataAndErr
-        return dataAndErr;
-    }*/
 }
