@@ -174,7 +174,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean receiveCoupon(String couponId, HttpServletRequest request) {
-int uid=TokenUtil.getActiveUserid(request);
+    int uid=TokenUtil.getActiveUserid(request);
         //获取认证后的用户信息，通过Realm进行封装的
         if(uid<0){
             return new MessageBean("请登录",501,null);
@@ -184,14 +184,15 @@ int uid=TokenUtil.getActiveUserid(request);
             UserCouponExample.Criteria criteria = userCouponExample.createCriteria();
             criteria.andCouponIdEqualTo(Integer.valueOf(couponId)).andUserIdEqualTo(uid);
             List<UserCoupon> userCoupons =userCouponMapper.selectByExample(userCouponExample);
-            if(userCoupons.size()>0){
-                return new MessageBean("优惠券已经领取过",740,null);
-            }
             MallCoupon mallCoupon=couponMapper.selectByPrimaryKey(Integer.valueOf(couponId));
+            if(userCoupons.size()>=mallCoupon.getLimit()){
+                return new MessageBean("你不能领取更多了",740,null);
+            }
+            if(mallCoupon.getTotal()<1)return new MessageBean("优惠券已被领完了",778,null);
             //找出该优惠券
             //然后把该优惠券塞进用户
             Date date=new Date();
-            if(mallCoupon.getStartTime()==null||date.before(mallCoupon.getEndTime())){
+            if(mallCoupon.getStartTime()==null||mallCoupon.getEndTime()==null||date.before(mallCoupon.getEndTime())){
             UserCoupon userCoupon=new UserCoupon();
             userCoupon.setUserId(uid);
             userCoupon.setStatus((short) 0);
@@ -203,8 +204,15 @@ int uid=TokenUtil.getActiveUserid(request);
             Date enddate=(mallCoupon.getEndTime()==null||calendar.getTime().before(mallCoupon.getEndTime()))?calendar.getTime():mallCoupon.getEndTime();
             userCoupon.setEndTime(enddate);
             userCoupon.setAddTime(date);
-            userCouponMapper.insert(userCoupon);
-            return new MessageBean("成功",0,null);
+            mallCoupon.setTotal(mallCoupon.getTotal()-1);
+                try {
+                    userCouponMapper.insert(userCoupon);
+                    couponMapper.updateByPrimaryKeySelective(mallCoupon);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return new MessageBean("网络异常",460,null);
+                }
+                return new MessageBean("成功",0,null);
             }else {
                 return new MessageBean("已过期的优惠卷",777,null);
             }
