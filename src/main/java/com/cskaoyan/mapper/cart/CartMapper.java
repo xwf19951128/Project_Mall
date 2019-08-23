@@ -38,4 +38,5 @@ public interface CartMapper {
 
     List<MallCoupon> getCouponList();
 
+    void updateGood(@Param("good") GoodInCart goodInCart);
 }

@@ -99,4 +99,9 @@ public class CartServiceImpl implements CartService {
     public Address getAddressById(int addressId) {
         return shoppingAddressMapper.queryDetailAddressById(addressId);
     }
+
+    @Override
+    public void updateGood(GoodInCart goodInCart) {
+         cartMapper.updateGood(goodInCart);
+    }
 }

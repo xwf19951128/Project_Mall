@@ -7,20 +7,21 @@ import com.cskaoyan.bean.wx.coreservice.UserCoupon;
 import com.cskaoyan.bean.wx.index.vo.WxResponseVo;
 import com.cskaoyan.bean.wx.login.WxUser;
 import com.cskaoyan.mapper.coreservice.UserCouponMapper;
+import com.cskaoyan.mapper.login.WxUserMapper;
 import com.cskaoyan.mapper.spread.MallCouponMapper;
 import com.cskaoyan.util.ResponseVo;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+import com.cskaoyan.util.wx.UserTokenManager;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,17 +39,26 @@ public class CouponsController {
     @Autowired
     MallCouponMapper mallCouponMapper;
 
+
+    @Autowired
+    WxUserMapper wxUserMapper;
+
+
     //传入的是一个json对象，而不是一个字符串,接收对象用jsonobject
-//    @RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)
-    public WxResponseVo receiveCoupon(@RequestBody Map jsonObject) throws JSONException {
+   //@RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)
+    public WxResponseVo receiveCoupon(@RequestBody HashMap hashMap, HttpServletRequest request) throws JSONException {
 
-        int couponId = (int) jsonObject.get("couponId");
-
+        int couponId = (int) hashMap.get("couponId");
+       String tolen= request.getHeader("X-Litemall-Token");
+       Integer userId = UserTokenManager.getUserId(tolen);
+       WxUser user = wxUserMapper.selectByPrimaryKey(userId);
         WxResponseVo wxResponseVo = new WxResponseVo();
-        //获得UserId以后，判断优惠券code是否有效，如果有效往coupon_user里塞
-        Subject subject = SecurityUtils.getSubject();
-        //获取认证后的用户信息，通过Realm进行封装的
-        WxUser user = (WxUser) subject.getPrincipal();
+//        //获得UserId以后，判断优惠券code是否有效，如果有效往coupon_user里塞
+//        Subject subject = SecurityUtils.getSubject();
+//        //获取认证后的用户信息，通过Realm进行封装的
+//        WxUser user = (WxUser) subject.getPrincipal();
+
+
         if(user==null){
             wxResponseVo.setErrmsg("请登录");
             wxResponseVo.setErrno(501);
