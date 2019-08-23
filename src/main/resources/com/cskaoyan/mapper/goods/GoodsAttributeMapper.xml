@@ -254,10 +254,15 @@
     update_time,
     deleted
   </sql>
+  <!--添加-->
   <insert id="insertGoodsAttributeByLastGoodsId">
       insert into cskaoyan_mall_goods_attribute
       (
-      <include refid="goodsAttributeColumns"></include>
+        goods_id,
+        attribute,
+        `value`,
+        add_time,
+        deleted
       )
       values
       <foreach collection="goodsAttributeList" item="goodsAttribute" separator=",">
@@ -266,9 +271,36 @@
         #{goodsAttribute.attribute,jdbcType=VARCHAR},
         #{goodsAttribute.value,jdbcType=VARCHAR},
         #{otherAttributeMap.addTime},
-        #{otherAttributeMap.updateTime},
         #{otherAttributeMap.deleted}
         )
       </foreach>
   </insert>
+
+  <!--编辑-->
+  <update id="updateGoodsAttributeByLastGoodsId">
+      update cskaoyan_mall_goods_attribute
+        <trim prefix="set" suffixOverrides=",">
+          <trim prefix="attribute = case" suffix="end,">
+            <foreach collection="goodsAttributeMapList" item="goodsAttributeMap">
+                when id=#{goodsAttributeMap.id} then #{goodsAttributeMap.attribute,jdbcType=VARCHAR}
+            </foreach>
+          </trim>
+          <trim prefix="value = case" suffix="end,">
+            <foreach collection="goodsAttributeMapList" item="goodsAttributeMap">
+              when id=#{goodsAttributeMap.id} then #{goodsAttributeMap.value,jdbcType=VARCHAR}
+            </foreach>
+          </trim>
+          <trim prefix="update_time = case" suffix="end,">
+            <foreach collection="goodsAttributeMapList" item="goodsAttributeMap">
+              when id=#{goodsAttributeMap.id} then #{goodsAttributeMap.updateTime}
+            </foreach>
+          </trim>
+          <trim prefix="deleted = case" suffix="end">
+            <foreach collection="goodsAttributeMapList" item="goodsAttributeMap">
+              when id=#{goodsAttributeMap.id} then #{goodsAttributeMap.deleted}
+            </foreach>
+          </trim>
+      where goods_id = #{goodsId,jdbcType=INTEGER}
+      </trim>
+  </update>
 </mapper>

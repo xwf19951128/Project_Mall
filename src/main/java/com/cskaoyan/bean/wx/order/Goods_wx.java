@@ -4,7 +4,7 @@ public class Goods_wx {
     private String goodsName;
     private int id;
     private int number;
-    private String pucUrls;
+    private String picUrl;
 
     public String getGoodsName() {
         return goodsName;
@@ -30,11 +30,11 @@ public class Goods_wx {
         this.number = number;
     }
 
-    public String getPucUrls() {
-        return pucUrls;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setPucUrls(String pucUrls) {
-        this.pucUrls = pucUrls;
+    public void setPicUrl(String picUrls) {
+        this.picUrl = picUrls;
     }
 }

@@ -33,4 +33,6 @@ public interface UserCouponMapper {
     int updateByPrimaryKey(UserCoupon record);
 
     List<MallCoupon> queryUserCouponList(@Param("username") String username, @Param("status") short status);
+
+    long countByCid(@Param("id") Integer id);
 }

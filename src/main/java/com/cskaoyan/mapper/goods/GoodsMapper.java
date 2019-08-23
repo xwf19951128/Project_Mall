@@ -37,7 +37,7 @@ public interface GoodsMapper {
 
     int insertSingleGoods(@Param("goodsMap") Map<String, Object> goodsMap);
 
-    int updateSingleGoods(Map<String, Object> goodsMap);
+    int updateSingleGoods(@Param("goodsMap")Map<String, Object> goodsMap);
 
     List<Integer> selectCategorysIdByBrandId(@Param("brandId") int brandId);
 

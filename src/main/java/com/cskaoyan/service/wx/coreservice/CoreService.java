@@ -16,4 +16,10 @@ public interface CoreService {
     MessageBean showCollectList(int page, int size, short type, HttpServletRequest request);
 
     MessageBean showFootprintList(int page, int size, HttpServletRequest request);
+
+    MessageBean insertCollect(int valueId, HttpServletRequest request);
+
+    MessageBean getGrouponDetail(int grouponId, HttpServletRequest request);
+
+    MessageBean getCoupon(String code, HttpServletRequest request);
 }

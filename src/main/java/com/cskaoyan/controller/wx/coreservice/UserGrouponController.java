@@ -17,4 +17,8 @@ public class UserGrouponController {
     public MessageBean showCouponList(short showType , HttpServletRequest request){
         return coreService.showGrouponList(showType,request);
     }
+    @RequestMapping("/detail")
+    public MessageBean showCouponList(int grouponId , HttpServletRequest request){
+        return coreService.getGrouponDetail(grouponId,request);
+    }
 }

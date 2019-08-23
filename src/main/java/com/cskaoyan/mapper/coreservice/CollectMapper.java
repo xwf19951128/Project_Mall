@@ -2,6 +2,7 @@ package com.cskaoyan.mapper.coreservice;
 
 import com.cskaoyan.bean.admin.goods.Goods;
 import com.cskaoyan.bean.wx.coreservice.Collect;
+import com.cskaoyan.bean.wx.coreservice.CollectGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,7 +20,10 @@ public interface CollectMapper {
 
     int updateByPrimaryKey(Collect record);
 
-    List<Goods> queryListByUser(@Param("id") int uid, @Param("type") short type);
+//    List<Goods> queryListByUser(@Param("id") int uid, @Param("type") short type);
 
     List<Collect> selectCollectByUserId(@Param("id") int id);
+
+    List<CollectGoods> queryListByUser(@Param("id") int uid, @Param("type") short type);
+
 }
