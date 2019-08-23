@@ -27,4 +27,8 @@ public interface GoodsCommentMapper {
     int updateByPrimaryKeySelective(GoodsComment record);
 
     int updateByPrimaryKey(GoodsComment record);
+
+    List<GoodsComment> queryCommentsByValueIdAndPicture(@Param("valueId")int valueId,@Param("type")int type,@Param("hasPicture") Integer hasPicture);
+
+    List<GoodsComment> getGoodsCommentByValueIdAndType(Integer valueId, Integer type);
 }

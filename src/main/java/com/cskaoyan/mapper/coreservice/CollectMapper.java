@@ -20,4 +20,6 @@ public interface CollectMapper {
     int updateByPrimaryKey(Collect record);
 
     List<Goods> queryListByUser(@Param("id") int uid, @Param("type") short type);
+
+    List<Collect> selectCollectByUserId(@Param("id") int id);
 }

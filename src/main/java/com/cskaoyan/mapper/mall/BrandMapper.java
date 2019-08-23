@@ -39,4 +39,6 @@ public interface BrandMapper {
     Brand queryBrandById(@Param("id") Integer id);
 
     Brand queryBrandByBrandName(@Param("brandName") String name);
+
+    Brand selectBrandById(@Param("brandId") int brandId);
 }

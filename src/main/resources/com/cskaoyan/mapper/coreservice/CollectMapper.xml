@@ -94,6 +94,13 @@
   <sql id="Base_Column_List">
     id, user_id, value_id, type, add_time, update_time, deleted
   </sql>
+
+  <select id="selectCollectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from  cskaoyan_mall_collect where user_id =#{id}
+  </select>
+
   <select id="queryListByUser" resultMap="goodsMap" resultType="com.cskaoyan.bean.admin.goods.Goods">
     select
     g.id,
