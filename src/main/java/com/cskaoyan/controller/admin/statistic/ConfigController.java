@@ -1,6 +1,7 @@
 package com.cskaoyan.controller.admin.statistic;
 
 
+import com.cskaoyan.annotation.SystemLog;
 import com.cskaoyan.bean.admin.statistic.LiteMall;
 import com.cskaoyan.service.admin.statistic.ConfigService;
 import com.cskaoyan.util.ResponseUtil;
@@ -22,6 +23,7 @@ public class ConfigController {
     //在本模块中，get请求是查询所有记录，post请求是修改记录
 
     @GetMapping("/mall")
+    @SystemLog(desc = "查看商场配置")
     public ResponseVo configmall(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigMall();
@@ -34,6 +36,7 @@ public class ConfigController {
     }
 
     @PostMapping("/mall")
+    @SystemLog(desc = "修改商场配置")
     public ResponseVo updatemall(@RequestBody HashMap<String,String> map){
         //把四个键值对以Map的形式接收，更加方法
         //遍历这个Map。把四个键值对分别更新即可
@@ -46,6 +49,7 @@ public class ConfigController {
     }
 
     @GetMapping("/express")
+    @SystemLog(desc = "查看运费配置")
     public ResponseVo configexpress(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigExpress();
@@ -58,6 +62,7 @@ public class ConfigController {
     }
 
     @PostMapping("/express")
+    @SystemLog(desc = "修改运费配置")
     public ResponseVo updateexpress(@RequestBody HashMap<String,String> map){
         //把四个键值对以Map的形式接收，更加方法
         //遍历这个Map。把四个键值对分别更新即可
@@ -70,6 +75,7 @@ public class ConfigController {
     }
 
     @GetMapping("/order")
+    @SystemLog(desc = "查看订单配置")
     public ResponseVo configorder(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigOrder();
@@ -82,6 +88,7 @@ public class ConfigController {
     }
 
     @PostMapping("/order")
+    @SystemLog(desc = "修改订单配置")
     public ResponseVo updateorder(@RequestBody HashMap<String,String> map){
         //把四个键值对以Map的形式接收，更加方法
         //遍历这个Map。把四个键值对分别更新即可
@@ -94,6 +101,7 @@ public class ConfigController {
     }
 
     @GetMapping("/wx")
+    @SystemLog(desc = "查看小程序配置")
     public ResponseVo configwx(){
         //获取所有的和mall相关的系统配置JavaBean，一共有4个
         List<LiteMall> liteMallList = configService.queryConfigWx();
@@ -105,6 +113,7 @@ public class ConfigController {
         return ResponseUtil.success(data);
     }
     @PostMapping("/wx")
+    @SystemLog(desc = "修改小程序配置")
     public ResponseVo updatewx(@RequestBody HashMap<String,String> map){
         //把四个键值对以Map的形式接收，更加方法
         //遍历这个Map。把四个键值对分别更新即可
