@@ -67,4 +67,9 @@ public class WxLoginServiceImpl implements WxLoginService {
         criteria.andMobileEqualTo(wxUser.getMobile());
         wxUserMapper.updateByExampleSelective(wxUser,userExample);
     }
+
+    @Override
+    public String queryUsernameById(Integer userId) {
+        return loginMapper.queryWxUsernameById(userId);
+    }
 }

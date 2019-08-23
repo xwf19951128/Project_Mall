@@ -24,4 +24,5 @@ public interface OrderService_wx {
 
     // 查订单详情
     HashMap<String, Object> queryOrderDetail(int orderId);
+
 }

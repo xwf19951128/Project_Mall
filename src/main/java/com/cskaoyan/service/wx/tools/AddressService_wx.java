@@ -1,5 +1,6 @@
 package com.cskaoyan.service.wx.tools;
 
+import com.cskaoyan.bean.admin.userManage.FeedBack;
 import com.cskaoyan.bean.wx.tools.Address_wx;
 import com.cskaoyan.bean.wx.tools.DetailedAddress_wx;
 import com.cskaoyan.bean.wx.tools.Region_wx;
@@ -25,4 +26,7 @@ public interface AddressService_wx {
 
     // 编辑地址
     int updateAddress(HashMap<String, Object> hashMap, int userId);
+
+    //新增一条用户反馈
+    void insertFeedBack(FeedBack feedBack);
 }
