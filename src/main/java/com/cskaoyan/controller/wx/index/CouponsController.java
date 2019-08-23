@@ -38,7 +38,7 @@ public class CouponsController {
     MallCouponMapper mallCouponMapper;
 
     //传入的是一个json对象，而不是一个字符串,接收对象用jsonobject
-    @RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)
+//    @RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)
     public WxResponseVo receiveCoupon(@RequestBody JSONObject jsonObject) throws JSONException {
 
         int couponId = (int) jsonObject.get("couponId");

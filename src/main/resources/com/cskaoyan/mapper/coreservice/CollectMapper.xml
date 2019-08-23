@@ -81,6 +81,7 @@
     id, user_id, value_id, type, add_time, update_time, deleted
   </sql>
 
+
   <select id="selectCollectByUserId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -88,6 +89,11 @@
   </select>
 
 
+
+
+  <select id="selectByValueId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from cskaoyan_mall_collect where value_id=#{value_id}
+  </select>
 
   <select id="queryListByUser" resultMap="goodsMap" resultType="com.cskaoyan.bean.wx.coreservice.CollectGoods">
     select

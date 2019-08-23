@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 @Service
@@ -49,8 +50,10 @@ public class CoreServiceImp implements CoreService{
         String username= userMapper.selectByPrimaryKey(uid).getUsername();
         PageHelper.startPage(page,size);
         ListDateWX dateWX=new ListDateWX();
-        List<MallCoupon> list=userCouponMapper.queryUserCouponList(username,status);
-        PageInfo<MallCoupon> pageInfo=new PageInfo(list);
+        List<UserCoupon> list=userCouponMapper.queryUserCouponList(username,status);
+        list=judgeCoupon(list);
+        System.out.println("*****************"+list);
+        PageInfo<UserCoupon> pageInfo=new PageInfo(list);
         dateWX.setCount(pageInfo.getTotal());
         dateWX.setData(list);
         return new MessageBean("成功",0,dateWX);
@@ -111,7 +114,7 @@ public class CoreServiceImp implements CoreService{
     public MessageBean insertCollect(int valueId, HttpServletRequest request) {
 //        int uid=TokenUtil.getActiveUserid(request);
         int uid=23;
-        Collect get=collectMapper.selectByPrimaryKey(valueId);
+        Collect get=collectMapper.selectByValueId(valueId);
         Map map=new HashMap();
         if(get==null){
             Collect collect=new Collect();
@@ -161,5 +164,30 @@ public class CoreServiceImp implements CoreService{
             return new MessageBean("成功",0,null);
         }
         return new MessageBean("优惠券不正确",742,null);
+    }
+    public List judgeCoupon(List<UserCoupon> list){
+        Date date=new Date();
+        List<UserCoupon> newlist=new ArrayList<>();
+        Iterator iterator=list.iterator();
+        UserCoupon coupon=null;
+        while (iterator.hasNext()){
+            coupon= (UserCoupon) iterator.next();
+            if(coupon.getEndTime().before(date)){
+                coupon.setStatus((short) 2);
+                newlist.add(coupon);
+                iterator.remove();
+            }
+        }
+//        for (UserCoupon coupon : list) {1
+//            if(coupon.getEndTime().before(date)){
+//                coupon.setStatus((short) 2);
+//                list.;
+//                newlist.add(coupon);
+//            }
+//        }
+        if(newlist.size()>0){
+            userCouponMapper.updateStatus(newlist);
+        }
+        return list;
     }
 }
