@@ -364,7 +364,7 @@ public class OrderServiceImpl_wx implements OrderService_wx {
      * @param id 商品的id号
      * @return 返回商品的list集合
      */
-    @Override
+    /*@Override
     public List<Goods> reBuyById(int id) {
         Goods goods = goodsMapper.findGoods(id);
 
@@ -372,7 +372,7 @@ public class OrderServiceImpl_wx implements OrderService_wx {
         list.add(goods);
 
         return list;
-    }
+    }*/
 
     /**
      * 申请退款

@@ -148,13 +148,13 @@ public class OrderController_wx {
      * @param id 商品的id
      * @return 返回模板
      */
-    @RequestMapping("/wx/goods/related")
+    /*@RequestMapping("/wx/goods/related")
     @ResponseBody
     ResponseVo reBuyById(int id) {
         List<Goods> data = orderService_wx.reBuyById(id);
 
         return ResponseUtil.success(data);
-    }
+    }*/
 
     /**
      * 申请退款
