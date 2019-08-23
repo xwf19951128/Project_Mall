@@ -31,8 +31,8 @@ public class CouponController {
     }
     @ApiOperation(value = "查看单个优惠卷信息")
     @RequestMapping(value = "/read")
-    public MessageBean<MallCoupon> showPage(String couponId){
-        return spreadService.readMallCouponInfo(couponId);
+    public MessageBean<MallCoupon> showPage(String id){
+        return spreadService.readMallCouponInfo(id);
     }
     @ApiOperation(value = "更新优惠卷效果")
     @RequestMapping(value = "/update")
