@@ -10,6 +10,7 @@ import com.cskaoyan.bean.admin.spread.MallGrouponRuleExample;
 import com.cskaoyan.bean.admin.userManage.User;
 import com.cskaoyan.bean.wx.coreservice.Collect;
 import com.cskaoyan.bean.wx.coreservice.CollectExample;
+import com.cskaoyan.bean.wx.coreservice.Footprint;
 import com.cskaoyan.bean.wx.goods.ResponseGoodVo;
 import com.cskaoyan.bean.wx.index.GoodsCount;
 import com.cskaoyan.bean.wx.login.WxUser;
@@ -22,6 +23,7 @@ import com.cskaoyan.mapper.mall.IssueMapper;
 import com.cskaoyan.mapper.spread.MallGrouponRuleMapper;
 import com.cskaoyan.service.wx.index.GoodListService;
 import com.cskaoyan.util.ResponseVo;
+import com.cskaoyan.util.wx.UserTokenManager;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.annotations.Param;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -199,7 +202,7 @@ public class GoodListController {
     CollectMapper collectMapper;
 
     @RequestMapping("/wx/goods/detail")
-    public ResponseVo getGoodsDetail(@Param("id") Integer id){
+    public ResponseVo getGoodsDetail(@Param("id") Integer id, HttpServletRequest request){
 
         Subject subject = SecurityUtils.getSubject();
         subject = SecurityUtils.getSubject();
@@ -271,6 +274,7 @@ public class GoodListController {
             objectObjectHashMap.put("valueList",goodsSpecifications);
             goodsSpecificationsVo.add(objectObjectHashMap);
         }
+
         //10。userHasCollect
         int userHasCollect =0;
         if(user!=null){
