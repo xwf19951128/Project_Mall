@@ -43,4 +43,12 @@ public interface CategoryMapper {
     CategoryFirstClass selectById(@Param("id") int id);
 
     List<FloorGoodList> getGroupList();
+
+    List<Category> selectCategorysById(@Param("categorysId") List<Integer> categorysId);
+
+    List<Integer> SelectSecond(@Param("id") int categoryId);
+
+    List<Category> queryAllCategoryByPid(@Param("id") Integer id);
+
+
 }

@@ -35,5 +35,8 @@ public interface GoodsAttributeMapper {
 
     int insertGoodsAttributeByLastGoodsId(@Param("goodsAttributeList") List<GoodsAttribute> goodsAttributeList, @Param("lastInsertGoodsId") Integer lastInsertGoodsId, @Param("otherAttributeMap") HashMap<String, Object> otherAttributeMap);
 
+    List<GoodsAttribute> selectGoodsAttributeByGoodId(@Param("id") Integer id);
+
     int updateGoodsAttributeByLastGoodsId(@Param("goodsAttributeMapList") List<Map<String, Object>> goodsAttributeMapList, @Param("goodsId")Integer lastUpdateGoodsId);
+
 }

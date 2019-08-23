@@ -76,6 +76,18 @@
     id, value_id, type, content, user_id, has_picture, pic_urls, star, add_time, update_time, 
     deleted
   </sql>
+
+  <select id="queryCommentsByValueIdAndPicture" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+     from cskaoyan_mall_comment
+     where value_id = #{valueId} and type = #{type} and has_picture = #{hasPicture}
+  </select>
+  <select id="getGoodsCommentByValueIdAndType" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from cskaoyan_mall_comment
+    where value_id = #{valueId} and 'type' = #{type}
+  </select>
+
   <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.goods.GoodsCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

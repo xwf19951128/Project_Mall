@@ -87,6 +87,12 @@
       order by ${orderByClause}
     </if>
   </select>
+
+    <select id="selectBrandById" resultMap="BaseResultMap">
+        select * from cskaoyan_mall_brand
+        where id= #{brandId}
+    </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

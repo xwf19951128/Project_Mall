@@ -221,7 +221,7 @@ public class Goods {
 
     @Override
     public String toString() {
-        return "Goods{" +
+        return "goods{" +
                 "id=" + id +
                 ", goodsSn='" + goodsSn + '\'' +
                 ", name='" + name + '\'' +
