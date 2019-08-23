@@ -1,12 +1,11 @@
 package com.cskaoyan.service.wx.coreservice;
 
 import com.cskaoyan.bean.admin.goods.Goods;
-import com.cskaoyan.bean.admin.spread.GrouponInfo;
-import com.cskaoyan.bean.admin.spread.MallCoupon;
-import com.cskaoyan.bean.admin.spread.MallGroupon;
-import com.cskaoyan.bean.admin.spread.MessageBean;
+import com.cskaoyan.bean.admin.spread.*;
 import com.cskaoyan.bean.wx.coreservice.*;
 
+import com.cskaoyan.bean.wx.coreservice.UserCoupon;
+import com.cskaoyan.bean.wx.login.WxUser;
 import com.cskaoyan.mapper.coreservice.CollectMapper;
 import com.cskaoyan.mapper.coreservice.FootprintMapper;
 import com.cskaoyan.mapper.coreservice.UserCouponMapper;
@@ -18,6 +17,8 @@ import com.cskaoyan.util.StatusMap;
 import com.cskaoyan.util.wx.TokenUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +46,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean showCouponList(int page, int size, short status, HttpServletRequest request) {
-//        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+        int uid=TokenUtil.getActiveUserid(request);
         String username= userMapper.selectByPrimaryKey(uid).getUsername();
         PageHelper.startPage(page,size);
         ListDateWX dateWX=new ListDateWX();
@@ -62,8 +62,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean showGrouponList(short showType,HttpServletRequest request) {
-//        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+        int uid=TokenUtil.getActiveUserid(request);
         ListDateWX dateWX=new ListDateWX();
         List<RabbishBean> list=grouponMapper.queryListByUser(uid,showType);
         for (RabbishBean bean : list) {
@@ -85,8 +84,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean showCollectList(int page, int size, short type,HttpServletRequest request) {
-//        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+        int uid=TokenUtil.getActiveUserid(request);
         PageHelper.startPage(page,size);
         CollectList dateWX=new CollectList();
         List<CollectGoods> list=collectMapper.queryListByUser(uid,type);
@@ -98,8 +96,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean showFootprintList(int page, int size, HttpServletRequest request) {
-//        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+        int uid=TokenUtil.getActiveUserid(request);
         PageHelper.startPage(page,size);
         FootList dateWX=new FootList();
         List<CollectGoods> list=footprintMapper.queryListByUser(uid);
@@ -111,8 +108,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean insertCollect(int valueId, HttpServletRequest request) {
-//        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+        int uid=TokenUtil.getActiveUserid(request);
         Collect get=collectMapper.selectByValueId(valueId);
         Map map=new HashMap();
         if(get==null){
@@ -141,8 +137,7 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean getCoupon(String code, HttpServletRequest request) {
-        //        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
+int uid=TokenUtil.getActiveUserid(request);
         MallCoupon coupon=couponMapper.queryByCode(code);
         if(coupon==null||coupon.getDeleted()==true){
             return new MessageBean("优惠券不正确",742,null);
@@ -167,11 +162,41 @@ public class CoreServiceImp implements CoreService{
 
     @Override
     public MessageBean receiveCoupon(String couponId, HttpServletRequest request) {
-        //        int uid=TokenUtil.getActiveUserid(request);
-        int uid=23;
-        UserCoupon userCoupon=new UserCoupon();
-        MallCoupon mallCoupon=couponMapper.selectByPrimaryKey(Integer.valueOf(couponId));
-        return null;
+int uid=TokenUtil.getActiveUserid(request);
+        //获取认证后的用户信息，通过Realm进行封装的
+        if(uid<0){
+            return new MessageBean("请登录",501,null);
+        }else{
+            //查出该用户是否有该优惠券
+            UserCouponExample userCouponExample = new UserCouponExample();
+            UserCouponExample.Criteria criteria = userCouponExample.createCriteria();
+            criteria.andCouponIdEqualTo(Integer.valueOf(couponId)).andUserIdEqualTo(uid);
+            List<UserCoupon> userCoupons =userCouponMapper.selectByExample(userCouponExample);
+            if(userCoupons.size()>0){
+                return new MessageBean("优惠券已经领取过",740,null);
+            }
+            MallCoupon mallCoupon=couponMapper.selectByPrimaryKey(Integer.valueOf(couponId));
+            //找出该优惠券
+            //然后把该优惠券塞进用户
+            Date date=new Date();
+            if(mallCoupon.getStartTime()==null||date.before(mallCoupon.getEndTime())){
+            UserCoupon userCoupon=new UserCoupon();
+            userCoupon.setUserId(uid);
+            userCoupon.setStatus((short) 0);
+            userCoupon.setCouponId(mallCoupon.getId());
+            Calendar calendar=Calendar.getInstance();
+            calendar.add(Calendar.DATE,mallCoupon.getDays());
+            Date startdate=(mallCoupon.getStartTime()==null||date.after(mallCoupon.getStartTime()))?date:mallCoupon.getStartTime();
+            userCoupon.setStartTime(startdate);
+            Date enddate=(mallCoupon.getEndTime()==null||calendar.getTime().before(mallCoupon.getEndTime()))?calendar.getTime():mallCoupon.getEndTime();
+            userCoupon.setEndTime(enddate);
+            userCoupon.setAddTime(date);
+            userCouponMapper.insert(userCoupon);
+            return new MessageBean("成功",0,null);
+            }else {
+                return new MessageBean("已过期的优惠卷",777,null);
+            }
+        }
     }
 
     public List judgeCoupon(List<UserCoupon> list){
