@@ -2,15 +2,19 @@ package com.cskaoyan.bean.wx.cart;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class GoodInCart {
+    private int id;
     private int userId;
     private int goodsId;
     private int number;
     private int productId;
+    private String goodsName;
+    private String picUrl;
     private String goodsSn;
-    private double price;
+    private BigDecimal price;
     private String[] specifications;
     @JsonFormat(pattern = "yyyy-MM-dd Hh:mm;ss")
     private Date addTime;
@@ -18,6 +22,31 @@ public class GoodInCart {
     private Date updateTime;
     private boolean deleted;
     private boolean checked;
+
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Date getAddTime() {
         return addTime;
@@ -75,11 +104,11 @@ public class GoodInCart {
         this.goodsSn = goodsSn;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

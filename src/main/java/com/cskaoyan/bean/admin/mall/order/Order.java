@@ -48,6 +48,7 @@ public class Order {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date shipTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date confirmTime;
 
     private Short comments;

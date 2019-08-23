@@ -211,6 +211,19 @@ int uid=TokenUtil.getActiveUserid(request);
         }
     }
 
+    @Override
+    public MessageBean showCouponListUse(HttpServletRequest request) {
+        int uid=TokenUtil.getActiveUserid(request);
+        if(uid<0){
+            return new MessageBean("请登录",501,null);
+        }
+        String username= userMapper.selectByPrimaryKey(uid).getUsername();
+        List<UserCoupon> list=userCouponMapper.queryUserCouponList(username, (short) 0);
+        return new MessageBean("成功",0,list);
+    }
+
+
+
     public List judgeCoupon(List<UserCoupon> list){
         Date date=new Date();
         List<UserCoupon> newlist=new ArrayList<>();
