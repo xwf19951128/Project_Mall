@@ -14,21 +14,18 @@
   <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   <result column="deleted" jdbcType="BIT" property="deleted" />
 </resultMap>
-  <resultMap id="CResultMap" type="com.cskaoyan.bean.admin.spread.MallCoupon">
+  <resultMap id="CResultMap" type="com.cskaoyan.bean.wx.coreservice.UserCoupon">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="coupon_id" jdbcType="INTEGER" property="couponId" />
     <result column="desc" jdbcType="VARCHAR" property="desc" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="total" jdbcType="INTEGER" property="total" />
     <result column="discount" jdbcType="DECIMAL" property="discount" />
     <result column="min" jdbcType="DECIMAL" property="min" />
     <result column="limit" jdbcType="SMALLINT" property="limit" />
-    <result column="type" jdbcType="SMALLINT" property="type" />
     <result column="status" jdbcType="SMALLINT" property="status" />
-    <result column="goods_type" jdbcType="SMALLINT" property="goodsType" />
-    <result column="goods_value" jdbcType="VARCHAR" property="goodsValue" />
     <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="time_type" jdbcType="SMALLINT" property="timeType" />
     <result column="days" jdbcType="SMALLINT" property="days" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
@@ -99,10 +96,22 @@
     update_time, deleted
   </sql>
   <sql id="Base_Column_List_union">
-   c.id, c.`name`, c.`desc`, c.tag, c.total, c.discount, c.min, c.limit, c.type, c.status, c.goods_type, c.goods_value,
-    c.code, c.time_type, c.days, c.start_time, c.end_time, c.add_time, c.update_time, c.deleted
+   cu.id, c.`name`, c.`desc`, c.tag,  c.discount, c.min, c.limit,cu.user_id,c.status,cu.coupon_id,
+    cu.start_time, cu.end_time, cu.add_time, cu.update_time, cu.deleted
   </sql>
-  <select id="queryUserCouponList" resultType="com.cskaoyan.bean.admin.spread.MallCoupon" resultMap="CResultMap">
+  <update id="updateStatus">
+    update cskaoyan_mall_coupon_user set status=
+    <foreach collection="list" item="c" separator=",">
+      (#{c.status})
+    </foreach>
+    where id in<foreach collection="list" item="c" separator=",">
+    (#{c.id})
+  </foreach>
+  </update>
+  <select id="countByCid" resultType="_long">
+    select count(id) from cskaoyan_mall_coupon_user where coupon_id=#{id}
+  </select>
+  <select id="queryUserCouponList" resultType="com.cskaoyan.bean.wx.coreservice.UserCoupon" resultMap="CResultMap">
     select <include refid="Base_Column_List_union"></include> from cskaoyan_mall_coupon_user cu,cskaoyan_mall_user u,cskaoyan_mall_coupon c where u.id=cu.user_id and u.username=#{username}
     and c.id=cu.coupon_id and cu.status=#{status}
   </select>

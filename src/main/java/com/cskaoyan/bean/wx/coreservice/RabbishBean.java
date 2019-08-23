@@ -22,7 +22,7 @@ public class RabbishBean {
     private int orderStatus;
     private int userId;
     private HandleOption handleOption;
-private int comments;
+    private int comments;
 
     public HandleOption getHandleOption() {
         return handleOption;

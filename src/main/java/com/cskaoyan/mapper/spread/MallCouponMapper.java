@@ -34,4 +34,6 @@ public interface MallCouponMapper {
     long countNumber();
 
     List<MallCoupon> selectMallCouponForIndex();
+
+    MallCoupon queryByCode(@Param("code") String code);
 }

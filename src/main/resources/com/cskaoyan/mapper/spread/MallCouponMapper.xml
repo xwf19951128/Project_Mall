@@ -82,10 +82,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, `desc`, tag, total, discount, min, limit, type, status, goods_type, goods_value,
+    id, `name`, `desc`, tag, total, discount, `min`, `limit`, `type`, status, goods_type, goods_value,
     code, time_type, days, start_time, end_time, add_time, update_time, deleted
   </sql>
-
+  <select id="queryByCode" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from  cskaoyan_mall_coupon where code=#{code}
+  </select>
   <select id="selectMallCouponForIndex" resultMap="BaseResultMap">
     select * from cskaoyan_mall_coupon
   </select>

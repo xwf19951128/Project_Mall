@@ -1,8 +1,6 @@
 package com.cskaoyan.mapper.coreservice;
 
 
-import com.cskaoyan.bean.admin.spread.MallCoupon;
-
 import com.cskaoyan.bean.admin.spread.UserCouponExample;
 import java.util.List;
 
@@ -32,5 +30,9 @@ public interface UserCouponMapper {
 
     int updateByPrimaryKey(UserCoupon record);
 
-    List<MallCoupon> queryUserCouponList(@Param("username") String username, @Param("status") short status);
+    List<UserCoupon> queryUserCouponList(@Param("username") String username, @Param("status") short status);
+
+    long countByCid(@Param("id") Integer id);
+
+    int updateStatus(List<UserCoupon> newlist);
 }

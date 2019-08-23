@@ -1,5 +1,6 @@
 package com.cskaoyan.service.admin.system;
 
+import com.cskaoyan.bean.admin.system.NewPermission;
 import com.cskaoyan.bean.admin.system.PermissionL1;
 import com.cskaoyan.bean.admin.system.permission.PermissionDateOne;
 
@@ -15,8 +16,16 @@ public interface PermissionsService {
     List<PermissionL1> queryAllPermissions();
 
     //查询当前用户所拥有的权限。如果查询结果为*，就去查询所有的权限
-    List<String> queryAssignPermissionByRoleId(String roleId);
+    List<String> queryAssignPermissionByRoleId(int roleId);
 
     //当用户权限为*时，手动查询所有的权限名字
     List<String> queryAllPermissionName();
+
+    void deletePermissionsById(int roleId);
+
+
+
+    NewPermission queryApiByPermissionName(String name);
+
+    void insertPermissions(int roleId, List<NewPermission> newPermissions);
 }

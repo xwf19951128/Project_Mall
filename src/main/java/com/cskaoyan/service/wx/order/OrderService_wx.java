@@ -44,4 +44,5 @@ public interface OrderService_wx {
 
     // 评论跳转页面
     GoodsDetail queryOrderGoods(int orderId, int goodsId);
+
 }

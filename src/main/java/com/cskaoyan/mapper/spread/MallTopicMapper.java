@@ -6,6 +6,7 @@ import com.cskaoyan.bean.admin.spread.MallTopicExample;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public interface MallTopicMapper {
     long countByExample(MallTopicExample example);
@@ -37,4 +38,8 @@ public interface MallTopicMapper {
     int updateByPrimaryKey(MallTopic record);
 
     ArrayList<MallTopic> queryMallTopicList(@Param("title") String title, @Param("subtitle") String subtitle);
+
+    String selectGoodsByTopicId(@Param("id") int id);
+
+    List<MallTopic> getRelatedTopic(@Param("lowId") int lowId, @Param("topId") int topId);
 }

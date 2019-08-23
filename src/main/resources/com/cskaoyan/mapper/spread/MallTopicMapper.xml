@@ -82,6 +82,16 @@
   <sql id="Blob_Column_List">
     content
   </sql>
+
+  <select id="selectGoodsByTopicId" resultType="string">
+    select goods from cskaoyan_mall_topic where id=#{id}
+  </select>
+
+  <select id="getRelatedTopic" resultMap="BaseResultMap">
+     select  id,title,subtitle,content,price,read_count,pic_url,sort_order,goods,add_time,update_time,deleted
+        from cskaoyan_mall_topic where id  &lt;=#{topId} and id &gt;= #{lowId}
+  </select>
+
   <select id="selectByExampleWithBLOBs" parameterType="com.cskaoyan.bean.admin.spread.MallTopicExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">

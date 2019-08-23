@@ -93,4 +93,11 @@
         from cskaoyan_mall_feedback
         where id = #{id} and username like #{username}
     </select>
+
+    <!--插入一条用户反馈-->
+    <insert id="insertFeedBack">
+        insert into cskaoyan_mall_feedback(content, feed_type,has_picture, mobile, pic_urls,user_id,username,add_time,update_time)
+        values (#{feedBack.content},#{feedBack.feedType},#{feedBack.hasPicture},#{feedBack.mobile},#{feedBack.picUrls},
+        #{feedBack.userId},#{feedBack.username},#{feedBack.addTime},#{feedBack.updateTime})
+    </insert>
 </mapper>

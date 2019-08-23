@@ -123,10 +123,9 @@ public class LoginController {
     //修改密码
     @RequestMapping("/profile/password")
     @ResponseBody
-    public ResponseVo password(@RequestBody Password password){
+    public ResponseVo password(@RequestBody Password password,HttpServletRequest request){
         //首先利用shiro，获取当前的用户名
         String principal = (String) SecurityUtils.getSubject().getPrincipal();
-        System.out.println(principal);
         //然后要判断旧密码是否正确
         String oldPassword = password.getOldPassword();
         List<Admin> admins = loginService.queryPasswordByName(principal);
@@ -138,6 +137,9 @@ public class LoginController {
         if (newPassword.equals(oldPassword)){
             return ResponseUtil.fail(null,"新旧密码不能相同！",605);
         }
+        if (newPassword.length()<6){
+            return ResponseUtil.fail(null,"密码长度不能低于6位",605);
+        }
         //确认无误后再进行修改,同时要修改当前用户的updatetime字段为当前时间
         Admin admin = admins.get(0);
         admin.setPassword(newPassword);
@@ -145,6 +147,8 @@ public class LoginController {
         admin.setUpdateTime(date);
         int i = loginService.updatePasswordAndTime(admin);
         if (i==1){
+            //插入修改密码状态
+            insertLogInAuth(principal,request.getRemoteAddr(),"修改密码");
             return ResponseUtil.success(null);
         }else {
             return ResponseUtil.fail(null,"修改失败",0);

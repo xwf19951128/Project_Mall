@@ -84,6 +84,32 @@
     <collection property="goodsList" column="id" select="com.cskaoyan.mapper.goods.GoodsMapper.selectGoodByCategoryId"></collection>
   </resultMap>
 
+  <select id="selectCategorysById" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_category
+    <if test="categorysId!=null">
+      <where>
+        id in
+        <foreach collection="categorysId" item="ids" open="(" close=")" separator=",">
+          #{ids}
+        </foreach>
+      </where>
+    </if>
+    <if test="categorysId==null"></if>
+
+  </select>
+
+  <select id="SelectSecond" resultType="int">
+    select id from cskaoyan_mall_category
+    where pid =#{id}
+  </select>
+
+  <select id="queryAllCategoryByPid" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_category
+    where pid = #{id}
+  </select>
+
+
+
   <select id="getGroupList" resultMap="MygetGroupList">
    select * from  cskaoyan_mall_category where level='L1' limit 4;
   </select>

@@ -1,6 +1,7 @@
 package com.cskaoyan.mapper.goods;
 
 import com.cskaoyan.bean.admin.goods.Goods;
+import com.cskaoyan.bean.admin.mall.category.Category;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -38,4 +39,12 @@ public interface GoodsMapper {
 
     int updateSingleGoods(@Param("goodsMap")Map<String, Object> goodsMap);
 
+    List<Integer> selectCategorysIdByBrandId(@Param("brandId") int brandId);
+
+    List<Goods> selectGoodsByBrandId(@Param("brandId")int brandId);
+
+
+    List<Goods> selectAllCountGoods();
+
+    List<Goods> selectGoodsByCategoryId(@Param("id") int id);
 }

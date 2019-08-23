@@ -20,4 +20,8 @@ public interface CoreService {
     MessageBean insertCollect(int valueId, HttpServletRequest request);
 
     MessageBean getGrouponDetail(int grouponId, HttpServletRequest request);
+
+    MessageBean getCoupon(String code, HttpServletRequest request);
+
+    MessageBean receiveCoupon(String code, HttpServletRequest request);
 }

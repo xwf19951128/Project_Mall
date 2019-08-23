@@ -323,4 +323,9 @@
   <select id="queryWxPasswordByUsername" resultType="string">
       select password from cskaoyan_mall_user where username=#{username}
   </select>
+
+  <!--根据用户名查询-->
+  <select id="queryWxUsernameById" resultType="string">
+      select username from cskaoyan_mall_user where id=#{userId}
+  </select>
 </mapper>
