@@ -5,11 +5,56 @@
 
 <!--需要将命名空间改造成对应接口的全类名-->
 <mapper namespace="com.cskaoyan.mapper.userManage.OrderMapper_wx">
-
-    <!--<resultMap id="orderMap" type="">
-
+    <resultMap id="goodsMap" type="com.cskaoyan.bean.wx.order.Goods_wx">
+        <result property="goodsName" column="goods_name"/>
+        <result property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="picUrl" column="pic_url"/>
     </resultMap>
-    <select id="queryUnpayOrder" resultMap="orderMap">
 
-    </select>-->
+    <select id="queryGoodsListByOrderId" resultMap="goodsMap">
+        select
+            g.id as id,
+            g.name as goods_name,
+            g.pic_url as pic_url,
+            og.number as number
+        from cskaoyan_mall_goods g
+        inner join cskaoyan_mall_order_goods og on g.id = og.goods_id
+        inner join cskaoyan_mall_order o on o.id = og.order_id
+        where o.id = #{orderId}
+    </select>
+
+
+
+    <resultMap id="orderMap" type="com.cskaoyan.bean.wx.order.OrderInfo">
+        <result property="actualPrice" column="actual_price"/>
+        <result property="addTime" column="add_time"/>
+        <result property="address" column="address"/>
+        <result property="consignee" column="consignee"/>
+        <result property="couponPrice" column="coupon_price"/>
+        <result property="freightPrice" column="freight_price"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="mobile" column="mobile"/>
+        <result property="orderSn" column="order_sn"/>
+    </resultMap>
+    <select id="getOrderByOrderId" resultMap="orderMap">
+        select
+           actual_price,
+           add_time,
+           address,
+           consignee,
+           coupon_price,
+           freight_price,
+           goods_price,
+           mobile,
+           order_sn,
+           order_status
+        from cskaoyan_mall_order where id = #{orderId}
+    </select>
+
+    <select id="getOrderStatusByOrderId" resultType="int">
+        select
+            order_status
+        from cskaoyan_mall_order where id = #{orderId}
+    </select>
 </mapper>
