@@ -406,6 +406,8 @@ public class OrderServiceImpl_wx implements OrderService_wx {
         Boolean hasPicture = (Boolean) map.get("hasPicture");
         int orderGoodsId = (int) map.get("orderGoodsId");
         List<String> picUrls = (List<String>) map.get("picUrls");
+
+        orderMapper_wx.setOrderGoodsCommentById(orderGoodsId);
         int star = (int) map.get("star");
         orderMapper_wx.insertComment(content, hasPicture, orderGoodsId, star, userId);
     }

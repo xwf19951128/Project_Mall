@@ -30,4 +30,6 @@ public interface OrderMapper_wx {
 
     void insertComment(@Param("content") String content, @Param("hasPicture") Boolean hasPicture,
                        @Param("orderGoodsId") int orderGoodsId, @Param("star") int star, @Param("userId") int userId);
+
+    void setOrderGoodsCommentById(@Param("id") int orderGoodsId);
 }

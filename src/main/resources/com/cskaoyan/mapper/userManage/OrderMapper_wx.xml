@@ -134,4 +134,8 @@
         #{userId}
         )
     </insert>
+
+    <update id="setOrderGoodsCommentById">
+        update cskaoyan_mall_order_goods set comment = 1 where id = #{id}
+    </update>
 </mapper>

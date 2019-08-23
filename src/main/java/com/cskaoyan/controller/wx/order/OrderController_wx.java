@@ -181,6 +181,12 @@ public class OrderController_wx {
         return ResponseUtil.success(data);
     }
 
+    /**
+     * 提交评论
+     * @param map
+     * @param request
+     * @return
+     */
     @RequestMapping("/wx/order/comment")
     @ResponseBody
     ResponseVo commonOrder(@RequestBody HashMap<String, Object> map, HttpServletRequest request) {
