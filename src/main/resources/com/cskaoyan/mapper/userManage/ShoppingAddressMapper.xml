@@ -36,9 +36,9 @@
     </sql>
 
     <sql id="baseLeftJoin">
-        left join cskaoyan_mall_region region1 on address.province_id = region1.code
-        left join cskaoyan_mall_region region2 on address.city_id = region2.code
-        left join cskaoyan_mall_region region3 on address.area_id = region3.code
+        left join cskaoyan_mall_region region1 on address.province_id = region1.id
+        left join cskaoyan_mall_region region2 on address.city_id = region2.id
+        left join cskaoyan_mall_region region3 on address.area_id = region3.id
     </sql>
 
     <!--查询全部收货地址-->

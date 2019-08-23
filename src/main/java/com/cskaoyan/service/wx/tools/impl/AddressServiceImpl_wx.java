@@ -81,19 +81,24 @@ public class AddressServiceImpl_wx implements AddressService_wx {
         DetailedAddress_wx detailedAddress_wx = new DetailedAddress_wx();
         Address address = shoppingAddressMapper.queryDetailAddressById(id);
 
-        detailedAddress_wx.setAddress(address.getAddress());
-        detailedAddress_wx.setAreaId(address.getAreaId());
-        detailedAddress_wx.setAreaName(address.getArea());
-        detailedAddress_wx.setCityId(address.getCityId());
-        detailedAddress_wx.setCityName(address.getCity());
-        detailedAddress_wx.setId(address.getId());
-        detailedAddress_wx.setIsDefault(address.getIsDefault());
-        detailedAddress_wx.setMobile(address.getMobile());
-        detailedAddress_wx.setName(address.getName());
-        detailedAddress_wx.setProvinceId(address.getProvinceId());
-        detailedAddress_wx.setProvinceName(address.getProvince());
+        if (address == null) {
+            return null;
+        } else {
+            detailedAddress_wx.setAddress(address.getAddress());
+            detailedAddress_wx.setAreaId(address.getAreaId());
+            detailedAddress_wx.setAreaName(address.getArea());
+            detailedAddress_wx.setCityId(address.getCityId());
+            detailedAddress_wx.setCityName(address.getCity());
+            detailedAddress_wx.setId(address.getId());
+            detailedAddress_wx.setIsDefault(address.getIsDefault());
+            detailedAddress_wx.setMobile(address.getMobile());
+            detailedAddress_wx.setName(address.getName());
+            detailedAddress_wx.setProvinceId(address.getProvinceId());
+            detailedAddress_wx.setProvinceName(address.getProvince());
+        }
 
         return detailedAddress_wx;
+
     }
 
     /**
@@ -137,13 +142,13 @@ public class AddressServiceImpl_wx implements AddressService_wx {
 
         // 封装省、市、区
         Region_wx province = shoppingAddressMapper.queryRegionByProvinceId((int) hashMap.get("provinceId"));
-        address.setProvinceId(province.getCode());
+        address.setProvinceId(province.getId());
         address.setProvince(province.getName());
         Region_wx city = shoppingAddressMapper.queryRegionByCityId((int) hashMap.get("cityId"));
-        address.setCityId(city.getCode());
+        address.setCityId(city.getId());
         address.setCity(city.getName());
         Region_wx area = shoppingAddressMapper.queryRegionByAreaId((int) hashMap.get("areaId"));
-        address.setAreaId(area.getCode());
+        address.setAreaId(area.getId());
         address.setArea(area.getName());
 
         return shoppingAddressMapper.insertAddress(address);
@@ -189,13 +194,13 @@ public class AddressServiceImpl_wx implements AddressService_wx {
 
         // 封装省、市、区
         Region_wx province = shoppingAddressMapper.queryRegionByProvinceId((int) hashMap.get("provinceId"));
-        address.setProvinceId(province.getCode());
+        address.setProvinceId(province.getId());
         address.setProvince(province.getName());
         Region_wx city = shoppingAddressMapper.queryRegionByCityId((int) hashMap.get("cityId"));
-        address.setCityId(city.getCode());
+        address.setCityId(city.getId());
         address.setCity(city.getName());
         Region_wx area = shoppingAddressMapper.queryRegionByAreaId((int) hashMap.get("areaId"));
-        address.setAreaId(area.getCode());
+        address.setAreaId(area.getId());
         address.setArea(area.getName());
 
         return shoppingAddressMapper.updateAddress(address);

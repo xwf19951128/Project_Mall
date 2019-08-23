@@ -1,6 +1,5 @@
 package com.cskaoyan.service.wx.order;
 
-import com.cskaoyan.bean.admin.goods.Goods;
 import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
 import com.cskaoyan.bean.wx.order.OrderVo;
 
@@ -44,5 +43,10 @@ public interface OrderService_wx {
 
     // 评论跳转页面
     GoodsDetail queryOrderGoods(int orderId, int goodsId);
+
+    // 提交评论
+    void insertComment(HashMap<String, Object> map, int userId);
+
+
 
 }

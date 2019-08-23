@@ -3,10 +3,7 @@ package com.cskaoyan.service.wx.order.impl;
 import com.cskaoyan.bean.admin.goods.Goods;
 import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
 import com.cskaoyan.bean.admin.mall.order.Order;
-import com.cskaoyan.bean.wx.order.Goods_wx;
-import com.cskaoyan.bean.wx.order.HandleOption;
-import com.cskaoyan.bean.wx.order.OrderInfo;
-import com.cskaoyan.bean.wx.order.OrderVo;
+import com.cskaoyan.bean.wx.order.*;
 import com.cskaoyan.mapper.goods.GoodsMapper;
 import com.cskaoyan.mapper.mall.OrderMapper;
 import com.cskaoyan.mapper.userManage.OrderMapper_wx;
@@ -14,6 +11,7 @@ import com.cskaoyan.service.wx.order.OrderService_wx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.stream.events.Comment;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -395,5 +393,20 @@ public class OrderServiceImpl_wx implements OrderService_wx {
         GoodsDetail goodsDetail = orderMapper_wx.queryOrderGoods(orderId, goodsId);
 
         return goodsDetail;
+    }
+
+    /**
+     * 提交评论
+     * @param map 前端的数据封装在map
+     * @param userId 当前登录用户的id
+     */
+    @Override
+    public void insertComment(HashMap<String, Object> map, int userId) {
+        String content = (String) map.get("content");
+        Boolean hasPicture = (Boolean) map.get("hasPicture");
+        int orderGoodsId = (int) map.get("orderGoodsId");
+        List<String> picUrls = (List<String>) map.get("picUrls");
+        int star = (int) map.get("star");
+        orderMapper_wx.insertComment(content, hasPicture, orderGoodsId, star, userId);
     }
 }

@@ -1,8 +1,6 @@
 package com.cskaoyan.controller.wx.order;
 
-import com.cskaoyan.bean.admin.goods.Goods;
 import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
-import com.cskaoyan.bean.admin.mall.order.Order;
 import com.cskaoyan.bean.wx.order.DataForOrder;
 import com.cskaoyan.bean.wx.order.OrderVo;
 import com.cskaoyan.service.wx.order.OrderService_wx;
@@ -181,5 +179,18 @@ public class OrderController_wx {
         GoodsDetail data = orderService_wx.queryOrderGoods(orderId, goodsId);
 
         return ResponseUtil.success(data);
+    }
+
+    @RequestMapping("/wx/order/comment")
+    @ResponseBody
+    ResponseVo commonOrder(@RequestBody HashMap<String, Object> map, HttpServletRequest request) {
+
+        // 获取当前登录用户的id
+        String tokenKey = request.getHeader("X-Litemall-Token");
+        int userId = UserTokenManager.getUserId(tokenKey).intValue();
+
+        orderService_wx.insertComment(map, userId);
+
+        return ResponseUtil.success();
     }
 }
