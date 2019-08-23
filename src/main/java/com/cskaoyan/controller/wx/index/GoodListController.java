@@ -10,10 +10,13 @@ import com.cskaoyan.bean.admin.spread.MallGrouponRuleExample;
 import com.cskaoyan.bean.admin.userManage.User;
 import com.cskaoyan.bean.wx.coreservice.Collect;
 import com.cskaoyan.bean.wx.coreservice.CollectExample;
+import com.cskaoyan.bean.wx.coreservice.Footprint;
+import com.cskaoyan.bean.wx.coreservice.FootprintExample;
 import com.cskaoyan.bean.wx.goods.ResponseGoodVo;
 import com.cskaoyan.bean.wx.index.GoodsCount;
 import com.cskaoyan.bean.wx.login.WxUser;
 import com.cskaoyan.mapper.coreservice.CollectMapper;
+import com.cskaoyan.mapper.coreservice.FootprintMapper;
 import com.cskaoyan.mapper.goods.*;
 import com.cskaoyan.mapper.login.WxUserMapper;
 import com.cskaoyan.mapper.mall.BrandMapper;
@@ -22,6 +25,7 @@ import com.cskaoyan.mapper.mall.IssueMapper;
 import com.cskaoyan.mapper.spread.MallGrouponRuleMapper;
 import com.cskaoyan.service.wx.index.GoodListService;
 import com.cskaoyan.util.ResponseVo;
+import com.cskaoyan.util.wx.UserTokenManager;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.annotations.Param;
@@ -35,10 +39,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * @Author: XiaoLei
@@ -198,16 +200,15 @@ public class GoodListController {
     @Autowired
     CollectMapper collectMapper;
 
-    @RequestMapping("/wx/goods/detail")
-    public ResponseVo getGoodsDetail(@Param("id") Integer id){
+    @Autowired
+    FootprintMapper footprintMapper;
 
-        Subject subject = SecurityUtils.getSubject();
-        subject = SecurityUtils.getSubject();
-        //获取认证后的用户信息，通过Realm进行封装的
-        User user = new User();
-        if(subject!=null) {
-            user = (User) subject.getPrincipal();
-        }
+    @RequestMapping("/wx/goods/detail")
+    public ResponseVo getGoodsDetail(@Param("id") Integer id, HttpServletRequest request){
+        //获取用户
+        String tolen= request.getHeader("X-Litemall-Token");
+        Integer userId = UserTokenManager.getUserId(tolen);
+        WxUser user = wxUserMapper.selectByPrimaryKey(userId);
 
         //根据good id找出所需的东西
         //1.找attribute
@@ -282,6 +283,26 @@ public class GoodListController {
             }
 
         }
+        //在点击商品详情的时候，添加浏览记录
+        if(user!=null){
+            //记录用户足迹:用户id，浏览商品的id，插入到footprint表
+            FootprintExample footprintExample = new FootprintExample();
+            FootprintExample.Criteria criteria2 = footprintExample.createCriteria();
+            criteria2.andUserIdEqualTo(user.getId());
+            criteria2.andGoodsIdEqualTo(id);
+            //查看表中是否有该记录
+//            long count = footprintMapper.countByExample(footprintExample);
+//            if(count==0){
+                Footprint footprint = new Footprint();
+                footprint.setGoodsId(id);
+                footprint.setUserId(userId);
+                footprint.setAddTime(new Date());
+                footprint.setUpdateTime(new Date());
+                footprint.setDeleted(false);
+                int insert = footprintMapper.insert(footprint);
+//            }
+        }
+
         HashMap hashMap = new HashMap();
         hashMap.put("attribute",goodsAttributeList);
         hashMap.put("info",goods);
