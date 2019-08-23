@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("admin/topic/")
 @Api(tags = "Created By Mr.Xu",description = "主题系统")
@@ -31,9 +33,12 @@ public class TopicController {
     }
     @ApiOperation(value = "增加新主题")
     @RequestMapping(value = "/create")
-    public MessageBean<MallTopic> addRecord(@RequestBody MallTopic ad){
+    public MessageBean<MallTopic> addRecord( @RequestBody MallTopic ad){
+//        public MessageBean<MallTopic> addRecord(@RequestBody Map<String,String> ad){
+        System.out.println(ad);
         return spreadService.addRecord(ad);
     }
+
     @ApiOperation(value = "删除主题")
     @RequestMapping(value = "/delete")
     public MessageBean<String> deleteRecord(@RequestBody MallTopic ad){

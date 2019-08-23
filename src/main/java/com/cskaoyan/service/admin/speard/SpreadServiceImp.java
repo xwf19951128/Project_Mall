@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 @Service
 public class SpreadServiceImp implements SpreadService{
@@ -36,7 +37,8 @@ public class SpreadServiceImp implements SpreadService{
     }
 
     @Override
-    public MessageBean<MallTopic> addRecord(MallTopic ad) {
+    public MessageBean addRecord(MallTopic ad) {
+        System.out.println(ad);
         if(topicMapper.insert(ad)==1){
             return new MessageBean<>("成功",0,ad);
         }

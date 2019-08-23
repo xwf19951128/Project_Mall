@@ -20,7 +20,7 @@ public class MallTopic {
 
     private Integer sortOrder;
 
-    private String goods;
+    private String[] goods;
     @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date addTime;
     @JsonFormat( pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
@@ -86,12 +86,12 @@ public class MallTopic {
         this.sortOrder = sortOrder;
     }
 
-    public String getGoods() {
+    public String[] getGoods() {
         return goods;
     }
 
-    public void setGoods(String goods) {
-        this.goods = goods == null ? null : goods.trim();
+    public void setGoods(String[] goods) {
+        this.goods = goods;
     }
 
     public Date getAddTime() {
@@ -124,5 +124,23 @@ public class MallTopic {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "MallTopic{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
+                ", price=" + price +
+                ", readCount='" + readCount + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", sortOrder=" + sortOrder +
+                ", goods='" + goods + '\'' +
+                ", addTime=" + addTime +
+                ", updateTime=" + updateTime +
+                ", deleted=" + deleted +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

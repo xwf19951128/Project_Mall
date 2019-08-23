@@ -2,12 +2,14 @@ package com.cskaoyan.service.admin.speard;
 
 import com.cskaoyan.bean.admin.spread.*;
 
+import java.util.Map;
+
 
 public interface SpreadService {
 
     MessageBean<MallTopic> updateRecord(MallTopic ad);
 
-    MessageBean<MallTopic> addRecord(MallTopic ad);
+//    MessageBean<MallTopic> addRecord(MallTopic ad);
 
     MessageBean<String> deleteRecord(MallTopic ad);
 
@@ -44,4 +46,6 @@ public interface SpreadService {
 
 
     MessageBean<ListDate<GrouponInfo>> showGrouponInfoListByPage(int page, int limit, String id);
+
+    MessageBean addRecord(MallTopic ad);
 }
