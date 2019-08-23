@@ -73,10 +73,10 @@ public class CartController {
     }
 
     @RequestMapping("delete")
-    public ResponseVo delete(HttpServletRequest request, @RequestBody int[] productIds) {
+    public ResponseVo delete(HttpServletRequest request, @RequestBody ProductIsChecked productIsChecked) {
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
-        cartService.deleteProduct(productIds);
+        cartService.deleteProduct(productIsChecked.getProductIds());
         CartIndex cartIndex = getIndex(userId);
         return ResponseUtil.success(cartIndex);
     }
@@ -85,7 +85,7 @@ public class CartController {
     public ResponseVo goodsCount(HttpServletRequest request) {
         String tokenKey = request.getHeader("X-Litemall-Token");
         Integer userId = UserTokenManager.getUserId(tokenKey);
-        int count = cartService.goodCount(userId);
+        Integer count = cartService.goodCount(userId);
         return ResponseUtil.success(count);
     }
 
@@ -124,12 +124,11 @@ public class CartController {
             List<GoodInCart> goods = cartService.getGoods(userId);
             setOrderByGoods(goods, couponId, grouponPrice, userId, order2Checkout);
         }
+
+
         request.getSession().setAttribute("order2checkout",order2Checkout);
         return ResponseUtil.success(order2Checkout);
     }
-
-
-
 
     /*获取购物车主页信息*/
     private CartIndex getIndex(Integer userId) {
@@ -150,6 +149,8 @@ public class CartController {
         goodInCart.setAddTime(new Date());
         goodInCart.setUpdateTime(new Date());
         goodInCart.setNumber(number);
+        goodInCart.setDeleted(false);
+        goodInCart.setChecked(true);
         return goodInCart;
     }
 
@@ -161,23 +162,23 @@ public class CartController {
         BigDecimal couponPrice = new BigDecimal("0");  // 优惠劵总额
         for (GoodInCart good : goods) {  // 计算商品总价
             if (good.isChecked()) {
-                goodsTotalPrice.add(good.getPrice()) ;
+                goodsTotalPrice = goodsTotalPrice.add(good.getPrice()) ;
             }
             actualPrice = goodsTotalPrice;
         }
 
 
         if (goodsTotalPrice.compareTo(new BigDecimal(88)) < 0) {
-            freightPrice.add(new BigDecimal(10));  // 加10元运费
-            actualPrice.add(freightPrice);
+            freightPrice = freightPrice.add(new BigDecimal(10));  // 加10元运费
+            actualPrice = actualPrice.add(freightPrice);
         }
 
         if (couponId != 0) {
             MallCoupon coupon = cartService.getCoupon(userId, couponId);
             if (goodsTotalPrice.compareTo( coupon.getMin()) >= 0) {
-                couponPrice.add(coupon.getDiscount());
+                couponPrice = couponPrice.add(coupon.getDiscount());
             }
-            actualPrice.subtract(couponPrice);
+            actualPrice = actualPrice.subtract(couponPrice);
             List<MallCoupon> coupons = cartService.getCouponList();
             for (MallCoupon mallCoupon : coupons) {
                 if (goodsTotalPrice.compareTo(mallCoupon.getMin()) > 0) {

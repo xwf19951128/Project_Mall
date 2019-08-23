@@ -38,7 +38,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void setProductIsChecked(ProductIsChecked productIsChecked) {
-        cartMapper.setProductIsChecked(productIsChecked.isChecked(),productIsChecked.getProductIds());
+        cartMapper.setProductIsChecked(productIsChecked.getIsChecked(),productIsChecked.getProductIds());
     }
 
     @Override
@@ -53,7 +53,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<GoodInCart> getGoods(Integer userId) {
-        return cartMapper.getGoods(userId);
+        int i = userId.intValue();
+        return cartMapper.getGoods(i);
     }
 
     @Override

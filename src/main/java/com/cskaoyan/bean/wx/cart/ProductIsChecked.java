@@ -1,16 +1,16 @@
 package com.cskaoyan.bean.wx.cart;
 
 public class ProductIsChecked {
-    private boolean isChecked;
+    private int isChecked;
 
     private int[] productIds;
 
-    public boolean isChecked() {
+    public int getIsChecked() {
         return isChecked;
     }
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
+    public void setIsChecked(int isChecked) {
+        this.isChecked = isChecked;
     }
 
     public int[] getProductIds() {

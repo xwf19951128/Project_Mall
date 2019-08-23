@@ -14,7 +14,7 @@ public interface CartMapper {
 
     GoodInCart getGoodById(int goodsId);
 
-    void insertCart( GoodInCart goodInCart);
+    void insertCart(@Param("good") GoodInCart goodInCart);
 
     int goodCount();
 
@@ -26,9 +26,9 @@ public interface CartMapper {
 
     int getGoodsCount(Integer userId);
 
-    List<GoodInCart> getGoods(Integer userId);
+    List<GoodInCart> getGoods(int userId);
 
-    void setProductIsChecked(boolean checked, @Param("productIds") int[] productIds);
+    void setProductIsChecked(int checked, @Param("productIds") int[] productIds);
 
     void deleteProduct(int[] productIds);
 

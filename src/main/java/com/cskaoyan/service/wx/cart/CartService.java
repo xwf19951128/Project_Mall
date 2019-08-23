@@ -7,6 +7,7 @@ import com.cskaoyan.bean.admin.userManage.Address;
 import com.cskaoyan.bean.wx.cart.CartTotal;
 import com.cskaoyan.bean.wx.cart.GoodInCart;
 import com.cskaoyan.bean.wx.cart.ProductIsChecked;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

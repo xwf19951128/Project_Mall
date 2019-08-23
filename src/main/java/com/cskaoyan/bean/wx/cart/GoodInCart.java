@@ -11,6 +11,8 @@ public class GoodInCart {
     private int goodsId;
     private int number;
     private int productId;
+    private String goodsName;
+    private String picUrl;
     private String goodsSn;
     private BigDecimal price;
     private String[] specifications;
@@ -20,6 +22,23 @@ public class GoodInCart {
     private Date updateTime;
     private boolean deleted;
     private boolean checked;
+
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
 
     public int getId() {
         return id;
