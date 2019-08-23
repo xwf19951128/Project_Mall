@@ -251,11 +251,31 @@
 
   <!--查询当前用户的权限名-->
   <select id="queryAssignPermissionByRoleId" resultType="string">
-      select permission from cskaoyan_mall_permission where role_id=#{roleId}
+      select `name` from cskaoyan_mall_permission where role_id=#{roleId}
   </select>
 
   <!--查询所有权限的名字-->
   <select id="queryAllPermissionName" resultType="string">
-      select name from cskaoyan_mall_permission_list where level='L3'
+      select `name` from cskaoyan_mall_permission_list where level='L3'
   </select>
+
+  <!--删除当前用户的所有权限-->
+  <delete id="deletePermissionsById">
+      delete from cskaoyan_mall_permission where role_id=#{roleId}
+  </delete>
+
+
+  <!--在permission_list表中，根据name查询api-->
+  <select id="queryApiByPermissionName" resultType="com.cskaoyan.bean.admin.system.NewPermission">
+      select name,api from cskaoyan_mall_permission_list where name = #{name}
+  </select>
+
+  <!--插入roleId、api和name到permission表中-->
+  <insert id="insertPermissions">
+      insert into cskaoyan_mall_permission(role_id,permission,name) values
+      <foreach collection="newPermissions" item="newPermission" separator=",">
+        (#{roleId},#{newPermission.api},#{newPermission.name})
+      </foreach>
+  </insert>
+
 </mapper>

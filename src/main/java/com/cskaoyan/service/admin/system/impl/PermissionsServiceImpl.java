@@ -1,5 +1,6 @@
 package com.cskaoyan.service.admin.system.impl;
 
+import com.cskaoyan.bean.admin.system.NewPermission;
 import com.cskaoyan.bean.admin.system.PermissionL1;
 import com.cskaoyan.bean.admin.system.permission.PermissionDateOne;
 import com.cskaoyan.mapper.system.PermissionMapper;
@@ -25,7 +26,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     @Override
-    public List<String> queryAssignPermissionByRoleId(String roleId) {
+    public List<String> queryAssignPermissionByRoleId(int roleId) {
         return permissionMapper.queryAssignPermissionByRoleId(roleId);
     }
 
@@ -33,4 +34,20 @@ public class PermissionsServiceImpl implements PermissionsService {
     public List<String> queryAllPermissionName() {
         return permissionMapper.queryAllPermissionName();
     }
+
+    @Override
+    public void deletePermissionsById(int roleId) {
+        permissionMapper.deletePermissionsById(roleId);
+    }
+
+    @Override
+    public NewPermission queryApiByPermissionName(String name) {
+        return permissionMapper.queryApiByPermissionName(name);
+    }
+
+    @Override
+    public void insertPermissions(int roleId, List<NewPermission> newPermissions) {
+        permissionMapper.insertPermissions(roleId,newPermissions);
+    }
+
 }

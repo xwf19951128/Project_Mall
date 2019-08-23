@@ -1,5 +1,6 @@
 package com.cskaoyan.controller.admin.statistic;
 
+import com.cskaoyan.annotation.SystemLog;
 import com.cskaoyan.bean.admin.statistic.*;
 import com.cskaoyan.service.admin.statistic.StatService;
 import com.cskaoyan.util.ResponseUtil;
@@ -21,6 +22,7 @@ public class StatisticController {
     StatService statService;
 
     @RequestMapping("/user")
+    @SystemLog(desc = "查看用户统计")
     @ApiOperation(value = "user方法",notes = "这是用于统计用于的方法")
     public ResponseVo user(ConfigMall configMall){
         List<StatUser> statUsers = statService.statUser();
@@ -32,6 +34,7 @@ public class StatisticController {
     }
 
     @RequestMapping("/order")
+    @SystemLog(desc = "查看订单统计")
     public ResponseVo order(){
         List<StatOrder> statOrders = statService.statOrder();
         StatisticVo<StatOrder> statisticVo = new StatisticVo<>();
@@ -42,6 +45,7 @@ public class StatisticController {
     }
 
     @RequestMapping("/goods")
+    @SystemLog(desc = "查看商品统计")
     public ResponseVo goods(){
         List<StatGoods> statGoods = statService.statGoods();
         StatisticVo<StatGoods> statisticVo = new StatisticVo<>();
