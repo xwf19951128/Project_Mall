@@ -73,14 +73,14 @@
     </delete>
 
     <select id="getCoupon" resultType="com.cskaoyan.bean.admin.spread.MallCoupon">
-        select discount
+        select discount, min
         from cskaoyan_mall_coupon coupon
         left join cskaoyan_mall_coupon_user cu on cu.id = coupon.id
         where cu.user_id = #{userId} and cu.id = #{couponId}
     </select>
 
 
-    <select id="getgoodByCartId" resultType="com.cskaoyan.bean.wx.cart.GoodInCart">
+    <select id="getGoodByCartId" resultType="com.cskaoyan.bean.wx.cart.GoodInCart">
         select  user_id as userId,goods_id as goodsId,goods_sn as goodsSn,goods_name as goodsName,
          product_id as productId,price,number,specifications,
          checked,pic_url as picUrl,add_time as addTime,update_time as updateTime,deleted
@@ -89,7 +89,7 @@
     </select>
 
     <select id="getCouponList" resultType="com.cskaoyan.bean.admin.spread.MallCoupon">
-        select id, name, `desc`, tag, total, discount, min, limit, type, status, goods_type, goods_value,
+        select id, name, `desc`, tag, total, discount, min, `limit`, type, status, goods_type, goods_value,
         code, time_type, days, start_time, end_time, add_time, update_time, deleted
         from cskaoyan_mall_coupon
     </select>

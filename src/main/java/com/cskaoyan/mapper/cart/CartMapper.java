@@ -34,7 +34,7 @@ public interface CartMapper {
 
     MallCoupon getCoupon(@Param("userId") Integer userId, @Param("couponId") int couponId);
 
-    GoodInCart getgoodByCartId(int cartId);
+    GoodInCart getGoodByCartId(int cartId);
 
     List<MallCoupon> getCouponList();
 

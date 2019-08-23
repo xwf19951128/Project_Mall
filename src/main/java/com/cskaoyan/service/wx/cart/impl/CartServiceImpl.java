@@ -87,7 +87,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public GoodInCart getGoodByCartId(int cartId) {
-        return cartMapper.getgoodByCartId(cartId);
+        return cartMapper.getGoodByCartId(cartId);
     }
 
     @Override
