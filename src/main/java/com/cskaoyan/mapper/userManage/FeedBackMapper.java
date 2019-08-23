@@ -18,4 +18,7 @@ public interface FeedBackMapper {
 
     // 通过反馈id和用户名查询反馈
     List<FeedBack> queryFeedBackByFeedBackIdAndUsername(@Param("id") String id, @Param("username") String username);
+
+    //插入一条用户反馈
+    void insertFeedBack(@Param("feedBack") FeedBack feedBack);
 }

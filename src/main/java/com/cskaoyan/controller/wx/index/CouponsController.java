@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiaoLei
@@ -39,7 +40,7 @@ public class CouponsController {
 
     //传入的是一个json对象，而不是一个字符串,接收对象用jsonobject
 //    @RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)
-    public WxResponseVo receiveCoupon(@RequestBody JSONObject jsonObject) throws JSONException {
+    public WxResponseVo receiveCoupon(@RequestBody Map jsonObject) throws JSONException {
 
         int couponId = (int) jsonObject.get("couponId");
 
