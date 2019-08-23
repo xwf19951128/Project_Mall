@@ -1,5 +1,7 @@
 package com.cskaoyan.service.wx.order;
 
+import com.cskaoyan.bean.admin.goods.Goods;
+import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
 import com.cskaoyan.bean.wx.order.OrderVo;
 
 import java.util.HashMap;
@@ -24,4 +26,23 @@ public interface OrderService_wx {
 
     // 查订单详情
     HashMap<String, Object> queryOrderDetail(int orderId);
+
+    // 取消订单
+    void cancelOrderByOrderId(int orderId);
+
+    // 确认收货
+    void confirmOrder(int orderId);
+
+    // 删除订单
+    void deleteOrderByOrderId(int orderId);
+
+    // 再次购买
+    /*List<Goods> reBuyById(int id);*/
+
+    // 申请退款
+    void refundByOrderId(int orderId);
+
+    // 评论跳转页面
+    GoodsDetail queryOrderGoods(int orderId, int goodsId);
+
 }

@@ -2,9 +2,11 @@ package com.cskaoyan.service.wx.tools.impl;
 
 
 import com.cskaoyan.bean.admin.userManage.Address;
+import com.cskaoyan.bean.admin.userManage.FeedBack;
 import com.cskaoyan.bean.wx.tools.Address_wx;
 import com.cskaoyan.bean.wx.tools.DetailedAddress_wx;
 import com.cskaoyan.bean.wx.tools.Region_wx;
+import com.cskaoyan.mapper.userManage.FeedBackMapper;
 import com.cskaoyan.mapper.userManage.ShoppingAddressMapper;
 import com.cskaoyan.service.wx.tools.AddressService_wx;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class AddressServiceImpl_wx implements AddressService_wx {
 
     @Autowired
     ShoppingAddressMapper shoppingAddressMapper;
+    @Autowired
+    FeedBackMapper feedBackMapper;
 
     /**
      * 查询当前登录的用户的所有地址
@@ -195,5 +199,10 @@ public class AddressServiceImpl_wx implements AddressService_wx {
         address.setArea(area.getName());
 
         return shoppingAddressMapper.updateAddress(address);
+    }
+
+    @Override
+    public void insertFeedBack(FeedBack feedBack) {
+       feedBackMapper.insertFeedBack(feedBack);
     }
 }

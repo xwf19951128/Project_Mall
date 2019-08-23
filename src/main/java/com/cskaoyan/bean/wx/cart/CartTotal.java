@@ -1,20 +1,22 @@
 package com.cskaoyan.bean.wx.cart;
 
+import java.math.BigDecimal;
+
 public class CartTotal {
 
-    private double checkedGoodsAmount;
+    private BigDecimal checkedGoodsAmount;
 
     private int checkGoodsCount;
 
-    private double goodsAmount;
+    private BigDecimal goodsAmount;
 
     private int goodsCount;
 
-    public double getCheckedGoodsAmount() {
+    public BigDecimal getCheckedGoodsAmount() {
         return checkedGoodsAmount;
     }
 
-    public void setCheckedGoodsAmount(double checkedGoodsAmount) {
+    public void setCheckedGoodsAmount(BigDecimal checkedGoodsAmount) {
         this.checkedGoodsAmount = checkedGoodsAmount;
     }
 
@@ -26,11 +28,11 @@ public class CartTotal {
         this.checkGoodsCount = checkGoodsCount;
     }
 
-    public double getGoodsAmount() {
+    public BigDecimal getGoodsAmount() {
         return goodsAmount;
     }
 
-    public void setGoodsAmount(double goodsAmount) {
+    public void setGoodsAmount(BigDecimal goodsAmount) {
         this.goodsAmount = goodsAmount;
     }
 

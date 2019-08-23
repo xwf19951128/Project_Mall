@@ -57,7 +57,7 @@ public class MyOssClient {
         this.secret = secret;
     }
 
-    public Storage ossFileUpload(MultipartFile file) throws IOException {
+    public  Storage ossFileUpload(MultipartFile file) throws IOException {
         InputStream inputStream = file.getInputStream();
         String contentType = file.getContentType();
         long size = file.getSize();

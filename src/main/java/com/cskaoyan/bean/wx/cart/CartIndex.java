@@ -6,15 +6,15 @@ import java.util.List;
 
 public class CartIndex {
 
-    private List<Goods> cartList;
+    private List<GoodInCart> cartList;
 
     private CartTotal cartTotal;
 
-    public List<Goods> getCartList() {
+    public List<GoodInCart> getCartList() {
         return cartList;
     }
 
-    public void setCartList(List<Goods> cartList) {
+    public void setCartList(List<GoodInCart> cartList) {
         this.cartList = cartList;
     }
 

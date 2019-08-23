@@ -19,4 +19,6 @@ public interface WxLoginService {
     List<WxUser> queryUserByMobile(String mobile);
 
     void updatePassword(WxUser wxUser);
+
+    String queryUsernameById(Integer userId);
 }

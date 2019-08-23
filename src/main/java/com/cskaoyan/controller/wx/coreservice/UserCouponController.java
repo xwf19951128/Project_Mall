@@ -31,4 +31,9 @@ public class UserCouponController {
         String code=codemap.get("code");
         return coreService.getCoupon(code,request);
     }
+    @RequestMapping("/receive")
+    public MessageBean receiveCoupon(@RequestBody Map<String,String> codemap, HttpServletRequest request){
+        String code=codemap.get("couponId");
+        return coreService.receiveCoupon(code,request);
+    }
 }

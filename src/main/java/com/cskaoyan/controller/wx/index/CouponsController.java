@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiaoLei
@@ -38,8 +39,10 @@ public class CouponsController {
     @Autowired
     MallCouponMapper mallCouponMapper;
 
+
     @Autowired
     WxUserMapper wxUserMapper;
+
 
     //传入的是一个json对象，而不是一个字符串,接收对象用jsonobject
    //@RequestMapping(value = "/wx/coupon/receive" ,method = RequestMethod.POST)

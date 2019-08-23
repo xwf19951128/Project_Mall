@@ -27,6 +27,7 @@
 
 
     <resultMap id="orderMap" type="com.cskaoyan.bean.wx.order.OrderInfo">
+        <result property="id" column="id"/>
         <result property="actualPrice" column="actual_price"/>
         <result property="addTime" column="add_time"/>
         <result property="address" column="address"/>
@@ -39,6 +40,7 @@
     </resultMap>
     <select id="getOrderByOrderId" resultMap="orderMap">
         select
+           id,
            actual_price,
            add_time,
            address,
@@ -47,8 +49,7 @@
            freight_price,
            goods_price,
            mobile,
-           order_sn,
-           order_status
+           order_sn
         from cskaoyan_mall_order where id = #{orderId}
     </select>
 
@@ -56,5 +57,64 @@
         select
             order_status
         from cskaoyan_mall_order where id = #{orderId}
+    </select>
+    
+
+    <delete id="deleteOrderByOrderId">
+        delete from cskaoyan_mall_order where id = #{orderId}
+    </delete>
+
+    <delete id="deleteOrder_GoodsByOrderId">
+        delete from cskaoyan_mall_order_goods where id = #{orderId}
+    </delete>
+
+    <update id="confirmOrder">
+        update cskaoyan_mall_order set order_status = #{orderStatus} where id = #{orderId}
+    </update>
+
+    <update id="cancelOrderByOrderId">
+        update cskaoyan_mall_order set order_status = #{orderStatus} where id = #{orderId}
+    </update>
+
+    <update id="refundByOrderId">
+        update cskaoyan_mall_order set order_status = #{orderStatus} where id = #{orderId}
+    </update>
+
+
+    <resultMap id="goodsDetailMap" type="com.cskaoyan.bean.admin.mall.order.GoodsDetail">
+        <result property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="orderId" column="order_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="price" column="price"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="comment" column="comment"/>
+        <result property="goodsSn" column="goods_sn"/>
+        <result property="picUrl" column="pic_url"/>
+        <result property="specification" column="specifications"/>
+        <result property="addTime" column="add_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+
+    <select id="queryOrderGoods" resultMap="goodsDetailMap">
+        select
+           id,
+           number,
+           order_id,
+           goods_id,
+           product_id,
+           price,
+           goods_name,
+           comment,
+           goods_sn,
+           pic_url,
+           specifications,
+           add_time,
+           update_time,
+           deleted
+        from cskaoyan_mall_order_goods
+        where order_id = #{orderId} and goods_id = #{goodsId}
     </select>
 </mapper>

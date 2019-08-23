@@ -1,13 +1,13 @@
 package com.cskaoyan.bean.wx.order;
 
 public class HandleOption {
-    private boolean cancel;
-    private boolean comment;
-    private boolean confirm;
-    private boolean delete;
-    private boolean pay;
-    private boolean rebuy;
-    private boolean refund;
+    private boolean cancel = false;
+    private boolean comment = false;
+    private boolean confirm = false;
+    private boolean delete = false;
+    private boolean pay = false;
+    private boolean rebuy = false;
+    private boolean refund = false;
 
     public boolean isCancel() {
         return cancel;

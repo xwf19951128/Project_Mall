@@ -1,5 +1,7 @@
 package com.cskaoyan.controller.wx.order;
 
+import com.cskaoyan.bean.admin.goods.Goods;
+import com.cskaoyan.bean.admin.mall.order.GoodsDetail;
 import com.cskaoyan.bean.admin.mall.order.Order;
 import com.cskaoyan.bean.wx.order.DataForOrder;
 import com.cskaoyan.bean.wx.order.OrderVo;
@@ -75,16 +77,109 @@ public class OrderController_wx {
         return ResponseUtil.success(data);
     }
 
-
+    /**
+     * 查询商品详情
+     * @param orderId 订单id
+     * @return 模板返回
+     */
     @RequestMapping("/wx/order/detail")
     @ResponseBody
     ResponseVo queryOrderDetail(int orderId) {
         // 用来封装data
-        HashMap<String, Object> data;
-        data = orderService_wx.queryOrderDetail(orderId);
-
+        HashMap<String, Object> data = orderService_wx.queryOrderDetail(orderId);
+        // 调用返回模板
         return ResponseUtil.success(data);
     }
 
+    /**
+     * 取消订单
+     * @param map 注意看接收的是Json形式，所以用map接收
+     * @return 没有data的返回
+     */
+    @RequestMapping("/wx/order/cancel")
+    @ResponseBody
+    ResponseVo cancelOrderByOrderId(@RequestBody HashMap<String, Object> map) {
+        int orderId = (int) map.get("orderId");
+        orderService_wx.cancelOrderByOrderId(orderId);
+        return ResponseUtil.success();
+    }
 
+    /**
+     * 付款
+     * @param map 用来接收orderId
+     * @return 返回失败模板，因为不用实现支付功能
+     */
+    @RequestMapping("/wx/order/prepay")
+    @ResponseBody
+    ResponseVo prepayOrder(@RequestBody HashMap<String, Object> map) {
+        int orderId = (int) map.get("orderId");
+        return ResponseUtil.fail(null, "订单不能支付", 724);
+    }
+
+    /**
+     * 确认收货功能
+     * @param map 用来接收orderId
+     * @return 返回成功模板
+     */
+    @RequestMapping("/wx/order/confirm")
+    @ResponseBody
+    ResponseVo confirmOrder(@RequestBody HashMap<String, Object> map) {
+        int orderId = (int) map.get("orderId");
+        orderService_wx.confirmOrder(orderId);
+
+        return ResponseUtil.success();
+    }
+
+    /**
+     * 删除订单
+     * @param map 注意看接收的是Json形式，所以用map接收
+     * @return 没有data的返回
+     */
+    @RequestMapping("/wx/order/delete")
+    @ResponseBody
+    ResponseVo deleteOrderByOrderId(@RequestBody HashMap<String, Object> map) {
+        int orderId = (int) map.get("orderId");
+        orderService_wx.deleteOrderByOrderId(orderId);
+        return ResponseUtil.success();
+    }
+
+    /**
+     * 再次购买
+     * @param id 商品的id
+     * @return 返回模板
+     */
+    /*@RequestMapping("/wx/goods/related")
+    @ResponseBody
+    ResponseVo reBuyById(int id) {
+        List<Goods> data = orderService_wx.reBuyById(id);
+
+        return ResponseUtil.success(data);
+    }*/
+
+    /**
+     * 申请退款
+     * @param map 用map接收订单号
+     * @return 模板返回
+     */
+    @RequestMapping("/wx/order/refund")
+    @ResponseBody
+    ResponseVo refundByOrderId(@RequestBody HashMap<String, Object> map) {
+        int orderId = (int) map.get("orderId");
+        orderService_wx.refundByOrderId(orderId);
+        return ResponseUtil.success();
+    }
+
+    /**
+     * 评论填写页面
+     * @param orderId 订单号
+     * @param goodsId 商品号
+     * @return 模板返回
+     */
+    @RequestMapping("/wx/order/goods")
+    @ResponseBody
+    ResponseVo commentPage(int orderId, int goodsId) {
+        GoodsDetail data = orderService_wx.queryOrderGoods(orderId, goodsId);
+
+        return ResponseUtil.success(data);
+    }
 }
