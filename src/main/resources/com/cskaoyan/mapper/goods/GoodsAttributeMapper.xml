@@ -71,6 +71,11 @@
   <sql id="Base_Column_List">
     id, goods_id, attribute, value, add_time, update_time, deleted
   </sql>
+
+  <select id="selectGoodsAttributeByGoodId" resultMap="BaseResultMap">
+    select * from cskaoyan_mall_goods_attribute where goods_id =#{id}
+  </select>
+
   <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.goods.GoodsAttributeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

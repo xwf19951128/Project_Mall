@@ -38,6 +38,29 @@
         <result property="categoryId" column="category_id"></result>
     </resultMap>
 
+    <resultMap id="mycategoryvo" type="com.cskaoyan.bean.wx.index.CategoryVo">
+        <result property="categoryId" column="category_id"></result>
+    </resultMap>
+
+    <select id="selectCategorysIdByBrandId" resultType="integer">
+        select category_id from cskaoyan_mall_goods
+        where brand_id = #{brandId}
+    </select>
+
+    <select id="selectGoodsByCategoryId" resultMap="goodsMap">
+        select * from cskaoyan_mall_goods
+        where category_id = #{id}
+    </select>
+
+    <select id="selectGoodsByBrandId" resultMap="mygoodsMap">
+        select * from cskaoyan_mall_goods goods
+        left join cskaoyan_mall_brand brand on goods.brand_id =brand.id limit 10
+    </select>
+
+    <select id="selectAllCountGoods" resultMap="mygoodsMap">
+        select * from cskaoyan_mall_goods
+    </select>
+
 
     <sql id="goodsColumns">
         id,
