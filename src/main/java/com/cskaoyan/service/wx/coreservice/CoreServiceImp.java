@@ -52,7 +52,6 @@ public class CoreServiceImp implements CoreService{
         ListDateWX dateWX=new ListDateWX();
         List<UserCoupon> list=userCouponMapper.queryUserCouponList(username,status);
         list=judgeCoupon(list);
-        System.out.println("*****************"+list);
         PageInfo<UserCoupon> pageInfo=new PageInfo(list);
         dateWX.setCount(pageInfo.getTotal());
         dateWX.setData(list);
@@ -165,6 +164,16 @@ public class CoreServiceImp implements CoreService{
         }
         return new MessageBean("优惠券不正确",742,null);
     }
+
+    @Override
+    public MessageBean receiveCoupon(String couponId, HttpServletRequest request) {
+        //        int uid=TokenUtil.getActiveUserid(request);
+        int uid=23;
+        UserCoupon userCoupon=new UserCoupon();
+        MallCoupon mallCoupon=couponMapper.selectByPrimaryKey(Integer.valueOf(couponId));
+        return null;
+    }
+
     public List judgeCoupon(List<UserCoupon> list){
         Date date=new Date();
         List<UserCoupon> newlist=new ArrayList<>();
