@@ -37,4 +37,6 @@ public interface CartService {
     List<MallCoupon> getCouponList();
 
     Address getAddressById(int addressId);
+
+    void updateGood(GoodInCart goodInCart);
 }

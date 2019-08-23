@@ -130,6 +130,11 @@ public class CartController {
         return ResponseUtil.success(order2Checkout);
     }
 
+    @RequestMapping("update")
+    public ResponseVo update(@RequestBody GoodInCart goodInCart) {
+        cartService.updateGood(goodInCart);
+        return ResponseUtil.success();
+    }
     /*获取购物车主页信息*/
     private CartIndex getIndex(Integer userId) {
         CartIndex cartIndex = new CartIndex();

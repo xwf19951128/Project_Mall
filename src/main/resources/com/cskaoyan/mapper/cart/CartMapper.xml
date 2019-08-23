@@ -93,4 +93,10 @@
         code, time_type, days, start_time, end_time, add_time, update_time, deleted
         from cskaoyan_mall_coupon
     </select>
+
+    <update id="updateGood">
+        update cskaoyan_mall_cart
+        set number = #{good.number}
+        where id = #{good.id} and goods_id = #{good.goodsId}
+    </update>
 </mapper>
