@@ -72,6 +72,90 @@
       <id property="detail" column="detail"></id>
     </collection>
   </resultMap>
+  <resultMap id="GrouponInfoMap" type="com.cskaoyan.bean.wx.coreservice.GrouponInfoWx">
+    <result column="groupon_id" property="linkGrouponId"></result>
+    <association property="creator" javaType="com.cskaoyan.bean.wx.coreservice.Creator">
+      <result column="username"  property="nickname" />
+      <result column="avatar"  property="avatar" />
+    </association>
+    <association property="groupon" javaType="com.cskaoyan.bean.admin.spread.MallGroupon">
+      <result column="order_id" jdbcType="INTEGER" property="orderId" />
+      <result column="groupon_id" jdbcType="INTEGER" property="grouponId" />
+      <result column="rules_id" jdbcType="INTEGER" property="rulesId" />
+      <result column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="creator_user_id" jdbcType="INTEGER" property="creatorUserId" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="share_url" jdbcType="VARCHAR" property="shareUrl" />
+      <result column="payed" jdbcType="BIT" property="payed" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+    <association property="orderInfo" javaType="com.cskaoyan.bean.wx.coreservice.OrderInfo">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+      <result column="order_status" jdbcType="SMALLINT" property="orderStatus" />
+      <result column="consignee" jdbcType="VARCHAR" property="consignee" />
+      <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+      <result column="message" jdbcType="VARCHAR" property="message" />
+      <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+      <result column="freight_price" jdbcType="DECIMAL" property="freightPrice" />
+      <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+      <result column="integral_price" jdbcType="DECIMAL" property="integralPrice" />
+      <result column="groupon_price" jdbcType="DECIMAL" property="grouponPrice" />
+      <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+      <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+      <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+      <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+      <result column="ship_sn" jdbcType="VARCHAR" property="shipSn" />
+      <result column="ship_channel" jdbcType="VARCHAR" property="shipChannel" />
+      <result column="ship_time" jdbcType="TIMESTAMP" property="shipTime" />
+      <result column="confirm_time" jdbcType="TIMESTAMP" property="confirmTime" />
+      <result column="comments" jdbcType="SMALLINT" property="comments" />
+      <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+    <association property="rules" javaType="com.cskaoyan.bean.admin.spread.MallGrouponRule">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+      <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+      <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+      <result column="discount" jdbcType="DECIMAL" property="discount" />
+      <result column="discount_member" jdbcType="INTEGER" property="discountMember" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+    </association>
+    <collection property="joiners" ofType="com.cskaoyan.bean.wx.coreservice.Creator">
+      <result column="username"  property="nickname" />
+      <result column="avatar"  property="avatar" />
+    </collection>
+    <collection property="orderGoods" ofType="com.cskaoyan.bean.wx.coreservice.OrderGoods" >
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="order_id" jdbcType="INTEGER" property="orderId" />
+      <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+      <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+      <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+      <result column="product_id" jdbcType="INTEGER" property="productId" />
+      <result column="number" jdbcType="SMALLINT" property="number" />
+      <result column="price" jdbcType="DECIMAL" property="price" />
+      <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+      <result column="comment" jdbcType="INTEGER" property="comment" />
+      <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+      <result column="deleted" jdbcType="BIT" property="deleted" />
+      <result column="specifications" jdbcType="VARCHAR" property="specifications" />
+    </collection>
+  </resultMap>
+  <select id="getGrouponDetail" resultMap="GrouponInfoMap" resultType="com.cskaoyan.bean.wx.coreservice.OrderInfo">
+    select * from cskaoyan_mall_groupon mg ,cskaoyan_mall_groupon_rules gr,cskaoyan_mall_order_goods og,cskaoyan_mall_order o,
+    cskaoyan_mall_user mu
+    where mg.id=#{id} and mg.user_id=mu.id and mg.rules_id=gr.id and mg.order_id=o.id and  og.order_id=o.id
+  </select>
   <select id="countByGroupon" resultType="_long">
     select count(user_id) from cskaoyan_mall_groupon where groupon_id=#{id}
   </select>
@@ -153,11 +237,11 @@
     -- r.payed,
     -- r.deleted,
     -- r.id
-    from cskaoyan_mall_groupon r left join (cskaoyan_mall_groupon_rules mr, cskaoyan_mall_order o,cskaoyan_mall_goods g
+    from cskaoyan_mall_groupon r ,cskaoyan_mall_groupon_rules mr, cskaoyan_mall_order o,cskaoyan_mall_goods g
     ,cskaoyan_mall_order_goods og
-    ) on r.user_id=#{id}
+    where  r.user_id=#{id}
     and r.order_id=o.id and r.order_id=og.order_id and r.rules_id=mr.id and og.goods_id=g.id
-    <if test="type=1"></if>
+    <if test="type==1"></if>
     and r.creator_user_id=#{id}
   </select>
   <select id="selectByExample" parameterType="com.cskaoyan.bean.admin.spread.MallGrouponExample" resultMap="BaseResultMap">
