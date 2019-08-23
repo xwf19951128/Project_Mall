@@ -36,4 +36,8 @@ public class UserCouponController {
         String code=codemap.get("couponId");
         return coreService.receiveCoupon(code,request);
     }
+    @RequestMapping("/selectlist")
+    public MessageBean showCouponUse(int cartId,int grouponRulesId,HttpServletRequest request){
+        return coreService.showCouponListUse(request);
+    }
 }

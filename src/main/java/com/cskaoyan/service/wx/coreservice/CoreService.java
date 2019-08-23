@@ -24,4 +24,6 @@ public interface CoreService {
     MessageBean getCoupon(String code, HttpServletRequest request);
 
     MessageBean receiveCoupon(String code, HttpServletRequest request);
+
+    MessageBean showCouponListUse(HttpServletRequest request);
 }
