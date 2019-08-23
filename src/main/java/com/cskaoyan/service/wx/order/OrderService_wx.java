@@ -37,7 +37,7 @@ public interface OrderService_wx {
     void deleteOrderByOrderId(int orderId);
 
     // 再次购买
-    List<Goods> reBuyById(int id);
+    /*List<Goods> reBuyById(int id);*/
 
     // 申请退款
     void refundByOrderId(int orderId);
