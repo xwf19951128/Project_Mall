@@ -266,7 +266,7 @@
   <update id="updateByPrimaryKey" parameterType="com.cskaoyan.bean.admin.mall.brand.Brand">
     update cskaoyan_mall_brand
     set name = #{name,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
       sort_order = #{sortOrder,jdbcType=TINYINT},
       floor_price = #{floorPrice,jdbcType=DECIMAL},

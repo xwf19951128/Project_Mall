@@ -13,6 +13,7 @@
         from cskaoyan_mall_goods g
         left join cskaoyan_mall_goods_product gp on g.goods_id = gp.goods_id
         where g.goods_id = #{goodsId}
+
     </select>
 
     <insert id="insertCart">
@@ -21,6 +22,9 @@
         add_time,update_time,deleted)
         values (#{userId},#{goodsId},#{goodsSn},#{goodsName},#{productId},#{price},#{number},#{specifications},
         #{checked},#{picUrl},#{addTime}#{updateTime},#{deleted})
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT  LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <select id="goodCount">
@@ -50,4 +54,42 @@
         select ifnull(sum(number ), 0) from cskaoyan_mall_cart where checked = 0 and user_id = #{userId}
     </select>
 
+    <update id="setProductIsChecked">
+        update cskaoyan_mall_cart
+        set checked = #{ischecked}
+        where product_id in
+        <foreach collection="productIds" item="productId" open="(" close=")" separator=",">
+            #{productId}
+        </foreach>
+    </update>
+
+    <delete id="deleteProduct">
+        delete from cskaoyan_mall_cart
+        where product_id in
+        <foreach collection="productIds" item="productId" open="(" close=")" separator=",">
+            #{productId}
+        </foreach>
+    </delete>
+
+    <select id="getCoupon" resultType="com.cskaoyan.bean.admin.spread.MallCoupon">
+        select discount
+        from cskaoyan_mall_coupon coupon
+        left join cskaoyan_mall_coupon_user cu on cu.id = coupon.id
+        where cu.user_id = #{userId} and cu.id = #{couponId}
+    </select>
+
+
+    <select id="getgoodByCartId" resultType="com.cskaoyan.bean.wx.cart.GoodInCart">
+        select  user_id as userId,goods_id as goodsId,goods_sn as goodsSn,goods_name as goodsName,
+         product_id as productId,price,number,specifications,
+         checked,pic_url as picUrl,add_time as addTime,update_time as updateTime,deleted
+        from cskaoyan_mall_cart
+        where id = #{cartId}
+    </select>
+
+    <select id="getCouponList" resultType="com.cskaoyan.bean.admin.spread.MallCoupon">
+        select id, name, `desc`, tag, total, discount, min, limit, type, status, goods_type, goods_value,
+        code, time_type, days, start_time, end_time, add_time, update_time, deleted
+        from cskaoyan_mall_coupon
+    </select>
 </mapper>
